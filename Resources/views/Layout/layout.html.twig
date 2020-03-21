@@ -1,19 +1,23 @@
-{% extends '@UmbrellaCore/Layout/base.html.twig' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-{% block title %}
-    {{ theme_name() }}
-{% endblock %}
+        {% block title %}
+            <title>{{ theme_name() }}</title>
+        {% endblock %}
 
-{% block js %}
-    {% include "@UmbrellaAdmin/Include/scripts.html.twig" %}
-{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block stylesheets %}
+            {% include "@UmbrellaAdmin/Include/stylesheets.html.twig" %}
+        {% endblock %}
+    </head>
 
-{% block stylesheets %}
-    {% include "@UmbrellaAdmin/Include/stylesheets.html.twig" %}
-{% endblock %}
+    {% include "@UmbrellaCore/Include/toastr.html.twig" %}
 
-{% block body %}
-    <body class="{% block body_class %}{% endblock %}">
+    {% block body %}
+        <body class="{% block body_class %}{% endblock %}">
         <div class="app" id="app">
 
             {# menu #}
@@ -33,5 +37,16 @@
 
             </div>
         </div>
-    </body>
-{% endblock %}
+        </body>
+    {% endblock %}
+
+    {% block js %}
+        {% include "@UmbrellaAdmin/Include/scripts.html.twig" %}
+    {% endblock %}
+</html>
+
+
+
+
+
+

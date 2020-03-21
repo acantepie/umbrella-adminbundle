@@ -6,13 +6,8 @@
         {# Logo #}
         <div class="navbar no-radius">
             <div class="navbar-brand">
-                {% if theme_logo() %}
-                    <img src="{{ asset(theme_logo()) }}">
-                {% else %}
-                    <span class="hidden-folded inline">{{ theme_name() }}</span>
-                {% endif %}
+                {% include "@UmbrellaAdmin/Include/brand.html.twig" %}
             </div>
-
         </div>
 
         {# Menu #}
