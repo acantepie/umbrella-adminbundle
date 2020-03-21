@@ -1,0 +1,40 @@
+.infobar {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background-color: $white;
+  @include box-shadow($box-shadow);
+
+  .umbrella-actions {
+    flex-shrink: 0;
+
+    > * {
+      margin-right: 0.5rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+    }
+
+  }
+
+  .form-inline {
+
+    .select2.select2-container {
+      min-width: 200px;
+    }
+
+    .form-group {
+      margin-top: 3px;
+      margin-bottom: 3px;
+
+      &:not(:last-child) {
+        padding-right: 0.5rem;
+      }
+
+    }
+
+  }
+
+}

@@ -1,0 +1,131 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: $aside-width;
+  right: 0;
+  z-index: 5;
+  background-color: $topbar-bg;
+  color: color-yiq($topbar-bg);
+  height: $topbar-height;
+  display: flex;
+  align-items: center;
+  box-shadow: $box-shadow;
+  padding: 0 1.5rem;
+
+  &:before {
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 100%;
+    background-image: linear-gradient(90deg, rgba($gray-900, .25), rgba($gray-900, 0));
+    content: "";
+    top: 0;
+    left: 0;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+
+    > i {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: $border-radius;
+      background-color: $primary;
+      margin-right: 1rem;
+      color: color-yiq($primary);
+      font-size: 1.5rem;
+    }
+
+    ol {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      color: $gray-400;
+
+      li {
+
+        a {
+          color: $gray-200;
+          text-decoration: underline;
+
+          &:hover {
+            text-decoration: none;
+          }
+
+        }
+
+        &:after {
+          content: '/';
+          display: inline-block;
+          margin: 0 .25rem;
+        }
+
+        &.active {
+          flex-basis: 100%;
+          color: $white;
+          font-weight: 700;
+          font-size: 1rem;
+
+          &:after {
+            display: none;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  .scope-title {
+    text-align: right;
+    color: rgba($white, .5);
+    margin-right: .75rem;
+    line-height: 1.35;
+
+    span {
+      color: $primary;
+      display: block;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+  }
+
+  input.search-input {
+    background-color: $gray-900;
+    border: 0;
+    padding: .6rem 0.75rem;
+    height: auto;
+    min-width: 350px;
+    color: $white;
+
+    &::placeholder {
+      font-style: italic;
+      color: $gray-300;
+    }
+
+  }
+
+  .auth-user {
+    display: flex;
+    align-items: center;
+
+    .thumb {
+      display: block;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin-right: .75rem;
+      overflow: hidden;
+    }
+
+  }
+
+}

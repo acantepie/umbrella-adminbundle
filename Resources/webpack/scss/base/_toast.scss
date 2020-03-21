@@ -1,0 +1,91 @@
+#toast-container {
+
+  .toast {
+    opacity: 1;
+    background-color: $white;
+    color: $black;
+    border: 0;
+    font-size: .8125rem;
+    padding: 1rem 2rem 1rem 70px;
+    width: 320px;
+    @include box-shadow($box-shadow);
+
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 18px;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      font-family: "Material Icons", sans-serif;
+      z-index: 1;
+    }
+
+    &:after {
+      width: 60px;
+      content: "";
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    &.toast-success {
+      border-left: 4px solid $success;
+
+      &:before {
+        content: '\e5ca';
+        color: $success;
+      }
+
+      &:after {
+        background-color: rgba($success, .25);
+      }
+
+    }
+
+    &.toast-info {
+      border-left: 4px solid $info;
+
+      &:before {
+        content: '\e88e';
+        color: $info;
+      }
+
+      &:after {
+        background-color: rgba($info, .25);
+      }
+
+    }
+
+    &.toast-warning {
+      border-left: 4px solid $warning;
+
+      &:before {
+        content: '\e002';
+        color: $warning;
+      }
+
+      &:after {
+        background-color: rgba($warning, .25);
+      }
+
+    }
+
+    &.toast-error {
+      border-left: 4px solid $danger;
+
+      &:before {
+        content: '\e000';
+        color: $danger;
+      }
+
+      &:after {
+        background-color: rgba($danger, .25);
+      }
+
+    }
+
+  }
+
+}

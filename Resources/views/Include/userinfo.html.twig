@@ -1,33 +1,33 @@
-<div class="b-t">
-    <div class="nav-fold">
 
-        {% if app.user is instanceof('\\Umbrella\\UserBundle\\Entity\\User') %}
-            {% set avatar = app.user.avatar
-                ? app.user.avatar.webPath | imagine_filter('ub_avatar_md')
-                : asset('/bundles/umbrellauser/images/default_user.png') %}
+{% if app.user is instanceof('\\Umbrella\\UserBundle\\Entity\\User') %}
+    {% set avatar = app.user.avatar
+        ? app.user.avatar.webPath | imagine_filter('ub_avatar_md')
+        : asset('/bundles/umbrellauser/images/default_user.png')
+    %}
+    <div>
+        <a class="auth-user dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="thumb">
+                <img src="{{ avatar }}"/>
+            </span>
+            <span class="name">{{ app.user.fullName }}</span>
+        </a>
 
-            <span class="pull-left">
-                <a href="{{ path('umbrella_user_account_index') }}">
-                    <img src="{{ avatar }}" alt="{{ app.user.fullName }}" class="w-40 img-circle">
-                </a>
-            </span>
-            <span class="clear hidden-folded p-x">
-                <small class="block _500">{{ app.user.fullName }}</small>
-                <a class="block text-primary" href="{{ path('umbrella_user_logout') }}">
-                    <i class="fa fa-power-off"></i> {{ 'action.signout'|trans }}
-                </a>
-            </span>
-        {% else %}
-            <span class="pull-left">
-                <img src="{{ asset('/bundles/umbrellauser/images/default_user.png') }}" alt="{{ app.user.username }}" class="w-40 img-circle">
-            </span>
-            <span class="clear hidden-folded p-x">
-                <small class="block _500">{{ app.user.username }}</small>
-                <a class="block text-primary" href="{{ path('umbrella_user_logout') }}">
-                    <i class="fa fa-power-off"></i> {{ 'action.signout'|trans }}
-                </a>
-            </span>
-        {% endif %}
-
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('umbrella_user_account_index') }}"><i class="fa fa-fw fa-user"></i> {{ 'action.my_account'|trans }}</a>
+            <a class="dropdown-item" href="{{ path('umbrella_user_logout') }}"><i class="fa fa-fw fa-power-off"></i> {{ 'action.signout'|trans }}</a>
+        </div>
     </div>
-</div>
+{% else %}
+    <div>
+        <a class="auth-user dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="thumb">
+                <img src="{{ asset('/bundles/umbrellauser/images/default_user.png') }}"/>
+            </span>
+            <span class="name">{{ app.user.username }}</span>
+        </a>
+
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('umbrella_user_logout') }}"><i class="fa fa-fw fa-power-off"></i> {{ 'action.signout'|trans }}</a>
+        </div>
+    </div>
+{% endif %}

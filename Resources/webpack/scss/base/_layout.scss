@@ -1,0 +1,15 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+html{
+  height: 100%;
+}
+body{
+  height: auto;
+  min-height: 100%;
+  position: relative;
+  padding-top: $topbar-height;
+
+}

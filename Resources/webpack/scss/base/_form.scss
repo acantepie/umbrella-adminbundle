@@ -1,0 +1,16 @@
+.custom-file-label::after {
+  content: 'Parcourir';
+}
+
+label.required:after {
+  content: " *";
+  color: #dd4b39;
+  font-weight: 500;
+  line-height: 1;
+  font-size: 1.2em;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: $gray-100;
+  opacity: 1;
+}

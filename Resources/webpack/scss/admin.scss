@@ -1,17 +1,33 @@
+@import "abstracts/variables";
+@import "abstracts/variables_default";
+@import "abstracts/color";
+
+@import "abstracts/mixins";
+@import "abstracts/utility";
+
 @import "~bootstrap/scss/functions";
-@import "./variables/variables.scss";
-@import "./variables/variables.md.scss";
-@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap/scss/bootstrap";
 
-@import "./mixins/mixins.scss";
+@import "~umbrella_core/scss/app";
 
-// fixme: inclure le sass du core dans admin
-@import "~umbrella_core/scss/app.scss";
+@import "bs/bs";
 
-@import "./bs/bs.scss";
-@import "./ui/ui.scss";
-@import "./utils/utils.scss";
-@import "./md/md.scss";
-@import "./ng/ng.scss";
-@import "./pages/pages.scss";
-@import "./components/select2";
+@import "base/layout";
+@import "base/color";
+@import "base/buttons";
+@import "base/cards";
+@import "base/typography";
+@import "base/table";
+@import "base/nav";
+@import "base/modal";
+@import "base/form";
+@import "base/icons";
+@import "base/spacing";
+@import "base/badges";
+
+@import "components/select2";
+@import "components/sidebar";
+@import "components/topbar";
+@import "components/infobar";
+@import "components/toolbar";
+

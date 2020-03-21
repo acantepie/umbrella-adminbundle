@@ -1,0 +1,83 @@
+@mixin color-variant($color) {
+
+  color: color-yiq($color);
+  background-color: $color;
+
+  .lt {
+    background-color: lighten($color, $color-percent);
+  }
+
+  .dk {
+    background-color: darken($color, $color-percent);
+  }
+
+  .bg {
+    background-color: $color;
+  }
+
+}
+
+.lter {
+  background-color: rgba(255, 255, 255, 0.035);
+}
+
+.dker {
+  background-color: rgba(0, 0, 0, 0.035);
+}
+
+.light {
+  background-color: $light;
+}
+
+.white {
+  background-color: #fff;
+}
+
+.dark-white {
+  color: $dark-black;
+  background-color: #fff;
+}
+
+.black {
+  @include color-variant($black);
+}
+
+.dark {
+  @include color-variant($dark);
+}
+
+.grey {
+  @include color-variant($grey);
+}
+
+.primary {
+  @include color-variant($primary);
+}
+
+.accent {
+  @include color-variant($accent);
+}
+
+.warn {
+  @include color-variant($warn);
+}
+
+.success {
+  @include color-variant($success);
+}
+
+.info {
+  @include color-variant($info);
+}
+
+.warning {
+  @include color-variant($warning);
+}
+
+.danger {
+  @include color-variant($danger);
+}
+
+.blue {
+  @include color-variant($blue);
+}

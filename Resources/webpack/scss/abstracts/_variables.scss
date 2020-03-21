@@ -1,0 +1,147 @@
+/**
+ * Bootstrap variables
+ */
+
+// Colors
+
+$orange: #f39200;
+$blue: #1dafec;
+$pink: #d4479d;
+$magenta: #c20e67;
+$green: #8ec449;
+$green-vibrant: #a6df0d;
+
+$white: #fff;
+$gray-100: #f8f8f8;
+$gray-200: #dee2e5;
+$gray-300: #c8ced3;
+$gray-400: #a9afb3;
+$gray-500: #808589;
+$gray-600: #6d7276;
+$gray-700: #3d444d;
+$gray-800: #363d45;
+$gray-900: #2b3035;
+$black: #000;
+
+$primary: $orange;
+$secondary: $gray-200;
+$info: $blue;
+$dark: $gray-700;
+$light: $white;
+
+$yiq-contrasted-threshold: 175;
+
+// Options
+
+$enable-rounded: true;
+$enable-gradients: true;
+
+// Body
+
+$body-bg: #f0f0f0;
+
+// Links
+
+$link-color: $gray-900;
+
+// Components
+
+$box-shadow: 0 2px 5px 0 rgba(0, 37, 64, 0.08);
+
+// Typography
+
+$font-family-sans-serif: "Open Sans", "Helvetica", sans-serif;
+$label-margin-bottom: .4rem;
+
+$font-size-base: .75rem;
+$headings-font-weight: 600;
+$headings-margin-bottom: 1rem;
+
+$h1-font-size: 1.5rem;
+$h2-font-size: 1.25rem;
+$h3-font-size: 1.0625rem;
+$h4-font-size: .9375rem;
+
+$hr-border-color: rgba($black, .075);
+
+// Buttons + forms
+
+$input-btn-padding-y-sm: .28rem;
+$input-btn-padding-x-sm: .75rem;
+
+$input-btn-padding-y-lg:      .5rem;
+$input-btn-padding-x-lg:      1rem;
+$input-btn-font-size-lg:      1rem;
+
+$input-btn-font-size-sm: .6875rem;
+
+// Forms
+
+$input-border-color: $gray-300;
+$input-box-shadow: 0 0 0;
+
+$input-group-addon-bg: $gray-100;
+
+$form-grid-gutter-width: 24px;
+
+$custom-control-indicator-bg: $white;
+$custom-control-indicator-border-color: $gray-400;
+
+// Buttons
+
+$btn-font-weight: 600;
+
+// Table
+
+$table-bg: $white;
+$table-border-color: $gray-200;
+
+// Breadcrumbs
+
+$breadcrumb-padding-y:              0;
+$breadcrumb-padding-x:              0;
+$breadcrumb-item-padding:           0;
+
+$breadcrumb-margin-bottom:          0;
+
+$breadcrumb-bg:                     transparent;
+$breadcrumb-border-radius:          0;
+
+// Dropdown
+
+$dropdown-border-width: 0;
+$dropdown-item-padding-y:           .25rem;
+$dropdown-item-padding-x:           1rem;
+
+// Badges
+
+$badge-font-size: .65rem;
+$badge-font-weight: 400;
+$badge-padding-y: .2em;
+$badge-padding-x: .5em;
+$badge-border-radius: 15px;
+
+// Navs
+
+$nav-tabs-border-width: 0;
+$nav-tabs-border-radius: 0;
+
+// Modal
+
+$modal-backdrop-bg:                 $gray-900;
+$modal-backdrop-opacity:            .75;
+$modal-content-box-shadow-xs: 0 2px 5px 0 rgba(0, 37, 64, 0.25);
+$modal-content-box-shadow-sm-up: 0 2px 5px 0 rgba(0, 37, 64, 0.25);
+
+/**
+ * Umbrella variables
+ */
+
+$aside-bg: $gray-900;
+
+/**
+ * Project variables
+ */
+
+$topbar-bg: $gray-700;
+$topbar-height: 63px;
