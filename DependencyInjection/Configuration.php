@@ -2,7 +2,6 @@
 
 namespace Umbrella\AdminBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -19,20 +18,19 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('umbrella_admin');
-        $rootNode->append($this->menuNode());
-        $rootNode->append($this->themeNode());
-        $rootNode->append($this->assetsNode());
+        $treeBuilder = new TreeBuilder('umbrella_admin');
+        $treeBuilder
+            ->getRootNode()
+            ->append($this->menuNode())
+            ->append($this->themeNode())
+            ->append($this->assetsNode());
         return $treeBuilder;
     }
 
     private function menuNode()
     {
-        $treeBuilder = new TreeBuilder();
-
-        /** @var ArrayNodeDefinition $themeNode */
-        $themeNode = $treeBuilder->root('menu')->addDefaultsIfNotSet();
+        $treeBuilder = new TreeBuilder('menu');
+        $themeNode = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
         $themeNode->children()
             ->scalarNode('sitemap')
                 ->defaultNull()
@@ -46,10 +44,8 @@ class Configuration implements ConfigurationInterface
 
     private function themeNode()
     {
-        $treeBuilder = new TreeBuilder();
-
-        /** @var ArrayNodeDefinition $themeNode */
-        $themeNode = $treeBuilder->root('theme')->addDefaultsIfNotSet();
+        $treeBuilder = new TreeBuilder('theme');
+        $themeNode = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
         $themeNode->children()
             ->scalarNode('name')
                 ->defaultValue('Umbrella')
@@ -62,17 +58,15 @@ class Configuration implements ConfigurationInterface
 
     private function assetsNode()
     {
-        $treeBuilder = new TreeBuilder();
-
-        /** @var ArrayNodeDefinition $themeNode */
-        $assetNode = $treeBuilder->root('assets')->addDefaultsIfNotSet();
+        $treeBuilder = new TreeBuilder('assets');
+        $assetNode = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
         $assetNode->children()
             ->scalarNode('stylesheet_entry')
-            ->defaultValue('/build/umbrella_admin.css')
-            ->end()
+                ->defaultValue('/build/umbrella_admin.css')
+                ->end()
             ->scalarNode('script_entry')
-            ->defaultValue('/build/umbrella_admin.js')
-            ->end();
+                ->defaultValue('/build/umbrella_admin.js')
+                ->end();
         return $assetNode;
     }
 }
