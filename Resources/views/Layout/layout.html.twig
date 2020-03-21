@@ -22,12 +22,8 @@
             {% endblock %}
 
             <div id="content" class="app-content box-shadow-z0" role="main">
-                {% block headbar %}
-                    {% include('@UmbrellaAdmin/Include/header.html.twig') %}
-                {% endblock %}
-
-                {% block footer %}
-                    {% include('@UmbrellaAdmin/Include/footer.html.twig') %}
+                {% block topbar %}
+                    {% include('@UmbrellaAdmin/Include/topbar.html.twig') %}
                 {% endblock %}
 
                 <div ui-view class="app-body" id="view">
