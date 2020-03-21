@@ -8,11 +8,10 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/bootstrap";
 
-@import "~umbrella_core/scss/app";
-
 @import "bs/bs";
 
 @import "base/layout";
+@import "base/link";
 @import "base/color";
 @import "base/buttons";
 @import "base/cards";
@@ -30,4 +29,6 @@
 @import "components/topbar";
 @import "components/infobar";
 @import "components/toolbar";
+
+@import "~font-awesome/css/font-awesome.css";
 

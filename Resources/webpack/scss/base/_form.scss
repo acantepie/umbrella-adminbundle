@@ -14,3 +14,11 @@ label.required:after {
   background-color: $gray-100;
   opacity: 1;
 }
+
+.js-select2 {
+  display: none;
+}
+
+.form-check-input {
+  margin-top: 0.2rem;
+}
