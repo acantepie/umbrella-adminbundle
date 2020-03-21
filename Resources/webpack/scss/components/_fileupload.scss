@@ -1,0 +1,25 @@
+.umbrella-fileupload {
+
+  input[type="text"] {
+    border-right: 0;
+  }
+
+  .btn.umbrella-remove {
+    display: none;
+    border-left: 0 !important;
+  }
+
+  .btn.umbrella-download {
+  }
+
+  .btn.umbrella-download, .btn.umbrella-remove {
+    background-color: $input-bg;
+    color: $input-color;
+    border: $input-border-width solid $input-border-color;
+  }
+
+  .btn.umbrella-browse {
+    background: $secondary !important;
+  }
+
+}
