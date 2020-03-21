@@ -39,7 +39,7 @@ class SideBarMenuRenderer implements MenuRendererInterface
      */
     public function render(Menu $menu)
     {
-        return $this->twig->render('UmbrellaAdminBundle:Menu:sidebar.html.twig', array(
+        return $this->twig->render('@UmbrellaAdmin/Menu/sidebar.html.twig', array(
             'menu' => $menu
         ));
     }

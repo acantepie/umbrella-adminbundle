@@ -1,4 +1,4 @@
-{% extends "UmbrellaAdminBundle:Layout:layout.html.twig" %}
+{% extends "@UmbrellaAdmin/Layout/layout.html.twig" %}
 
 {% set breadcrumb = menu_get_breadcrumb(sidebar_alias | default('admin_sidebar')) | merge([{'label': title | trans}]) %}
 

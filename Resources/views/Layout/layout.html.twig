@@ -1,15 +1,15 @@
-{% extends 'UmbrellaCoreBundle:Layout:base.html.twig' %}
+{% extends '@UmbrellaCore/Layout/base.html.twig' %}
 
 {% block title %}
     {{ theme_name() }}
 {% endblock %}
 
 {% block js %}
-    {% include "UmbrellaAdminBundle:Include:scripts.html.twig" %}
+    {% include "@UmbrellaAdmin/Include/scripts.html.twig" %}
 {% endblock %}
 
 {% block stylesheets %}
-    {% include "UmbrellaAdminBundle:Include:stylesheets.html.twig" %}
+    {% include "@UmbrellaAdmin/Include/stylesheets.html.twig" %}
 {% endblock %}
 
 {% block body %}
@@ -23,11 +23,11 @@
 
             <div id="content" class="app-content box-shadow-z0" role="main">
                 {% block headbar %}
-                    {% include('UmbrellaAdminBundle:Include:header.html.twig') %}
+                    {% include('@UmbrellaAdmin/Include/header.html.twig') %}
                 {% endblock %}
 
                 {% block footer %}
-                    {% include('UmbrellaAdminBundle:Include:footer.html.twig') %}
+                    {% include('@UmbrellaAdmin/Include/footer.html.twig') %}
                 {% endblock %}
 
                 <div ui-view class="app-body" id="view">
