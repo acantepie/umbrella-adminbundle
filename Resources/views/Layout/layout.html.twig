@@ -1,0 +1,41 @@
+{% extends 'UmbrellaCoreBundle:Layout:base.html.twig' %}
+
+{% block title %}
+    {{ theme_name() }}
+{% endblock %}
+
+{% block js %}
+    {% include "UmbrellaAdminBundle:Include:scripts.html.twig" %}
+{% endblock %}
+
+{% block stylesheets %}
+    {% include "UmbrellaAdminBundle:Include:stylesheets.html.twig" %}
+{% endblock %}
+
+{% block body %}
+    <body class="{% block body_class %}{% endblock %}">
+        <div class="app" id="app">
+
+            {# menu #}
+            {% block menu %}
+                {{ menu_render(sidebar_alias | default('admin_sidebar')) }}
+            {% endblock %}
+
+            <div id="content" class="app-content box-shadow-z0" role="main">
+                {% block headbar %}
+                    {% include('UmbrellaAdminBundle:Include:header.html.twig') %}
+                {% endblock %}
+
+                {% block footer %}
+                    {% include('UmbrellaAdminBundle:Include:footer.html.twig') %}
+                {% endblock %}
+
+                <div ui-view class="app-body" id="view">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+
+            </div>
+        </div>
+    </body>
+{% endblock %}

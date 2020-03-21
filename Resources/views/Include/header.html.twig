@@ -1,0 +1,20 @@
+<div class="app-header white box-shadow">
+    <div class="navbar navbar-toggleable-sm flex-row align-items-center">
+
+        {# mobile open menu #}
+        <a data-toggle="modal" data-target="#aside" class="d-lg-none mr-3">
+            <i class="material-icons">menu</i>
+        </a>
+
+
+        {% block header_content %}
+            {% if breadcrumb is not defined %}
+                {% set breadcrumb = menu_get_breadcrumb(sidebar_alias | default('admin_sidebar')) %}
+            {% endif %}
+
+            <div class="nav nav-breadcrumb">
+                {{ breadcrumb_render(breadcrumb) }}
+            </div>
+        {% endblock %}
+    </div>
+</div>

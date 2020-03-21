@@ -1,0 +1,31 @@
+{% extends "UmbrellaAdminBundle:Layout:layout.html.twig" %}
+
+{% set breadcrumb = menu_get_breadcrumb(sidebar_alias | default('admin_sidebar')) | merge([{'label': title | trans}]) %}
+
+{% block content %}
+    <div class="padding">
+        <div class="box">
+            <form class="form-horizontal"
+                  enctype="multipart/form-data"
+                  method="POST"
+                  data-mount="Form">
+
+                <div class="box-body">
+                    {{ form_errors(form) }}
+                    {{ form_rest(form) }}
+                </div>
+
+                <div class="box-footer dker text-right">
+                    {% if cancel is defined and cancel %}
+                        <a href="{{ cancel }}" class="btn btn-default">
+                            {{ 'action.cancel' | trans }}
+                        </a>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-check"></i> {{ 'action.save' | trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

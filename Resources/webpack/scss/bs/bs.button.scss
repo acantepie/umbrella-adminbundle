@@ -1,0 +1,199 @@
+.btn,
+a:not([href]):not([tabindex]).btn {
+
+  &.btn-default,
+  &.b-default,
+  &.default {
+    @include button-variant($white, $input-border-color);
+  }
+
+
+  &.btn-outline-primary {
+    @include button-outline-variant($primary);
+  }
+
+  &.btn-primary,
+  &.b-primary,
+  &.primary {
+    @include button-variant($primary, $primary);
+  }
+
+  &.btn-outline-secondary {
+    @include button-outline-variant($secondary);
+  }
+
+  &.btn-secondary,
+  &.b-secondary,
+  &.secondary {
+    @include button-variant($secondary, $secondary);
+  }
+
+  &.btn-outline-accent {
+    @include button-outline-variant($accent);
+  }
+
+  &.btn-accent,
+  &.b-accent,
+  &.accent {
+    @include button-variant($accent, $accent);
+  }
+
+  &.btn-outline-warn {
+    @include button-outline-variant($warn);
+  }
+
+  &.btn-warn,
+  &.b-warn,
+  &.warn {
+    @include button-variant($warn, $warn);
+  }
+
+  &.btn-outline-success {
+    @include button-outline-variant($success);
+  }
+
+  &.btn-success,
+  &.b-success,
+  &.success {
+    @include button-variant($success, $success);
+  }
+
+  &.btn-outline-info {
+    @include button-outline-variant($info);
+  }
+
+  &.btn-info,
+  &.b-info,
+  &.info {
+    @include button-variant($info, $info);
+  }
+
+  &.btn-outline-warning {
+    @include button-outline-variant($warning);
+  }
+
+  &.btn-warning,
+  &.b-warning,
+  &.warning {
+    @include button-variant($warning, $warning);
+  }
+
+  &.btn-outline-danger {
+    @include button-outline-variant($danger);
+  }
+
+  &.btn-danger,
+  &.b-danger,
+  &.danger {
+    @include button-variant($danger, $danger);
+  }
+
+  &.btn-outline-dark {
+    @include button-outline-variant($dark);
+  }
+
+  &.btn-dark,
+  &.b-dark,
+  &.dark {
+    @include button-variant($dark, $dark);
+  }
+
+  &.btn-outline-black {
+    @include button-outline-variant($black);
+  }
+
+  &.btn-black,
+  &.b-black,
+  &.black {
+    @include button-variant($black, $black);
+  }
+
+  &.btn-outline-white {
+    @include button-outline-variant($white);
+  }
+
+  &.btn-white,
+  &.b-white,
+  &.white {
+    @include button-variant($white, $white);
+  }
+
+  &.btn-outline-light {
+    @include button-outline-variant($light);
+  }
+
+  &.btn-ligth,
+  &.b-light,
+  &.light {
+    @include button-variant($light, $light);
+  }
+
+}
+
+.btn-icon {
+  text-align: center;
+  padding: 0 !important;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  position: relative;
+  overflow: hidden;
+  i {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    line-height: inherit;
+    border-radius: inherit;
+    @include transition(all 0.3s);
+  }
+  &.btn-xs {
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+  }
+  &.btn-sm {
+    width: 1.775rem;
+    height: 1.775rem;
+    line-height: 1.775rem;
+  }
+  &.btn-lg {
+    width: 3.167rem;
+    height: 3.167rem;
+    line-height: 3.167rem;
+  }
+  &.btn-social {
+    i:last-child {
+      top: 100%;
+    }
+  }
+  &.btn-social:hover,
+  &.btn-social:focus,
+  &.btn-social.active {
+    i:first-child {
+      top: -100%;
+    }
+    i:last-child {
+      top: 0;
+      color: #fff;
+    }
+  }
+  &.btn-social-colored {
+    i:first-child {
+      color: #fff;
+    }
+  }
+}
+
+
+
+
+
+.btn-groups .btn {
+  margin-bottom: .25rem;
+}
+
+.btn-fw {
+  min-width: 7rem;
+}

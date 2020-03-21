@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Services
+    Umbrella\AdminBundle\Services\AdminConfigService:
+        public: true
+
+    # Sidebar
+    Umbrella\AdminBundle\Menu\SidebarMenu:
+        arguments: [null]
+        public: true
+        tags:
+          - { name: umbrella.menu, method: createMenu, alias: admin_sidebar }
+
+    Umbrella\AdminBundle\Renderer\SideBarMenuRenderer:
+        public: true
+        tags:
+          - { name: umbrella.menu_renderer, alias: admin_sidebar }
+
+    #Twig
+    Umbrella\AdminBundle\Twig\AdminTwigExtension:

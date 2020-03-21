@@ -1,0 +1,25 @@
+{
+    "name": "umbrella/adminbundle",
+    "type": "symfony-bundle",
+    "description": "Umbrella admin ",
+    "keywords": [],
+    "version": "1.0.0",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Adrien Cantepie",
+            "email": "adrien.cantepie@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Umbrella\\AdminBundle\\": ""}
+    },
+    "require": {
+        "umbrella/corebundle": "dev-master",
+        "umbrella/userbundle": "dev-master"
+    },
+    "scripts": {
+        "post-install-cmd": [],
+        "post-update-cmd": []
+    }
+}

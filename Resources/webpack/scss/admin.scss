@@ -1,0 +1,17 @@
+@import "~bootstrap/scss/functions";
+@import "./variables/variables.scss";
+@import "./variables/variables.md.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+
+@import "./mixins/mixins.scss";
+
+// fixme: inclure le sass du core dans admin
+@import "~umbrella_core/scss/app.scss";
+
+@import "./bs/bs.scss";
+@import "./ui/ui.scss";
+@import "./utils/utils.scss";
+@import "./md/md.scss";
+@import "./ng/ng.scss";
+@import "./pages/pages.scss";
+@import "./components/select2";

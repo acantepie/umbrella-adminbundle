@@ -1,0 +1,11 @@
+{% extends "UmbrellaAdminBundle:Layout:layout.html.twig" %}
+
+{% block content %}
+    <div class="padding">
+        {% if toolbar is defined %}
+            {{ render_toolbar(toolbar) }}
+        {% endif %}
+
+        {{ render_tree(tree) }}
+    </div>
+{% endblock %}

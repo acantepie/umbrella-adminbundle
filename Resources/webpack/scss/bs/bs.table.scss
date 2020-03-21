@@ -1,0 +1,115 @@
+.table{
+
+  .panel &{
+    border-color: $table-border-color !important;
+  }
+  > tbody,
+  > tfoot {
+    > tr {
+      > td,
+      > th {
+        padding-left: 16px;
+        padding-right: 16px;
+        border-color: $table-border-color;
+      }
+    }
+  }
+  > thead > tr > th{
+    padding:8px 12px;
+    font-size: 0.9em;
+    border-color: $table-border-color;
+  }
+}
+
+
+.table-not-bordered {
+  thead>tr>th,
+  tbody>tr>th,
+  tfoot>tr>th,
+  thead>tr>td,
+  tbody>tr>td,
+  tfoot>tr>td{
+    border: none;
+  }
+}
+.table-condensed{
+    thead>tr>th,
+    tbody>tr>th,
+    tfoot>tr>th,
+    thead>tr>td,
+    tbody>tr>td,
+    tfoot>tr>td{
+      padding: 5px;
+    }
+}
+
+.table.center-v{
+  thead>tr>th,
+  tbody>tr>th,
+  tfoot>tr>th,
+  thead>tr>td,
+  tbody>tr>td,
+  tfoot>tr>td{
+    vertical-align: middle;
+  }
+}
+
+.table.center-h{
+  thead>tr>th,
+  tbody>tr>th,
+  tfoot>tr>th,
+  thead>tr>td,
+  tbody>tr>td,
+  tfoot>tr>td{
+    text-align: center;
+  }
+}
+
+
+.table-bordered{
+  border-color: $table-border-color;
+}
+.table-striped{
+  > tbody {
+    > tr{
+      &:nth-child(odd){
+        background-color: $table-accent-bg;
+        background-clip: padding-box;
+      }
+    }
+  }
+  > thead {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+
+    > th{
+      background-color: $table-accent-bg;
+      border-right: 1px solid $table-border-color;
+      border-bottom: 0 !important;
+      &:last-child{
+        border-right: none
+      }
+    }
+  }
+}
+
+.table-hover tbody tr:hover,
+.table tr.active,
+.table td.active,
+.table th.active{
+  background-color: $min-black !important;
+}
+
+.row-action{
+  display: inline-block;
+  border-radius: 100%;
+  opacity: 0.8;
+  text-align: center;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+
+  &:hover{
+    background-color: rgba(0, 0, 0, 0.08);
+    opacity: 1;
+  }
+}

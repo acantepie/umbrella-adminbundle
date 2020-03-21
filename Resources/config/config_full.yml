@@ -1,0 +1,10 @@
+umbrella_admin:
+    theme:
+        name: Umbrella
+        locales: [fr, en]
+    menu:
+        sitemap: null
+        css_class: null
+    assets:
+        script_entry: /build/umbrella_admin.js
+        stylesheet_entry: /build/umbrella_admin.css
