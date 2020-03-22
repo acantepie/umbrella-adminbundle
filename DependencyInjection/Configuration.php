@@ -34,9 +34,6 @@ class Configuration implements ConfigurationInterface
         $themeNode->children()
             ->scalarNode('sitemap')
                 ->defaultNull()
-                ->end()
-            ->scalarNode('css_class')
-                ->defaultValue('dark dk')
                 ->end();
 
         return $themeNode;
@@ -49,9 +46,6 @@ class Configuration implements ConfigurationInterface
         $themeNode->children()
             ->scalarNode('name')
                 ->defaultValue('Umbrella')
-                ->end()
-            ->scalarNode('logo')
-                ->defaultValue('')
                 ->end();
         return $themeNode;
     }

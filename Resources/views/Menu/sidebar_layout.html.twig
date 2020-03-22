@@ -25,9 +25,7 @@
 {% endblock %}
 
 {% block header %}
-    <li class="nav-header hidden-folded">
-        <small class="text-muted">{{ block('label') }}</small>
-    </li>
+    <li class="side-nav-title side-nav-item">{{ block('label') }}</li>
 
     {% for node in node %}
         {{ block('node') }}
@@ -35,25 +33,29 @@
 {% endblock %}
 
 {% block list %}
-    <li class="{{ menu_is_current_node(node) ? 'active' }}">
-        <a>
-            <span class="nav-caret">
-                <i class="fa fa-caret-down"></i>
-            </span>
-            {#{% if node.children | length > 0 %}#}
-                {#<span class="nav-label">#}
-                    {#<b class="label label-sm info">{{ node.children | length }}</b>#}
-                {#</span>#}
-            {#{% endif %}#}
+    <li class="side-nav-item {{ menu_is_current_node(node) ? 'mm-active' }}">
+        <a href="javascript: void(0);" class="side-nav-link">
             {% if node.icon %}
                 <span class="nav-icon">
-                    {{ render_icon(node.icon) }}
+                    {{ node.icon | icon }}
                 </span>
             {% endif %}
-            <span class="nav-text">{{ block('label') }}</span>
+            <span>{{ block('label') }}</span>
+            <span class="menu-arrow"></span>
         </a>
 
-        <ul class="nav-sub">
+        {% set level = node.getLevel() %}
+        {% if level <= 2 %}
+            {% set node_level_class = 'side-nav-second-level' %}
+        {% elseif level == 3 %}
+            {% set node_level_class = 'side-nav-third-level' %}
+        {% elseif level == 4 %}
+            {% set node_level_class = 'side-nav-forth-level' %}
+        {% else  %}
+            {% set node_level_class = 'side-nav-n-level' %}
+        {% endif %}
+
+        <ul class="{{ node_level_class }}">
             {% for node in node %}
                 {{ block('node') }}
             {% endfor %}
@@ -62,11 +64,11 @@
 {% endblock %}
 
 {% block leaf %}
-    <li class="{{ menu_is_current_node(node) ? 'active' }}">
-        <a href="{{ node.url }}" target="{{ node.target }}">
+    <li class="side-nav-item {{ menu_is_current_node(node) ? 'mm-active' }}">
+        <a href="{{ node.url }}" target="{{ node.target }}" class="side-nav-link">
             {% if node.icon %}
                 <span class="nav-icon">
-                    {{ render_icon(node.icon) }}
+                    {{ node.icon | icon }}
                 </span>
             {% endif %}
             <span class="nav-text">{{ block('label') }}</span>

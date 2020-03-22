@@ -6,20 +6,14 @@
 
   .btn.umbrella-remove {
     display: none;
-    border-left: 0 !important;
+    border: $input-border-width solid $input-border-color;
+    border-left: 0;
+    border-right: 0;
   }
 
   .btn.umbrella-download {
-  }
-
-  .btn.umbrella-download, .btn.umbrella-remove {
-    background-color: $input-bg;
-    color: $input-color;
     border: $input-border-width solid $input-border-color;
-  }
-
-  .btn.umbrella-browse {
-    background: $secondary !important;
+    border-left: 0;
   }
 
 }

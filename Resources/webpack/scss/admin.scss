@@ -1,37 +1,102 @@
-@import "abstracts/variables_default";
-@import "abstracts/variables";
-@import "abstracts/color";
-
-@import "abstracts/mixins";
-@import "abstracts/utility";
-
+//Core files
 @import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "config/variables";
+@import "config/custom-variables";
 @import "~bootstrap/scss/bootstrap";
 
-@import "bs/bs";
+// Structure
+@import "structure/general";
+@import "structure/left-menu";
+@import "structure/topbar";
+//@import "structure/right-sidebar";
+@import "structure/page-head";
+//@import "structure/footer";
+//@import "structure/horizontal-nav";
 
-@import "base/layout";
-@import "base/link";
-@import "base/color";
-@import "base/buttons";
-@import "base/cards";
-@import "base/typography";
-@import "base/table";
-@import "base/nav";
-@import "base/modal";
-@import "base/form";
-@import "base/icons";
-@import "base/spacing";
-@import "base/badges";
 
-@import "components/select2";
-@import "components/sidebar";
-@import "components/topbar";
-@import "components/infobar";
+//Fonts
+//@import "fonts/nunito";
+
+
+//Components
+@import "components/mixins";
+@import "components/accordions";
+@import "components/avatar";
+@import "components/breadcrumb";
+@import "components/buttons";
+@import "components/badge";
+@import "components/card";
+@import "components/dropdown";
+//@import "components/docs";
+@import "components/forms";
+@import "components/modal";
+@import "components/nav";
+@import "components/pagination";
+@import "components/popover";
+//@import "components/print";
+@import "components/progress";
+@import "components/reboot";
+//@import "components/ribbons";
+//@import "components/switch";
+@import "components/tables";
+@import "components/type";
+@import "components/utilities";
+@import "components/divider";
+//@import "components/widgets";
+//@import "components/social";
+//@import "components/steps";
+//@import "components/preloader";
+//@import "components/hero";
 @import "components/toolbar";
 @import "components/fileupload";
+@import "components/logo";
+@import "components/toastr";
 
-@import "pages/security";
+//Pages
+@import "pages/authentication";
+//@import "pages/components-demo";
+//@import "pages/error";
+//@import "pages/faq";
+//@import "pages/maintenance";
+//@import "pages/tasks";
+//@import "pages/email";
+//@import "pages/timeline";
 
+
+// Vendors
 @import "~font-awesome/css/font-awesome.css";
+//@import "vendor/daterangepicker";
+//@import "vendor/bootstrap-datepicker.min";
+//@import "vendor/jquery.toast.min";
+//@import "vendor/select2.min";
+//@import "vendor/bootstrap-timepicker.min";
+//@import "vendor/jquery.bootstrap-touchspin.min";
+
+
+// Plugins
+//@import "plugins/apexcharts";
+//@import "plugins/britechart";
+//@import "plugins/calendar";
+//@import "plugins/chartjs";
+@import "plugins/datatable";
+//@import "plugins/daterange";
+@import "plugins/datepicker";
+//@import "plugins/dragula";
+//@import "plugins/dropzone";
+//@import "plugins/form-wizard";
+//@import "plugins/maps";
+@import "plugins/metis-menu";
+@import "plugins/select2";
+@import "plugins/simplebar";
+@import "plugins/toaster";
+//@import "plugins/bootstrap-touchspin";
+//@import "plugins/bootstrap-timepicker";
+//@import "plugins/summernote";
+//@import "plugins/simplemde";
+//@import "plugins/typehead";
+//@import "plugins/sparklines";
+//@import "plugins/rateit";
+//@import "plugins/ion-rangeslider";
+//@import "plugins/frappe-gantt";
 

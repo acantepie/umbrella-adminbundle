@@ -1,7 +1,9 @@
 {% extends "@UmbrellaAdmin/Layout/layout.html.twig" %}
 
 {% block content %}
-    <div class="padding">
-        {{ render_datatable(table) }}
+    <div class="card">
+        <div class="card-body">
+            {{ render_datatable(table) }}
+        </div>
     </div>
 {% endblock %}

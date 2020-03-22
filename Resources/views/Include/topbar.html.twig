@@ -1,17 +1,17 @@
-<div class="topbar">
+<div class="navbar-custom">
+    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+        {% include "@UmbrellaAdmin/Include/userinfo.html.twig" %}
+    </ul>
 
-    {# mobile open menu #}
-    <a data-toggle="modal" data-target="#aside" class="d-lg-none mr-3">
+    <button class="button-menu-mobile open-left disable-btn">
         <i class="material-icons">menu</i>
-    </a>
+    </button>
 
-    {% if breadcrumb is not defined %}
-        {% set breadcrumb = menu_get_breadcrumb(sidebar_alias | default('admin_sidebar')) %}
-    {% endif %}
+    <div class="app-breadcrumb">
+        {% if breadcrumb is not defined %}
+            {% set breadcrumb = menu_get_breadcrumb(sidebar_alias | default('admin_sidebar')) %}
+        {% endif %}
+        {{ breadcrumb_render(breadcrumb) }}
+    </div>
 
-    {{ breadcrumb_render(breadcrumb) }}
-
-    <span class="ml-auto"></span>
-
-    {% include '@UmbrellaAdmin/Include/userinfo.html.twig' %}
 </div>

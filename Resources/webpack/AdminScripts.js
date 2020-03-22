@@ -13,35 +13,34 @@ require('umbrella_core/vendor/datatables/datatable');
 require('umbrella_core/vendor/material-design-icons/material-design-icons');
 require('jquery-ui-sortable-npm'); // needed for nestedSortable
 require('nestedSortable');
+require('metismenu');
+require('simplebar');
 
-// umbrella services
+// Core services
 
 const Kernel = require('umbrella_core/services/Kernel');
 window.Kernel = new Kernel();
 window.Api = require('umbrella_core/components/appproxy/Api');
 window.ConfirmModal = require('umbrella_core/components/confirmModal/ConfirmModal');
 window.Spinner = require('umbrella_core/components/spinner/Spinner');
+window.Utils = require('umbrella_core/utils/Utils');
 
-const Bindings  = require('umbrella_core/services/Bindings');
 
-// umbrella components
+// Core components
 
 window.Kernel.registerComponent('DataTable', require('umbrella_core/components/datatable/DataTable'));
 window.Kernel.registerComponent('Tree', require('umbrella_core/components/tree/Tree'));
 window.Kernel.registerComponent('Form', require('umbrella_core/components/form/Form'));
 window.Form = require('umbrella_core/components/form/Form');
 
-// custom ui helpers
+// Admin components
 
-require('./components/ui-nav');
-require('./components/ui-scroll-to');
-window.Utils = require('umbrella_core/utils/Utils');
+require('./components/sidebar');
 
+const Bindings  = require('umbrella_core/services/Bindings');
 
 window.mountApp = function () {
-
-    let $body = $('body');
-
+    const $body = $('body');
     $.fn.dataTable.ext.errMode = 'throw';
 
     // some bind
@@ -49,7 +48,5 @@ window.mountApp = function () {
 
     // mount components
     window.Kernel.mountComponents($body);
-
-    //Pace.start();
 };
 

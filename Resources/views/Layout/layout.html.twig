@@ -1,42 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         {% block title %}
             <title>{{ theme_name() }}</title>
         {% endblock %}
 
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
             {% include "@UmbrellaAdmin/Include/stylesheets.html.twig" %}
         {% endblock %}
+
     </head>
 
     {% include "@UmbrellaCore/Include/toastr.html.twig" %}
 
     {% block body %}
-        <body class="{% block body_class %}{% endblock %}">
-        <div class="app" id="app">
-
-            {# menu #}
-            {% block menu %}
-                {{ menu_render(sidebar_alias | default('admin_sidebar')) }}
-            {% endblock %}
-
-            <div id="content" class="app-content box-shadow-z0" role="main">
-                {% block topbar %}
-                    {% include('@UmbrellaAdmin/Include/topbar.html.twig') %}
+        <body data-leftbar-theme="dark">
+            <div class="wrapper">
+                {% block sidebar %}
+                    {{ menu_render(sidebar_alias | default('admin_sidebar')) }}
                 {% endblock %}
 
-                <div ui-view class="app-body" id="view">
-                    {% block content %}
-                    {% endblock %}
+                <div class="content-page">
+                    <div class="content mt-3">
+                        {% block topbar %}
+                            {% include '@UmbrellaAdmin/Include/topbar.html.twig' %}
+                        {% endblock %}
+
+                        <div class="container-fluid">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                    </div>
                 </div>
 
             </div>
-        </div>
+
         </body>
     {% endblock %}
 

@@ -1,0 +1,38 @@
+.title-divider {
+  border: 0;
+  display: flex;
+  align-items: center;
+  margin: 2rem 0 1.5rem 0;
+
+  h5 {
+    opacity: 0.6;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  &:after {
+    display: block;
+    height: 1px;
+    content: "";
+    flex-grow: 1;
+    background-color: rgba($black, .25);
+    margin-left: 1rem;
+  }
+
+}
+
+a[data-toggle=collapse].title-divider  {
+  h5:before {
+    font-family: FontAwesome;
+    font-size: 0.8em;
+    margin-right: 10px;
+  }
+
+  &[aria-expanded=true] h5:before {
+    content: '\f078';
+  }
+
+  &[aria-expanded=false] h5:before {
+    content: '\f054';
+  }
+}
