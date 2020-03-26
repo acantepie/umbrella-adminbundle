@@ -13,9 +13,9 @@ services:
         arguments: [null]
         public: true
         tags:
-          - { name: umbrella.menu, method: createMenu, alias: admin_sidebar }
+          - { name: umbrella.menu.factory, method: createMenu, alias: admin_sidebar }
 
-    Umbrella\AdminBundle\Renderer\SideBarMenuRenderer:
+    Umbrella\AdminBundle\Menu\SideBarMenuRenderer:
         public: true
         tags:
           - { name: umbrella.menu_renderer, alias: admin_sidebar }

@@ -7,7 +7,7 @@
  * Time: 11:45.
  */
 
-namespace Umbrella\AdminBundle\Renderer;
+namespace Umbrella\AdminBundle\Menu;
 
 use Twig\Environment;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
