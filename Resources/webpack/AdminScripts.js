@@ -34,8 +34,8 @@ window.Kernel.registerComponent('Form', require('umbrella_core/components/form/F
 window.Form = require('umbrella_core/components/form/Form');
 
 // Admin components
-
-require('./components/sidebar');
+window.Kernel.registerComponent('Sidebar', require('umbrella_admin/components/Sidebar'));
+window.Kernel.registerComponent('Layout', require('umbrella_admin/components/Layout'));
 
 const Bindings  = require('umbrella_core/services/Bindings');
 
