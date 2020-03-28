@@ -9,42 +9,46 @@
 {% endblock %}
 
 {% block menu_title %}
-    <li class="side-nav-title side-nav-item">{{ block('menu_label') }}</li>
+    {% if menu_is_granted_node(node) %}
+        <li class="side-nav-title side-nav-item">{{ block('menu_label') }}</li>
+    {% endif %}
 {% endblock %}
 
 {% block menu_node %}
     {% set level = node.level %}
     {% set isTopLevel = level == 1 %}
 
-    <li class="side-nav-item {{ menu_is_current_node(node) ? 'mm-active' }}" data-lvl="{{ level }}">
-        <a {{ block('menu_url') }} class="{{ isTopLevel ? 'side-nav-link' }}">
-            {% if isTopLevel %}
-                {{ node.icon | icon }}
-                <span class="nav-text">{{ block('menu_label') }}</span>
-            {% else %}
-                {{ block('menu_label') }}
-            {% endif %}
+    {% if menu_is_granted_node(node) %}
+        <li class="side-nav-item {{ menu_is_current_node(node) ? 'mm-active' }}" data-lvl="{{ level }}">
+            <a {{ block('menu_url') }} class="{{ isTopLevel ? 'side-nav-link' }}">
+                {% if isTopLevel %}
+                    {{ node.icon | icon }}
+                    <span class="nav-text">{{ block('menu_label') }}</span>
+                {% else %}
+                    {{ block('menu_label') }}
+                {% endif %}
+                {% if node.hasChildren() %}
+                    <span class="menu-arrow"></span>
+                {% endif %}
+            </a>
+
             {% if node.hasChildren() %}
-                <span class="menu-arrow"></span>
-            {% endif %}
-        </a>
+                {% if level == 1 %}
+                    {% set node_level_class = 'side-nav-second-level' %}
+                {% elseif level == 2 %}
+                    {% set node_level_class = 'side-nav-third-level' %}
+                {% else %}
+                    {% set node_level_class = 'side-nav-forth-level' %}
+                {% endif %}
 
-        {% if node.hasChildren() %}
-            {% if level == 1 %}
-                {% set node_level_class = 'side-nav-second-level' %}
-            {% elseif level == 2 %}
-                {% set node_level_class = 'side-nav-third-level' %}
-            {% else %}
-                {% set node_level_class = 'side-nav-forth-level' %}
+                <ul class="{{ node_level_class }}">
+                    {% for node in node %}
+                        {{ block('menu_node') }}
+                    {% endfor %}
+                </ul>
             {% endif %}
-
-            <ul class="{{ node_level_class }}">
-                {% for node in node %}
-                    {{ block('menu_node') }}
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </li>
+        </li>
+    {% endif %}
 {% endblock %}
 
 {% block menu_label %}
