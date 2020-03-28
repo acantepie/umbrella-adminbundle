@@ -12,7 +12,6 @@ namespace Umbrella\AdminBundle\Menu;
 use Symfony\Component\Yaml\Yaml;
 use Umbrella\CoreBundle\Component\Menu\MenuBuilder;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
-use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
 
 /**
  * Class SidebarMenu.
@@ -40,59 +39,16 @@ class SidebarMenu
      */
     public function createMenu(MenuBuilder $builder)
     {
-        $root = $builder->createRootNode();
+        if (!file_exists($this->yml_path)) {
+            throw new \RuntimeException(sprintf("Can't load menu, resource %s doesn't exist", $this->yml_path));
+        }
 
-        if (!empty($this->yml_path && file_exists($this->yml_path))) {
-            $data = Yaml::parse(file_get_contents($this->yml_path));
-            if (is_array($data)) {
-                foreach ($data as $name => $data) {
-                    if (array_key_exists('action', $data)) {
-                        $root->addChild($name, $this->parsePageNode($builder, $data));
-                    } else {
-                        $root->addChild($name, $this->parseHeaderNode($builder, $data));
-                    }
-                }
-            }
+        $data = (array) Yaml::parse(file_get_contents($this->yml_path));
+        foreach ($data as $id => $options) {
+            $builder->addNode($id, $options);
         }
 
         return $builder->getMenu();
     }
 
-    /**
-     * @param MenuBuilder $builder
-     * @param array $data
-     *
-     * @return MenuNode
-     */
-    protected function parseHeaderNode(MenuBuilder $builder, array $data)
-    {
-        $node = $builder->createHeaderNode($data);
-
-        if (isset($data['children']) && is_array($data['children'])) {
-            foreach ($data['children'] as $name => $dataChild) {
-                $node->addChild($name, $this->parsePageNode($builder, $dataChild));
-            }
-        }
-
-        return $node;
-    }
-
-    /**
-     * @param MenuBuilder $builder
-     * @param array $data
-     *
-     * @return MenuNode
-     */
-    protected function parsePageNode(MenuBuilder $builder, array $data)
-    {
-        $node = $builder->createPageNode($data);
-
-        if (isset($data['children']) && is_array($data['children'])) {
-            foreach ($data['children'] as $name => $dataChild) {
-                $node->addChild($name, $this->parsePageNode($builder, $dataChild));
-            }
-        }
-
-        return $node;
-    }
 }

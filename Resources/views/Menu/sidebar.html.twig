@@ -1,4 +1,4 @@
-{% use "@UmbrellaAdmin/Menu/sidebar_layout.html.twig" %}
+{% use "@UmbrellaAdmin/Menu/sidebar_block.html.twig" %}
 
 <div class="left-side-menu">
 
@@ -6,8 +6,7 @@
 
     <div class="h-100" id="left-side-menu-container" data-simplebar>
         <ul class="metismenu side-nav">
-            {% set node = menu.root %}
-            {{ block('node') }}
+            {{ block('menu_widget') }}
         </ul>
         <div class="clearfix"></div>
     </div>

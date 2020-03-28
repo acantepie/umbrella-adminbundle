@@ -40,12 +40,12 @@
 .side-nav-forth-level {
     li {
         a {
-            padding: 8px 30px 8px 55px !important;
+            padding: 8px 30px 8px 65px !important;
             color: $menu-item;
             display: block;
             position: relative;
             transition: all 0.4s;
-            font-size: 0.89rem;
+            font-size: 0.85rem;
             &:focus,
             &:hover {
                 color: $menu-item-hover;
