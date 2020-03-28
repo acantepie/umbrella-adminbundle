@@ -1,5 +1,9 @@
-class Layout {
+import KernelComponent from "umbrella_core/core/KernelComponent";
+
+export default class Layout extends KernelComponent {
     constructor($body) {
+        super();
+
         this.$body = $body;
         this.$window = $(window);
         this.init();
@@ -31,5 +35,3 @@ class Layout {
         this.$body.attr('data-leftbar-compact-mode', false);
     }
 }
-
-module.exports = Layout;

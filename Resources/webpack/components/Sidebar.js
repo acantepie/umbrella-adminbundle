@@ -1,5 +1,9 @@
-class Sidebar {
+import KernelComponent from "umbrella_core/core/KernelComponent";
+
+export default class Sidebar extends KernelComponent {
     constructor($view) {
+        super();
+
         this.$view = $view;
         this.init();
     }
@@ -12,5 +16,3 @@ class Sidebar {
         });
     }
 }
-
-module.exports = Sidebar;

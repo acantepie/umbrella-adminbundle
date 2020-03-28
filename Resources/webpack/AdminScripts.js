@@ -1,52 +1,53 @@
-// vendors
+import Kernel from "umbrella_core/core/Kernel";
+import Api from "umbrella_core/components/appproxy/Api";
+import ConfirmModal from "umbrella_core/components/confirmModal/ConfirmModal";
+import DataTable from "umbrella_core/components/datatable/DataTable";
+import Tree from "umbrella_core/components/tree/Tree";
+import Form from "umbrella_core/components/form/Form";
+import Sidebar from "umbrella_admin/components/Sidebar";
+import Layout from "umbrella_admin/components/Layout";
+import Bindings from "umbrella_core/core/Bindings";
 
-require('umbrella_core/vendor/jquery/jquery');
-require('umbrella_core/vendor/jquery-minicolors/jquery-minicolors');
-require('umbrella_core/vendor/mustache/mustache');
-require('umbrella_core/vendor/bootstrap/bootstrap');
-require('umbrella_core/vendor/select2/select2');
-require('umbrella_core/vendor/bootstrap-tagsinput/bootstrap-tagsinput');
-require('umbrella_core/vendor/toastr/toastr');
-require('umbrella_core/vendor/bootstrap-datepicker/bootstrap-datepicker');
-require('umbrella_core/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker');
-require('umbrella_core/vendor/datatables/datatable');
-require('umbrella_core/vendor/material-design-icons/material-design-icons');
-require('jquery-ui-sortable-npm'); // needed for nestedSortable
-require('nestedSortable');
-require('metismenu');
-require('simplebar');
+
+// vendors
+import 'umbrella_core/vendor/jquery/jquery';
+import 'umbrella_core/vendor/jquery-minicolors/jquery-minicolors';
+import 'umbrella_core/vendor/mustache/mustache';
+import 'umbrella_core/vendor/bootstrap/bootstrap';
+import 'umbrella_core/vendor/select2/select2';
+import 'umbrella_core/vendor/bootstrap-tagsinput/bootstrap-tagsinput';
+import 'umbrella_core/vendor/toastr/toastr';
+import 'umbrella_core/vendor/bootstrap-datepicker/bootstrap-datepicker';
+import 'umbrella_core/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker';
+import 'umbrella_core/vendor/datatables/datatable';
+import 'umbrella_core/vendor/material-design-icons/material-design-icons';
+import 'jquery-ui-sortable-npm'; // needed for nestedSortable
+import 'nestedSortable';
+import 'metismenu';
+import 'simplebar';
 
 // Core services
-
-const Kernel = require('umbrella_core/services/Kernel');
 window.Kernel = new Kernel();
-window.Api = require('umbrella_core/components/appproxy/Api');
-window.ConfirmModal = require('umbrella_core/components/confirmModal/ConfirmModal');
-window.Spinner = require('umbrella_core/components/spinner/Spinner');
-window.Utils = require('umbrella_core/utils/Utils');
-
+window.Api = Api;
+window.ConfirmModal = ConfirmModal;
 
 // Core components
-
-window.Kernel.registerComponent('DataTable', require('umbrella_core/components/datatable/DataTable'));
-window.Kernel.registerComponent('Tree', require('umbrella_core/components/tree/Tree'));
-window.Kernel.registerComponent('Form', require('umbrella_core/components/form/Form'));
-window.Form = require('umbrella_core/components/form/Form');
+window.Kernel.registerComponent('DataTable', DataTable);
+window.Kernel.registerComponent('Tree', Tree);
+window.Kernel.registerComponent('Form', Form);
 
 // Admin components
-window.Kernel.registerComponent('Sidebar', require('umbrella_admin/components/Sidebar'));
-window.Kernel.registerComponent('Layout', require('umbrella_admin/components/Layout'));
+window.Kernel.registerComponent('Sidebar', Sidebar);
+window.Kernel.registerComponent('Layout', Layout);
 
-const Bindings  = require('umbrella_core/services/Bindings');
 
 window.mountApp = function () {
-    const $body = $('body');
     $.fn.dataTable.ext.errMode = 'throw';
 
     // some bind
-    new Bindings($body);
+    new Bindings($('body'));
 
     // mount components
-    window.Kernel.mountComponents($body);
+    window.Kernel.mountComponents($('html'));
 };
 
