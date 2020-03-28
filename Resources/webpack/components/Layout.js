@@ -6,7 +6,7 @@ class Layout {
     }
 
     init() {
-        this.$window.on('resize', function (e) {
+        this.$window.on('resize', (e) => {
             e.preventDefault();
             this.adjustLayout();
         });
