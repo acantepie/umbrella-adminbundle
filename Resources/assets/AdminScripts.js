@@ -1,13 +1,11 @@
 import Kernel from "umbrella_core/core/Kernel";
-import Api from "umbrella_core/components/appproxy/Api";
 import ConfirmModal from "umbrella_core/components/confirmModal/ConfirmModal";
 import DataTable from "umbrella_core/components/datatable/DataTable";
 import Tree from "umbrella_core/components/tree/Tree";
 import Form from "umbrella_core/components/form/Form";
 import Sidebar from "umbrella_admin/components/Sidebar";
 import Layout from "umbrella_admin/components/Layout";
-import Bindings from "umbrella_core/core/Bindings";
-
+import JsResponseHandler from "umbrella_core/core/JsResponseHandler";
 
 // vendors
 import 'umbrella_core/vendor/jquery/jquery';
@@ -26,12 +24,13 @@ import 'nestedSortable';
 import 'metismenu';
 import 'simplebar';
 
+
 // Core services
 window.Kernel = new Kernel();
-window.Api = Api;
 window.ConfirmModal = ConfirmModal;
 
 // Core components
+$.fn.dataTable.ext.errMode = 'throw';
 window.Kernel.registerComponent('DataTable', DataTable);
 window.Kernel.registerComponent('Tree', Tree);
 window.Kernel.registerComponent('Form', Form);
@@ -40,14 +39,8 @@ window.Kernel.registerComponent('Form', Form);
 window.Kernel.registerComponent('Sidebar', Sidebar);
 window.Kernel.registerComponent('Layout', Layout);
 
+// Ajax handler
+window.Kernel.registerAjaxHandler('jsresponse', JsResponseHandler);
 
-window.mountApp = function () {
-    $.fn.dataTable.ext.errMode = 'throw';
-
-    // some bind
-    new Bindings($('body'));
-
-    // mount components
-    window.Kernel.mountComponents($('html'));
-};
+window.Kernel.init();
 
