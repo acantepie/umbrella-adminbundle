@@ -1,5 +1,4 @@
 import Kernel from "umbrella_core/core/Kernel";
-import ConfirmModal from "umbrella_core/components/confirmModal/ConfirmModal";
 import DataTable from "umbrella_core/components/datatable/DataTable";
 import Tree from "umbrella_core/components/tree/Tree";
 import Form from "umbrella_core/components/form/Form";
@@ -14,20 +13,23 @@ import 'umbrella_core/vendor/mustache/mustache';
 import 'umbrella_core/vendor/bootstrap/bootstrap';
 import 'umbrella_core/vendor/select2/select2';
 import 'umbrella_core/vendor/bootstrap-tagsinput/bootstrap-tagsinput';
-import 'umbrella_core/vendor/toastr/toastr';
 import 'umbrella_core/vendor/bootstrap-datepicker/bootstrap-datepicker';
 import 'umbrella_core/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker';
 import 'umbrella_core/vendor/datatables/datatable';
 import 'umbrella_core/vendor/material-design-icons/material-design-icons';
+import 'umbrella_core/vendor/toastr/toastr';
 import 'jquery-ui-sortable-npm'; // needed for nestedSortable
 import 'nestedSortable';
 import 'metismenu';
 import 'simplebar';
 
+// plugins
+import 'umbrella_core/plugins/serializeFormToFormData';
+import 'umbrella_core/plugins/serializeFormToJson';
+import 'umbrella_core/plugins/confirm';
 
 // Core services
 window.Kernel = new Kernel();
-window.ConfirmModal = ConfirmModal;
 
 // Core components
 $.fn.dataTable.ext.errMode = 'throw';
