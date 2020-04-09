@@ -4,6 +4,10 @@
     border-right: 0;
   }
 
+  input[readonly] {
+    background-color: transparent;
+  }
+
   .btn.umbrella-remove {
     display: none;
     border: $input-border-width solid $input-border-color;
