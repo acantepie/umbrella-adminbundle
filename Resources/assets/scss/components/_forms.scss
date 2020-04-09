@@ -36,7 +36,7 @@ select.form-control-sm {
 }
 }
 
-label.required:after {
+label.required:after, legend.required:after {
     content: " *";
     color: $danger;
     font-weight: 500;
