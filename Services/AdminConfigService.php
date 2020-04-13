@@ -21,11 +21,12 @@ class AdminConfigService
 
     /**
      * @param $key
-     * @return mixed
+     * @param null $default
+     * @return mixed|null
      */
-    public function getValue($key)
+    public function getValue($key, $default = null)
     {
-        return ArrayUtils::get_with_dot_keys($this->config, $key);
+        return ArrayUtils::get_with_dot_keys($this->config, $key, $default);
     }
 
 

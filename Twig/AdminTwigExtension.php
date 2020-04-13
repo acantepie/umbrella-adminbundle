@@ -39,25 +39,26 @@ class AdminTwigExtension extends AbstractExtension
     public function getFunctions()
     {
         return array(
-            new TwigFunction('theme_name', array($this, 'getName')),
-            new TwigFunction('stylesheet_entry', array($this, 'getStylesheetEntry')),
-            new TwigFunction('script_entry', array($this, 'getScriptEntry')),
-
+            new TwigFunction('admin_theme_name', array($this, 'getThemeName')),
+            new TwigFunction('admin_config', array($this, 'getConfigValue')),
         );
     }
 
-    public function getName()
+    /**
+     * @return mixed|null
+     */
+    public function getThemeName()
     {
         return $this->configService->getValue('theme.name');
     }
 
-    public function getStylesheetEntry()
+    /**
+     * @param $key
+     * @param null $default
+     * @return mixed|null
+     */
+    public function getConfigValue($key , $default = null)
     {
-        return $this->configService->getValue('assets.stylesheet_entry');
-    }
-
-    public function getScriptEntry()
-    {
-        return $this->configService->getValue('assets.script_entry');
+        return $this->configService->getValue($key, $default);
     }
 }

@@ -21,12 +21,12 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
         {% if isAdminUser %}
-            <a href="{{ path('umbrella_user_account_index') }}" class="dropdown-item notify-item">
+            <a href="{{ path(admin_config('user.account_route')) }}" class="dropdown-item notify-item">
                 <i class="material-icons mr-1">account_circle</i>
                 <span>{{ 'action.my_account' | trans }}</span>
             </a>
         {% endif %}
-        <a href="{{ path('umbrella_user_logout') }}" class="dropdown-item notify-item">
+        <a href="{{ path(admin_config('user.logout_route')) }}" class="dropdown-item notify-item">
             <i class="material-icons mr-1">power_settings_new</i>
             <span>{{ 'action.signout' | trans }}</span>
         </a>

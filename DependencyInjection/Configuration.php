@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder
             ->getRootNode()
             ->append($this->menuNode())
+            ->append($this->userNode())
             ->append($this->themeNode())
             ->append($this->assetsNode());
         return $treeBuilder;
@@ -36,6 +37,20 @@ class Configuration implements ConfigurationInterface
                 ->defaultNull()
                 ->end();
 
+        return $themeNode;
+    }
+
+    private function userNode()
+    {
+        $treeBuilder = new TreeBuilder('user');
+        $themeNode = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
+        $themeNode->children()
+            ->scalarNode('logout_route')
+                ->defaultValue('umbrella_user_logout')
+            ->end()
+            ->scalarNode('account_route')
+                ->defaultValue('umbrella_user_account_index')
+            ->end();
         return $themeNode;
     }
 
