@@ -1,6 +1,5 @@
 import Kernel from "umbrella_core/core/Kernel";
 import DataTable from "umbrella_core/components/datatable/DataTable";
-import Tree from "umbrella_core/components/tree/Tree";
 import Form from "umbrella_core/components/form/Form";
 import Sidebar from "umbrella_admin/components/Sidebar";
 import Layout from "umbrella_admin/components/Layout";
@@ -18,8 +17,6 @@ import 'umbrella_core/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker';
 import 'umbrella_core/vendor/datatables/datatable';
 import 'umbrella_core/vendor/material-design-icons/material-design-icons';
 import 'umbrella_core/vendor/toastr/toastr';
-import 'jquery-ui-sortable-npm'; // needed for nestedSortable
-import 'nestedSortable';
 import 'metismenu';
 import 'simplebar';
 
@@ -34,7 +31,6 @@ window.Kernel = new Kernel();
 // Core components
 $.fn.dataTable.ext.errMode = 'throw';
 window.Kernel.registerComponent('DataTable', DataTable);
-window.Kernel.registerComponent('Tree', Tree);
 window.Kernel.registerComponent('Form', Form);
 
 // Admin components
