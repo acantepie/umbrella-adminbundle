@@ -1,22 +1,26 @@
-{% set isUmbrellaUser = app.user is instanceof('\\Umbrella\\UserBundle\\Entity\\User') %}
-
+{% set isAdminUser = app.user is instanceof('\\Umbrella\\AdminBundle\\Model\\AdminUserInterface') %}
 
 <li class="dropdown notification-list">
     <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#">
         <span class="account-user-avatar">
-            {% if isUmbrellaUser and app.user.avatar %}
-                <img src="{{ app.user.avatar.webPath | imagine_filter('ub_avatar_md') }}" alt="user-image" class="rounded-circle">
+            {% if isAdminUser and app.user.getAvatar() %}
+                <img src="{{ app.user.getAvatar().webPath | imagine_filter('ub_avatar_md') }}" alt="user-image" class="rounded-circle">
             {% else %}
                 <div class="avatar-default bg-secondary-lighten"><i class="material-icons">person</i></div>
             {% endif %}
         </span>
         <span>
-            <span class="account-user-name">{{ isUmbrellaUser ? app.user.fullName : app.user.username }}</span>
-            <span class="account-position">{{ isUmbrellaUser ? app.user.email : 'Super Administrateur' }}</span>
+            {% if isAdminUser %}
+                <span class="account-user-name">{{ app.user.getAdminName() }}</span>
+                <span class="account-position">{{ app.user.getAdminLogin() }}</span>
+            {% else %}
+                <span class="account-user-name">{{ app.user.username }}</span>
+                <span class="account-position">{{ '-' }}</span>
+            {% endif %}
         </span>
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-        {% if isUmbrellaUser %}
+        {% if isAdminUser %}
             <a href="{{ path('umbrella_user_account_index') }}" class="dropdown-item notify-item">
                 <i class="material-icons mr-1">account_circle</i>
                 <span>{{ 'action.my_account' | trans }}</span>
