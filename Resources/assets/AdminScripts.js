@@ -43,6 +43,3 @@ window.Kernel.registerComponent('Layout', Layout);
 
 // Ajax handler
 window.Kernel.registerAjaxHandler('jsresponse', JsResponseHandler);
-
-window.Kernel.init();
-
