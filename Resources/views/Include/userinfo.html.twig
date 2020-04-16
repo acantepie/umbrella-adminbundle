@@ -6,7 +6,7 @@
             {% if isAdminUser and app.user.getAvatar() %}
                 <img src="{{ app.user.getAvatar().webPath | imagine_filter('ub_avatar_md') }}" alt="user-image" class="rounded-circle">
             {% else %}
-                <div class="avatar-default bg-secondary-lighten"><i class="material-icons">person</i></div>
+                <div class="avatar-default bg-secondary-lighten"><i class="uil-user"></i></div>
             {% endif %}
         </span>
         <span>
@@ -22,12 +22,12 @@
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
         {% if isAdminUser %}
             <a href="{{ path(admin_config('user.account_route')) }}" class="dropdown-item notify-item">
-                <i class="material-icons mr-1">account_circle</i>
+                <i class="uil-user mr-1"></i>
                 <span>{{ 'action.my_account' | trans }}</span>
             </a>
         {% endif %}
         <a href="{{ path(admin_config('user.logout_route')) }}" class="dropdown-item notify-item">
-            <i class="material-icons mr-1">power_settings_new</i>
+            <i class="uil-power mr-1"></i>
             <span>{{ 'action.signout' | trans }}</span>
         </a>
     </div>

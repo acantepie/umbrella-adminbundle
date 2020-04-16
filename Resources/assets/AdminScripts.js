@@ -15,8 +15,8 @@ import 'umbrella_core/vendor/bootstrap-tagsinput/bootstrap-tagsinput';
 import 'umbrella_core/vendor/bootstrap-datepicker/bootstrap-datepicker';
 import 'umbrella_core/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker';
 import 'umbrella_core/vendor/datatables/datatable';
-import 'umbrella_core/vendor/material-design-icons/material-design-icons';
 import 'umbrella_core/vendor/toastr/toastr';
+
 import 'metismenu';
 import 'simplebar';
 
