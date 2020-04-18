@@ -15,6 +15,10 @@
     filter: alpha(opacity=80);
 }
 
+tr.gu-mirror {
+    display: inline-table;
+}
+
 .gu-hide {
     display: none !important;
 }
