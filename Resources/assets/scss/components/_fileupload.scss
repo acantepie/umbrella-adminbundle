@@ -1,5 +1,25 @@
 .umbrella-fileupload {
 
+  .input-container {
+    flex: 1 1 0%;
+    position: relative;
+  }
+
+  .action-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    height: 38px;
+    line-height: 38px;
+  }
+
+  .umbrella-download, .umbrella-remove {
+    width: 34px;
+    display: inline-block;
+    cursor: pointer;
+  }
+
   input[type="text"] {
     border-right: 0;
   }
@@ -7,17 +27,4 @@
   input[readonly] {
     background-color: transparent;
   }
-
-  .btn.umbrella-remove {
-    display: none;
-    border: $input-border-width solid $input-border-color;
-    border-left: 0;
-    border-right: 0;
-  }
-
-  .btn.umbrella-download {
-    border: $input-border-width solid $input-border-color;
-    border-left: 0;
-  }
-
 }

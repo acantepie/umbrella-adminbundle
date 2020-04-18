@@ -7,7 +7,6 @@ import JsResponseHandler from "umbrella_core/core/JsResponseHandler";
 
 // vendors
 import 'umbrella_core/vendor/jquery/jquery';
-import 'umbrella_core/vendor/jquery-minicolors/jquery-minicolors';
 import 'umbrella_core/vendor/mustache/mustache';
 import 'umbrella_core/vendor/bootstrap/bootstrap';
 import 'umbrella_core/vendor/select2/select2';
