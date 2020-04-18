@@ -21,4 +21,4 @@ services:
           - { name: umbrella.menu_renderer, alias: admin_sidebar }
 
     #Twig
-    Umbrella\AdminBundle\Twig\AdminTwigExtension:
+    Umbrella\AdminBundle\Extension\AdminTwigExtension:

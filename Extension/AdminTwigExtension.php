@@ -7,7 +7,7 @@
  * Time: 01:45.
  */
 
-namespace Umbrella\AdminBundle\Twig;
+namespace Umbrella\AdminBundle\Extension;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
