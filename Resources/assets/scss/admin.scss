@@ -16,8 +16,10 @@
 
 
 //Fonts
-//@import "fonts/nunito";
-
+@import "fonts/nunito";
+$mdi-font-path: '~@mdi/font/fonts';
+@import '~@mdi/font/scss/materialdesignicons.scss';
+@import '~@iconscout/unicons/css/unicons.css';
 
 //Components
 @import "components/mixins";
@@ -67,13 +69,10 @@
 // Vendors
 @import "~bootstrap-datepicker/dist/css/bootstrap-datepicker3.css";
 @import "~umbrella_core/vendor/bootstrap-datetimepicker/_bootstrap-datetimepicker.scss";
+@import "~umbrella_core/vendor/select2/_select2.min.scss";
 
-$mdi-font-path: '~@mdi/font/fonts';
-@import '~@mdi/font/scss/materialdesignicons.scss';
-@import '~@iconscout/unicons/css/unicons.css';
 //@import "vendor/daterangepicker";
 //@import "vendor/jquery.toast.min";
-//@import "vendor/select2.min";
 //@import "vendor/bootstrap-timepicker.min";
 //@import "vendor/jquery.bootstrap-touchspin.min";
 
