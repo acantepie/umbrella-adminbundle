@@ -206,9 +206,9 @@ button.toast-close-button {
 
 #toast-container > .toast:before {
   position: fixed;
-  font-family: "Material Icons";
+  font-family: "Material Design Icons";
   font-size: 24px;
-  line-height: 18px;
+  line-height: 20px;
   float: left;
   color: #FFF;
   padding-right: 0.5em;
@@ -216,14 +216,14 @@ button.toast-close-button {
 }
 
 #toast-container > .toast-warning:before {
-  content: "error";
+  content: "\F0026";
 }
 #toast-container > .toast-error:before {
-  content: "error";
+  content: "\F0026";
 }
 #toast-container > .toast-info:before {
-  content: "info";
+  content: "\F02FD";
 }
 #toast-container > .toast-success:before {
-  content: "check";
+  content: "\F012C";
 }
