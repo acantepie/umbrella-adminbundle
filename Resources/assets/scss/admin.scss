@@ -53,7 +53,6 @@ $mdi-font-path: '~@mdi/font/fonts';
 @import "components/toolbar";
 @import "components/fileupload";
 @import "components/logo";
-@import "components/toastr";
 @import "components/umbrellacollection";
 
 //Pages
@@ -73,9 +72,9 @@ $mdi-font-path: '~@mdi/font/fonts';
 @import "~umbrella_core/vendor/select2/_select2.min.scss";
 @import "~dragula/dist/dragula.css";
 @import "~bootstrap-tagsinput/src/bootstrap-tagsinput.css";
+@import "~jquery-toast-plugin";
 
 //@import "vendor/daterangepicker";
-//@import "vendor/jquery.toast.min";
 //@import "vendor/bootstrap-timepicker.min";
 //@import "vendor/jquery.bootstrap-touchspin.min";
 
@@ -97,7 +96,7 @@ $mdi-font-path: '~@mdi/font/fonts';
 @import "plugins/metis-menu";
 @import "plugins/select2";
 @import "plugins/simplebar";
-//@import "plugins/toaster";
+@import "plugins/toast";
 @import "plugins/confirm";
 //@import "plugins/bootstrap-touchspin";
 //@import "plugins/bootstrap-timepicker";

@@ -14,21 +14,24 @@ import 'umbrella_core/vendor/bootstrap-tagsinput/bootstrap-tagsinput';
 import 'umbrella_core/vendor/bootstrap-datepicker/bootstrap-datepicker';
 import 'umbrella_core/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker';
 import 'umbrella_core/vendor/datatables/datatable';
-import 'umbrella_core/vendor/toastr/toastr';
 
 import 'metismenu';
 import 'simplebar';
+import 'jquery-toast-plugin';
 
 // plugins
 import 'umbrella_core/plugins/serializeFormToFormData';
 import 'umbrella_core/plugins/serializeFormToJson';
 import 'umbrella_core/plugins/confirm';
 
+// Default jquery plugin options
+$.fn.dataTable.ext.errMode = 'throw';
+$.toast.options.position = 'bottom-right';
+
 // Core services
 window.Kernel = new Kernel();
 
 // Core components
-$.fn.dataTable.ext.errMode = 'throw';
 window.Kernel.registerComponent('DataTable', DataTable);
 window.Kernel.registerComponent('Form', Form);
 
