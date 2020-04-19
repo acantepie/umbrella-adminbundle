@@ -21,16 +21,16 @@ table.dataTable {
         .sorting_desc_disabled{
             &:before {
                 right: 0.5rem;
-                content: "\F35D";
+                content: "\F035D";
                 font-family: "Material Design Icons";
                 font-size: 1rem;
-                top: 18px;
+                top: 10px;
             }
             &:after {
                 right: 0.5em;
-                content: "\F360";
+                content: "\F0360";
                 font-family: "Material Design Icons";
-                top: 12px;
+                top: 4px;
                 font-size: 1rem;
             }
         }
