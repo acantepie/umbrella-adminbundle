@@ -20,14 +20,17 @@
         </span>
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+        <div class=" dropdown-header noti-title">
+            <h6 class="text-overflow m-0">{{ 'common.welcome' | trans }} !</h6>
+        </div>
         {% if isAdminUser %}
             <a href="{{ path(admin_config('user.account_route')) }}" class="dropdown-item notify-item">
-                <i class="uil-user mr-1"></i>
+                <i class="mdi mdi-account-circle mr-1"></i>
                 <span>{{ 'action.my_account' | trans }}</span>
             </a>
         {% endif %}
         <a href="{{ path(admin_config('user.logout_route')) }}" class="dropdown-item notify-item">
-            <i class="uil-power mr-1"></i>
+            <i class="mdi mdi-logout mr-1"></i>
             <span>{{ 'action.signout' | trans }}</span>
         </a>
     </div>
