@@ -1,5 +1,5 @@
 import Kernel from "umbrella_core/core/Kernel";
-import DataTable from "umbrella_core/components/datatable/DataTable";
+import DataTable from "umbrella_core/components/DataTable";
 import Form from "umbrella_core/components/form/Form";
 import Sidebar from "umbrella_admin/components/Sidebar";
 import Layout from "umbrella_admin/components/Layout";
