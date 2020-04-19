@@ -15,6 +15,11 @@ input.form-control[type="range"] {
     min-height: 39px;
 }
 
+// Custom range
+.custom-range.form-control {
+    border: 0;
+}
+
 
 // Custom select
 .custom-select.is-invalid, .form-control.is-invalid,.custom-select:invalid, .form-control:invalid,
@@ -37,11 +42,13 @@ select.form-control-sm {
 }
 
 label.required:after, legend.required:after {
-    content: " *";
-    color: $danger;
-    font-weight: 500;
-    line-height: 1;
-    font-size: 1.2em;
+    &:not(.checkbox-custom) {
+        content: " *";
+        color: $danger;
+        font-weight: 500;
+        line-height: 1;
+        font-size: 1.2em;
+    }
 }
 
 .js-select2 {
