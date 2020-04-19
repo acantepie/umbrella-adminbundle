@@ -17,7 +17,6 @@
 
 //Fonts
 @import "fonts/nunito";
-$mdi-font-path: '~@mdi/font/fonts';
 @import '~@mdi/font/scss/materialdesignicons.scss';
 @import '~@iconscout/unicons/css/unicons.css';
 
@@ -72,6 +71,10 @@ $mdi-font-path: '~@mdi/font/fonts';
 @import "~dragula/dist/dragula.css";
 @import "~bootstrap-tagsinput/src/bootstrap-tagsinput.css";
 @import "~jquery-toast-plugin";
+
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
+@import '~datatables.net-rowreorder-bs/css/rowReorder.bootstrap.css';
+@import '~datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.css';
 
 //@import "vendor/daterangepicker";
 //@import "vendor/bootstrap-timepicker.min";
