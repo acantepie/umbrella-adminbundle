@@ -20,30 +20,3 @@
         @include button-shadow($value);
     }
 }
-
-
-.row-action{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    opacity: 0.8;
-    text-align: center;
-    width: 2.2rem;
-    height: 2.2rem;
-    line-height: 2rem;
-    background-color: rgba($black, .05);
-
-    &:not(:last-child) {
-        margin-right: .2rem;
-    }
-
-    &.text-danger {
-        background-color: rgba($danger, .15);
-    }
-
-    &:hover{
-        background-color: rgba(0, 0, 0, 0.08);
-        opacity: 1;
-    }
-}
