@@ -30,11 +30,6 @@
     @include gradient-bg($value);
   }
 
-  .badge-feather-#{$color} {
-    background: rgba($value, .2);
-    color: mix($body-color, $value, 20%)
-  }
-
 }
 
 @each $color, $value in $colors {
@@ -42,11 +37,6 @@
   .badge-#{$color} {
     @include gradient-bg($value);
     color: color-yiq($value);
-  }
-
-  .badge-feather-#{$color} {
-    background: rgba($value, .2);
-    color: mix($body-color, $value, 20%)
   }
 
 }
