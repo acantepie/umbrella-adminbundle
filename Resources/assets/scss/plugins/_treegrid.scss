@@ -1,0 +1,21 @@
+.treegrid-expander {
+  background-image: none;
+  margin-right:10px;
+
+  &::before {
+    font: normal normal normal 24px/1 "Material Design Icons";
+    position: absolute;
+  }
+
+  &.treegrid-expander-expanded::before {
+    content: "\F0140";
+  }
+
+  &.treegrid-expander-collapsed::before {
+    content: "\F0142";
+  }
+}
+
+.treegrid-indent {
+  width: 22px;
+}

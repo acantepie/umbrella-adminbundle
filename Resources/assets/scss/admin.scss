@@ -71,6 +71,7 @@
 @import "~dragula/dist/dragula.css";
 @import "~bootstrap-tagsinput/src/bootstrap-tagsinput.css";
 @import "~jquery-toast-plugin";
+@import "~jquery-treegrid/css/jquery.treegrid.css";
 
 @import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
 @import '~datatables.net-rowreorder-bs/css/rowReorder.bootstrap.css';
@@ -82,6 +83,7 @@
 
 
 // Plugins
+@import "plugins/treegrid";
 //@import "plugins/apexcharts";
 //@import "plugins/britechart";
 //@import "plugins/calendar";

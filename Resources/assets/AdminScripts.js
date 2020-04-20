@@ -18,6 +18,7 @@ import 'umbrella_core/vendor/datatables/datatable';
 import 'metismenu';
 import 'simplebar';
 import 'jquery-toast-plugin';
+import 'jquery-treegrid/js/jquery.treegrid';
 
 // plugins
 import 'umbrella_core/plugins/serializeFormToFormData';
