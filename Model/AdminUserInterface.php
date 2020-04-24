@@ -17,18 +17,26 @@ use Umbrella\CoreBundle\Entity\UmbrellaFile;
 interface AdminUserInterface
 {
     /**
-     * @return string
-     */
-    public function getAdminName();
-
-    /**
-     * @return string
-     */
-    public function getAdminLogin();
-
-    /**
+     * Avatar of user
+     *
      * @return UmbrellaFile|null
      */
     public function getAvatar();
+
+    /**
+     * Username of user (used to login)
+     *
+     * @return string
+     */
+    public function getUsername();
+
+    /**
+     * Full name of user
+     *
+     * @return string
+     */
+    public function getFullName();
+
+
 
 }

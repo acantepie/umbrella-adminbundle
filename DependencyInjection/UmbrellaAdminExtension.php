@@ -7,7 +7,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 use Umbrella\AdminBundle\Menu\SidebarMenu;
-use Umbrella\AdminBundle\Services\AdminConfigService;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -27,10 +27,14 @@ class UmbrellaAdminExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $def = $container->getDefinition(AdminConfigService::class);
-        $def->addMethodCall('loadConfig', [$config]);
-
         $def = $container->getDefinition(SidebarMenu::class);
-        $def->replaceArgument(0, $config['menu']['sitemap']);
+        $def->replaceArgument(0, $config['menu']['file']);
+
+        $parameters = ArrayUtils::remap_nested_array($config, 'umbrella_admin');
+        foreach ($parameters as $pKey => $pValue) {
+            if (!$container->hasParameter($pKey)) {
+                $container->setParameter($pKey, $pValue);
+            }
+        }
     }
 }

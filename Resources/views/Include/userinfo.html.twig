@@ -11,8 +11,8 @@
         </span>
         <span>
             {% if isAdminUser %}
-                <span class="account-user-name">{{ app.user.getAdminName() }}</span>
-                <span class="account-position">{{ app.user.getAdminLogin() }}</span>
+                <span class="account-user-name">{{ app.user.getFullName() }}</span>
+                <span class="account-position">{{ app.user.getUsername() }}</span>
             {% else %}
                 <span class="account-user-name">{{ app.user.username }}</span>
                 <span class="account-position">{{ '-' }}</span>
@@ -24,12 +24,12 @@
             <h6 class="text-overflow m-0">{{ 'common.welcome' | trans }} !</h6>
         </div>
         {% if isAdminUser %}
-            <a href="{{ path(admin_config('user.account_route')) }}" class="dropdown-item notify-item">
+            <a href="{{ path(admin_route_profile()) }}" class="dropdown-item notify-item">
                 <i class="mdi mdi-account-circle mr-1"></i>
                 <span>{{ 'action.my_account' | trans }}</span>
             </a>
         {% endif %}
-        <a href="{{ path(admin_config('user.logout_route')) }}" class="dropdown-item notify-item">
+        <a href="{{ path(admin_route_logout()) }}" class="dropdown-item notify-item">
             <i class="mdi mdi-logout mr-1"></i>
             <span>{{ 'action.signout' | trans }}</span>
         </a>

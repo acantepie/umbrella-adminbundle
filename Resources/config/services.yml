@@ -4,10 +4,6 @@ services:
         autoconfigure: true
         public: false
 
-    # Services
-    Umbrella\AdminBundle\Services\AdminConfigService:
-        public: true
-
     # Sidebar
     Umbrella\AdminBundle\Menu\SidebarMenu:
         arguments: [null]

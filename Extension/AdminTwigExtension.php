@@ -9,9 +9,9 @@
 
 namespace Umbrella\AdminBundle\Extension;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use Umbrella\AdminBundle\Services\AdminConfigService;
 
 /**
  * Class AdminTwigExtension.
@@ -20,17 +20,17 @@ class AdminTwigExtension extends AbstractExtension
 {
 
     /**
-     * @var AdminConfigService
+     * @var ParameterBagInterface
      */
-    private $configService;
+    private $parameters;
 
     /**
-     * ThemeTwigExtension constructor.
-     * @param AdminConfigService $configService
+     * AdminTwigExtension constructor.
+     * @param ParameterBagInterface $parameters
      */
-    public function __construct(AdminConfigService $configService)
+    public function __construct(ParameterBagInterface $parameters)
     {
-        $this->configService = $configService;
+        $this->parameters = $parameters;
     }
 
     /**
@@ -39,26 +39,51 @@ class AdminTwigExtension extends AbstractExtension
     public function getFunctions()
     {
         return array(
-            new TwigFunction('admin_theme_name', array($this, 'getThemeName')),
-            new TwigFunction('admin_config', array($this, 'getConfigValue')),
+            new TwigFunction('admin_theme_name', array($this, 'themeName')),
+            new TwigFunction('admin_script_entry', array($this, 'scriptEntry')),
+            new TwigFunction('admin_stylesheet_entry', array($this, 'stylesheetEntry')),
+            new TwigFunction('admin_route_profile', array($this, 'routeProfile')),
+            new TwigFunction('admin_route_logout', array($this, 'routeLogout')),
         );
     }
 
     /**
-     * @return mixed|null
+     * @return mixed
      */
-    public function getThemeName()
+    public function themeName()
     {
-        return $this->configService->getValue('theme.name');
+        return $this->parameters->get('umbrella_admin.theme.name');
     }
 
     /**
-     * @param $key
-     * @param null $default
-     * @return mixed|null
+     * @return mixed
      */
-    public function getConfigValue($key , $default = null)
+    public function scriptEntry()
     {
-        return $this->configService->getValue($key, $default);
+        return $this->parameters->get('umbrella_admin.assets.script_entry');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function stylesheetEntry()
+    {
+        return $this->parameters->get('umbrella_admin.assets.stylesheet_entry');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function routeProfile()
+    {
+        return $this->parameters->get('umbrella_admin.route.profile');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function routeLogout()
+    {
+        return $this->parameters->get('umbrella_admin.route.logout');
     }
 }
