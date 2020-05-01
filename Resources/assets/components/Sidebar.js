@@ -1,6 +1,8 @@
-export default class Sidebar {
+import Component from "umbrella_core/core/Component";
+
+export default class Sidebar extends Component {
     constructor($view) {
-        this.$view = $view;
+        super($view);
         this.init();
     }
 

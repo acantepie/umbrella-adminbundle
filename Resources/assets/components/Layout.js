@@ -1,6 +1,9 @@
-export default class Layout {
-    constructor($body) {
-        this.$body = $body;
+import Component from "umbrella_core/core/Component";
+
+export default class Layout extends Component {
+
+    constructor($view) {
+        super($view);
         this.$window = $(window);
         this.init();
     }
@@ -24,10 +27,10 @@ export default class Layout {
     };
 
     activateCondensedSidebar() {
-        this.$body.attr('data-leftbar-compact-mode', 'condensed');
+        this.$view.attr('data-leftbar-compact-mode', 'condensed');
     }
 
     desactivateCondensedSidebar() {
-        this.$body.attr('data-leftbar-compact-mode', false);
+        this.$view.attr('data-leftbar-compact-mode', false);
     }
 }
