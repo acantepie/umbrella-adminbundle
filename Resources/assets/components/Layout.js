@@ -1,9 +1,5 @@
-import KernelComponent from "umbrella_core/core/KernelComponent";
-
-export default class Layout extends KernelComponent {
+export default class Layout {
     constructor($body) {
-        super();
-
         this.$body = $body;
         this.$window = $(window);
         this.init();

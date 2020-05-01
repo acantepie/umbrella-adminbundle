@@ -65,17 +65,7 @@
 
 
 // Vendors
-@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker3.css";
-@import "~umbrella_core/vendor/bootstrap-datetimepicker/_bootstrap-datetimepicker.scss";
-@import "~umbrella_core/vendor/select2/_select2.min.scss";
-@import "~dragula/dist/dragula.css";
-@import "~bootstrap-tagsinput/src/bootstrap-tagsinput.css";
-@import "~jquery-toast-plugin";
-@import "~jquery-treegrid/css/jquery.treegrid.css";
-
-@import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
-@import '~datatables.net-rowreorder-bs/css/rowReorder.bootstrap.css';
-@import '~datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.css';
+@import "~umbrella_core/vendor/_vendor.scss";
 
 //@import "vendor/daterangepicker";
 //@import "vendor/bootstrap-timepicker.min";
