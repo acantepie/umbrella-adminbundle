@@ -1,5 +1,5 @@
 import 'umbrella_core/vendor/_vendor';
-import 'umbrella_core/jquery-plugins/_plugins';
+import 'umbrella_core/jquery-plugins/_jquery_plugins';
 
 // components
 import Sidebar from "umbrella_admin/components/Sidebar";
