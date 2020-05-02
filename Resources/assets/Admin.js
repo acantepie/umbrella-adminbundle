@@ -37,4 +37,4 @@ app.use('.js-datetimepicker', DateTimePicker);
 app.use('.js-umbrella-fileupload', FileUpload);
 app.use('.js-umbrella-collection', Collection);
 
-app.useAjaxHandler('default', JsResponseHandler);
+app.useAjaxHandler('default', new JsResponseHandler());
