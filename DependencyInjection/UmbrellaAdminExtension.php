@@ -2,12 +2,12 @@
 
 namespace Umbrella\AdminBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
-use Umbrella\AdminBundle\Menu\SidebarMenu;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrella\AdminBundle\Menu\SidebarMenu;
+use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration.

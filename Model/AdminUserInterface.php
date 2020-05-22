@@ -36,7 +36,4 @@ interface AdminUserInterface
      * @return string
      */
     public function getFullName();
-
-
-
 }

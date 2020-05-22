@@ -10,8 +10,8 @@
 namespace Umbrella\AdminBundle\Menu;
 
 use Symfony\Component\Yaml\Yaml;
-use Umbrella\CoreBundle\Component\Menu\MenuBuilder;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
+use Umbrella\CoreBundle\Component\Menu\MenuBuilder;
 
 /**
  * Class SidebarMenu.
@@ -34,7 +34,7 @@ class SidebarMenu
     }
 
     /**
-     * @param MenuBuilder $builder
+     * @param  MenuBuilder $builder
      * @return Menu
      */
     public function createMenu(MenuBuilder $builder)
@@ -50,5 +50,4 @@ class SidebarMenu
 
         return $builder->getMenu();
     }
-
 }

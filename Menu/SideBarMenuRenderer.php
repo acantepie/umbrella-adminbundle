@@ -34,13 +34,13 @@ class SideBarMenuRenderer implements MenuRendererInterface
     }
 
     /**
-     * @param Menu $menu
+     * @param  Menu   $menu
      * @return string
      */
     public function render(Menu $menu)
     {
-        return $this->twig->render('@UmbrellaAdmin/Menu/sidebar.html.twig', array(
+        return $this->twig->render('@UmbrellaAdmin/Menu/sidebar.html.twig', [
             'menu' => $menu
-        ));
+        ]);
     }
 }

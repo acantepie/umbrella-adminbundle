@@ -9,9 +9,9 @@
 
 namespace Umbrella\AdminBundle\Extension;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Twig\Extension\AbstractExtension;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * Class AdminTwigExtension.
@@ -38,13 +38,13 @@ class AdminTwigExtension extends AbstractExtension
      */
     public function getFunctions()
     {
-        return array(
-            new TwigFunction('admin_theme_name', array($this, 'themeName')),
-            new TwigFunction('admin_script_entry', array($this, 'scriptEntry')),
-            new TwigFunction('admin_stylesheet_entry', array($this, 'stylesheetEntry')),
-            new TwigFunction('admin_route_profile', array($this, 'routeProfile')),
-            new TwigFunction('admin_route_logout', array($this, 'routeLogout')),
-        );
+        return [
+            new TwigFunction('admin_theme_name', [$this, 'themeName']),
+            new TwigFunction('admin_script_entry', [$this, 'scriptEntry']),
+            new TwigFunction('admin_stylesheet_entry', [$this, 'stylesheetEntry']),
+            new TwigFunction('admin_route_profile', [$this, 'routeProfile']),
+            new TwigFunction('admin_route_logout', [$this, 'routeLogout']),
+        ];
     }
 
     /**
