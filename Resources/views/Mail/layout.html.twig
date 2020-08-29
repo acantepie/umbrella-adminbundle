@@ -4,12 +4,17 @@
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>{{ admin_theme_name() }}</title>
+
     {% block baseHref %}
         {% if app.request is not null %}
             <base href="{{ app.request.getSchemeAndHttpHost() }}">
         {% endif %}
     {% endblock %}
+
     <style>
+
+        @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&amp;display=swap");
+
         /* -------------------------------------
             GLOBAL RESETS
         ------------------------------------- */
@@ -20,7 +25,7 @@
 
         body {
             background-color: #f6f6f6;
-            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
             font-size: 14px;
             line-height: 1.4;
@@ -35,7 +40,7 @@
             mso-table-rspace: 0pt;
             width: 100%; }
         table td {
-            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
             font-size: 14px;
             vertical-align: top; }
 
@@ -62,16 +67,20 @@
             display: block;
             Margin: 0 auto;
             max-width: 580px;
-            padding: 10px; }
+            padding: 20px; }
 
         /* -------------------------------------
             HEADER, FOOTER, MAIN
         ------------------------------------- */
-        .header .title {
-            font-size: 35px;
+        .header {
             text-align: center;
-            margin-bottom: 25px;
-            font-weight: 300;
+            width: 100%;
+        }
+
+        .header .logo {
+            font-weight: bold;
+            font-size: 35px;
+            color: #666;
         }
 
         .main {
@@ -111,7 +120,7 @@
         h3,
         h4 {
             color: #000000;
-            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
             font-weight: 400;
             line-height: 1.4;
             margin: 0;
@@ -126,7 +135,7 @@
         p,
         ul,
         ol {
-            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
             font-size: 14px;
             font-weight: normal;
             margin: 0;
@@ -301,7 +310,7 @@
                             <div class="header">
                                 <table border="0" cellpadding="0" cellspacing="0">
                                     <tr>
-                                        <td class="title">
+                                        <td class="content-block">
                                             {% include '@UmbrellaAdmin/Include/logo.html.twig' %}
                                         </td>
                                     </tr>
