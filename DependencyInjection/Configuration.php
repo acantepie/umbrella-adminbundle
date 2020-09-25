@@ -2,13 +2,13 @@
 
 namespace Umbrella\AdminBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Umbrella\AdminBundle\DataTable\UserGroupTableType;
-use Umbrella\AdminBundle\DataTable\UserTableType;
+use Umbrella\AdminBundle\Form\UserType;
 use Umbrella\AdminBundle\Form\ProfileType;
 use Umbrella\AdminBundle\Form\UserGroupType;
-use Umbrella\AdminBundle\Form\UserType;
+use Umbrella\AdminBundle\DataTable\UserTableType;
+use Umbrella\AdminBundle\DataTable\UserGroupTableType;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * This is the class that validates and merges configuration from your app/config files.

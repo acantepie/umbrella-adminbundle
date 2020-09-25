@@ -8,7 +8,6 @@
 
 namespace Umbrella\AdminBundle\DataTable;
 
-use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
 use Umbrella\CoreBundle\Form\SearchType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
@@ -20,6 +19,7 @@ use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
 use Umbrella\CoreBundle\Component\Toolbar\Action\AddButtonActionType;
 use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
 
 /**
  * Class UserGroupTableType.
@@ -77,9 +77,7 @@ class UserGroupTableType extends DataTableType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->parameters->get('umbrella_admin.user.group_crud.class'),
-            'length_change' => false,
-            'id' => 'umbrella_usergrouptable'
+            'data_class' => $this->parameters->get('umbrella_admin.user.group_crud.class')
         ]);
     }
 }

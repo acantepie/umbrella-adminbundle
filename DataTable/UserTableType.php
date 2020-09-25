@@ -9,7 +9,6 @@
 
 namespace Umbrella\AdminBundle\DataTable;
 
-use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
 use Umbrella\CoreBundle\Form\SearchType;
 use Umbrella\AdminBundle\Entity\BaseUser;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
@@ -25,6 +24,7 @@ use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
 use Umbrella\CoreBundle\Component\Toolbar\Action\AddButtonActionType;
 use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
 
 /**
  * Class UserTableType.
@@ -119,9 +119,7 @@ class UserTableType extends DataTableType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->parameters->get('umbrella_admin.user.user_crud.class'),
-            'length_change' => false,
-            'id' => 'umbrella_usertable'
+            'data_class' => $this->parameters->get('umbrella_admin.user.user_crud.class')
         ]);
     }
 }

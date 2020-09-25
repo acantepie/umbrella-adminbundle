@@ -8,8 +8,8 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
-use Umbrella\AdminBundle\Services\UserMailer;
 use Symfony\Component\HttpFoundation\Request;
+use Umbrella\AdminBundle\Services\UserMailer;
 use Umbrella\AdminBundle\Services\UserManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Umbrella\CoreBundle\Controller\BaseController;
@@ -96,6 +96,7 @@ class SecurityController extends BaseController
 
     /**
      * @Route("/password_reset/{token}")
+     * @param mixed $token
      */
     public function passwordResetAction(Request $request, $token)
     {

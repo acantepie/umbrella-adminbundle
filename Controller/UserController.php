@@ -77,7 +77,7 @@ class UserController extends BaseController
 
             return $this->jsResponseBuilder()
                 ->closeModal()
-                ->reloadTable('umbrella_usertable')
+                ->reloadTable()
                 ->toastSuccess('message.entity_updated');
         }
 
@@ -117,7 +117,7 @@ class UserController extends BaseController
 
         return $this->jsResponseBuilder()
             ->closeModal()
-            ->reloadTable('umbrella_usertable')
+            ->reloadTable()
             ->toastSuccess('message.entity_deleted');
     }
 }

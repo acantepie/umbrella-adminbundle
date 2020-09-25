@@ -1,0 +1,3 @@
+umbrella_admin_task_:
+  resource: "@UmbrellaAdminBundle/Controller/TaskController.php"
+  type: annotation

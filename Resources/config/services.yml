@@ -13,6 +13,7 @@ services:
     # Table
     Umbrella\AdminBundle\DataTable\UserGroupTableType:
     Umbrella\AdminBundle\DataTable\UserTableType:
+    Umbrella\AdminBundle\DataTable\TaskTableType:
 
     # Form
     Umbrella\AdminBundle\Form\ProfileType:

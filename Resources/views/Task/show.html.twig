@@ -1,0 +1,64 @@
+{% extends "@UmbrellaCore/Modal/default.html.twig" %}
+
+{% block modal_title %}
+    <h5 class="modal-title">{{ entity }}</h5>
+{% endblock %}
+
+{% block modal_content %}
+    <table class="table table-striped mb-0">
+        <tbody>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ entity.taskId }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ entity.state | render_task_state }}</td>
+            </tr>
+            <tr>
+                <th>Timeout</th>
+                <td>
+                    {% if entity.timeout %}
+                        {{ entity.timeout }}s
+                    {% else %}
+                        &infin;
+                    {% endif %}
+                </td>
+            </tr>
+            {% if entity.startedAt %}
+                <tr>
+                    <th>Exécuté le</th>
+                    <td>{{ entity.startedAt | date('d/m/Y H:i:s') }}</td>
+                </tr>
+            {% endif %}
+            {% if entity.endedAt %}
+                <tr>
+                    <th>Terminé le</th>
+                    <td>{{ entity.endedAt | date('d/m/Y H:i:s') }}</td>
+                </tr>
+            {% endif %}
+            {% set runtime = entity.runtime %}
+            {% if runtime %}
+                <tr>
+                    <th>Runtime</th>
+                    <td>{{ runtime }}</td>
+                </tr>
+            {% endif %}
+            {% if entity.progress %}
+                <tr>
+                    <th>Progression</th>
+                    <td>{{ entity.progress }}%</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    {% if entity.output %}
+        <div class="m-3">
+            <hr>
+            <div class="pb-3">Messages</div>
+            <pre class="pre-scrollable">{{ entity.output }}</pre>
+        </div>
+    {% endif %}
+
+{% endblock %}

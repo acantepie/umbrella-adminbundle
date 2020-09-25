@@ -55,6 +55,7 @@ class UserGroupController extends BaseController
 
     /**
      * @Route("/edit/{id}", requirements={"id"="\d+"})
+     * @param null|mixed $id
      */
     public function editAction(Request $request, $id = null)
     {
@@ -73,7 +74,7 @@ class UserGroupController extends BaseController
 
             return $this->jsResponseBuilder()
                 ->closeModal()
-                ->reloadTable('umbrella_usergrouptable')
+                ->reloadTable()
                 ->toastSuccess('message.entity_updated');
         }
 
@@ -87,6 +88,7 @@ class UserGroupController extends BaseController
 
     /**
      * @Route("/delete/{id}", requirements={"id"="\d+"})
+     * @param mixed $id
      */
     public function deleteAction(Request $request, $id)
     {
@@ -97,7 +99,7 @@ class UserGroupController extends BaseController
 
         return $this->jsResponseBuilder()
             ->closeModal()
-            ->reloadTable('umbrella_usergrouptable')
+            ->reloadTable()
             ->toastSuccess('message.entity_deleted');
     }
 }
