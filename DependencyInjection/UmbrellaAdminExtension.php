@@ -31,6 +31,9 @@ class UmbrellaAdminExtension extends Extension
         $def->replaceArgument(0, $config['menu']['file']);
 
         $parameters = ArrayUtils::remap_nested_array($config, 'umbrella_admin');
+        $parameters['umbrella_admin.route.profile'] = 'umbrella_admin_profile_index';
+        $parameters['umbrella_admin.route.logout'] = 'umbrella_admin_logout';
+
         foreach ($parameters as $pKey => $pValue) {
             if (!$container->hasParameter($pKey)) {
                 $container->setParameter($pKey, $pValue);

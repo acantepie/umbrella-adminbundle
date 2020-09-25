@@ -4,6 +4,11 @@ namespace Umbrella\AdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Umbrella\AdminBundle\DataTable\UserGroupTableType;
+use Umbrella\AdminBundle\DataTable\UserTableType;
+use Umbrella\AdminBundle\Form\ProfileType;
+use Umbrella\AdminBundle\Form\UserGroupType;
+use Umbrella\AdminBundle\Form\UserType;
 
 /**
  * This is the class that validates and merges configuration from your app/config files.
@@ -22,7 +27,14 @@ class Configuration implements ConfigurationInterface
             ->getRootNode()
             ->append($this->menuNode())
             ->append($this->themeNode())
-            ->append($this->assetsNode());
+            ->append($this->assetsNode())
+            ->children()
+                ->arrayNode('user')->addDefaultsIfNotSet()
+                ->append($this->userCrudNode())
+                ->append($this->groupCrudNode())
+                ->append($this->profileCrudNode())
+                ->append($this->mailNode());
+
         return $treeBuilder;
     }
 
@@ -61,5 +73,64 @@ class Configuration implements ConfigurationInterface
                 ->defaultValue('/build/umbrella_admin.js')
                 ->end();
         return $assetNode;
+    }
+
+    private function userCrudNode()
+    {
+        $treeBuilder = new TreeBuilder('user_crud');
+        $node = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
+        $node->children()
+            ->scalarNode('class')
+            ->defaultValue('App\\Entity\\User')
+            ->end()
+            ->scalarNode('table')
+            ->defaultValue(UserTableType::class)
+            ->end()
+            ->scalarNode('form')
+            ->defaultValue(UserType::class)
+            ->end();
+        return $node;
+    }
+
+    private function groupCrudNode()
+    {
+        $treeBuilder = new TreeBuilder('group_crud');
+        $node = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
+        $node->children()
+            ->scalarNode('class')
+            ->defaultValue('App\\Entity\\UserGroup')
+            ->end()
+            ->scalarNode('table')
+            ->defaultValue(UserGroupTableType::class)
+            ->end()
+            ->scalarNode('form')
+            ->defaultValue(UserGroupType::class)
+            ->end();
+        return $node;
+    }
+
+    private function profileCrudNode()
+    {
+        $treeBuilder = new TreeBuilder('profile_crud');
+        $node = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
+        $node->children()
+            ->scalarNode('form')
+            ->defaultValue(ProfileType::class)
+            ->end();
+        return $node;
+    }
+
+    private function mailNode()
+    {
+        $treeBuilder = new TreeBuilder('mail');
+        $node = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
+        $node->children()
+            ->scalarNode('from_email')
+            ->defaultValue('no-reply@umbrella.dev')
+            ->end()
+            ->scalarNode('from_name')
+            ->defaultValue(null)
+            ->end();
+        return $node;
     }
 }

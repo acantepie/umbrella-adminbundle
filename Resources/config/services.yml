@@ -4,6 +4,36 @@ services:
         autoconfigure: true
         public: false
 
+    # Controllers
+    Umbrella\AdminBundle\Controller\:
+        resource: '../../Controller'
+        public: true
+        tags: ['controller.service_arguments']
+
+    # Table
+    Umbrella\AdminBundle\DataTable\UserGroupTableType:
+    Umbrella\AdminBundle\DataTable\UserTableType:
+
+    # Form
+    Umbrella\AdminBundle\Form\ProfileType:
+    Umbrella\AdminBundle\Form\UserGroupType:
+    Umbrella\AdminBundle\Form\UserPasswordConfirmType:
+    Umbrella\AdminBundle\Form\UserType:
+
+    # Security
+    Umbrella\AdminBundle\Security\AuthenticationEntryPoint:
+    Umbrella\AdminBundle\Security\UserProvider:
+    Umbrella\AdminBundle\Security\UserChecker:
+
+    # Services
+    Umbrella\AdminBundle\Services\UserGroupManager:
+        public: true
+    Umbrella\AdminBundle\Services\UserManager:
+        public: true
+    Umbrella\AdminBundle\Services\UserMailer:
+        public: true
+
+
     # Sidebar
     Umbrella\AdminBundle\Menu\SidebarMenu:
         arguments: [null]

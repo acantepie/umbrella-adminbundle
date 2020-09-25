@@ -1,0 +1,49 @@
+{% extends "@UmbrellaAdmin/Layout/layout.html.twig" %}
+
+{% block topbar %}
+    {% set breadcrumb = [{label: 'action.my_account' | trans, icon: 'uil-user'}] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="mb-2">
+        <div class="row">
+            <div class="col-sm-8 col-lg-9">
+
+                <form data-mount="Form" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-body">
+                        {{ form_rest(settings_form) }}
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-primary">
+                            {{ 'mdi mdi-check mr-1' | icon  }}
+                            {{ 'action.save' | trans }}
+                        </button>
+                    </div>
+                </div>
+                </form>
+
+            </div>
+
+            <div class="col-sm-4 col-lg-3">
+
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="card-body">
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.webPath }}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+                            {% else %}
+                                <div class="avatar-icon avatar-lg rounded-circle"><i class="uil-user font-24"></i></div>
+                            {% endif %}
+
+                            <h4 class="mb-0 mt-2">{{ user.getFullName() }}</h4>
+                            <p class="text-muted font-14">{{ user.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

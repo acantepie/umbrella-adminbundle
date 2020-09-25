@@ -1,0 +1,18 @@
+umbrella_admin_logout:
+    path: /logout
+
+umbrella_profile_:
+    resource: "@UmbrellaAdminBundle/Controller/ProfileController.php"
+    type: annotation
+
+umbrella_security_:
+    resource: "@UmbrellaAdminBundle/Controller/SecurityController.php"
+    type: annotation
+
+umbrella_user_:
+    resource: "@UmbrellaAdminBundle/Controller/UserController.php"
+    type: annotation
+
+umbrella_usergroup_:
+    resource: "@UmbrellaAdminBundle/Controller/UserGroupController.php"
+    type: annotation
