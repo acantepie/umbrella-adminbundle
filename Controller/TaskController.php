@@ -8,14 +8,14 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Umbrella\CoreBundle\Entity\UmbrellaTask;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Umbrella\AdminBundle\DataTable\TaskTableType;
-use Umbrella\CoreBundle\Component\Task\TaskManager;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Umbrella\CoreBundle\Controller\BaseController;
-use Umbrella\CoreBundle\Entity\UmbrellaTask;
+use Umbrella\CoreBundle\Component\Task\TaskManager;
 
 /**
  * Class TaskController
@@ -37,9 +37,9 @@ class TaskController extends BaseController
             return new JsonResponse($table->getApiResults());
         }
 
-        return $this->render('@UmbrellaAdmin/DataTable/index.html.twig', array(
+        return $this->render('@UmbrellaAdmin/DataTable/index.html.twig', [
             'table' => $table
-        ));
+        ]);
     }
 
     /**
@@ -53,9 +53,9 @@ class TaskController extends BaseController
     {
         $entity = $this->findOrNotFound(UmbrellaTask::class, $id);
         return $this->jsResponseBuilder()
-            ->openModalView('@UmbrellaAdmin/Task/show.html.twig', array(
+            ->openModalView('@UmbrellaAdmin/Task/show.html.twig', [
                 'entity' => $entity
-            ));
+            ]);
     }
 
     /**
@@ -74,5 +74,4 @@ class TaskController extends BaseController
             ->toastSuccess('message.task_canceled')
             ->reloadTable();
     }
-
 }

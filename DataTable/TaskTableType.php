@@ -9,21 +9,20 @@
 namespace Umbrella\AdminBundle\DataTable;
 
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
-use Umbrella\CoreBundle\Component\Column\Type\DateColumnType;
-use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
-use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
-use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
-use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntityCallbackSourceModifier;
-use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
-use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
-use Umbrella\CoreBundle\Component\Task\Extension\TaskHelper;
-use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
-use Umbrella\CoreBundle\Entity\UmbrellaTask;
-use Umbrella\CoreBundle\Form\Choice2Type;
 use Umbrella\CoreBundle\Form\SearchType;
+use Umbrella\CoreBundle\Form\Choice2Type;
+use Umbrella\CoreBundle\Entity\UmbrellaTask;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
+use Umbrella\CoreBundle\Component\Task\Extension\TaskHelper;
+use Umbrella\CoreBundle\Component\Column\Type\DateColumnType;
+use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
+use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
+use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
+use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
+use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
+use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
+use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntityCallbackSourceModifier;
 
 /**
  * Class TaskTableType
@@ -50,66 +49,66 @@ class TaskTableType extends DataTableType
     public function buildToolbar(ToolbarBuilder $builder, array $options = [])
     {
         $builder->addFilter('search', SearchType::class);
-        $builder->addFilter('states', Choice2Type::class, array(
+        $builder->addFilter('states', Choice2Type::class, [
             'label' => false,
-            'choices' => array(
+            'choices' => [
                 UmbrellaTask::STATE_PENDING,
                 UmbrellaTask::STATE_RUNNING,
                 UmbrellaTask::STATE_FINISHED,
                 UmbrellaTask::STATE_TERMINATED,
                 UmbrellaTask::STATE_FAILED
-            ),
-            'choice_label' => function($state) {
+            ],
+            'choice_label' => function ($state) {
                 return $state ? $this->taskHelper->getStateLabel($state) : null;
             },
             'multiple' => true,
             'translation_domain' => false,
-            'attr' => array(
+            'attr' => [
                 'class' => 'form-check-horizontal'
-            ),
+            ],
             'placeholder' => 'form.placeholder.states'
-        ));
+        ]);
     }
 
     /**
      * @inheritdoc
      */
-    public function buildTable(DataTableBuilder $builder, array $options = array())
+    public function buildTable(DataTableBuilder $builder, array $options = [])
     {
-        $builder->add('state', PropertyColumnType::class, array(
+        $builder->add('state', PropertyColumnType::class, [
             'label' => 'task_state',
             'renderer' => function (UmbrellaTask $entity) {
                 return $this->taskHelper->renderState($entity->state);
             }
-        ));
+        ]);
 
-        $builder->add('handlerAlias', PropertyColumnType::class, array(
+        $builder->add('handlerAlias', PropertyColumnType::class, [
             'label' => 'task_id',
             'renderer' => function (UmbrellaTask $entity) {
                 return $entity->getTaskId();
             }
-        ));
+        ]);
 
-        $builder->add('createdAt', DateColumnType::class, array(
+        $builder->add('createdAt', DateColumnType::class, [
             'default_order' => 'DESC',
             'format' => 'd/m/Y H:i'
-        ));
+        ]);
 
-        $builder->add('startedAt', PropertyColumnType::class, array(
+        $builder->add('startedAt', PropertyColumnType::class, [
             'label' => 'task_runtime',
             'renderer' => function (UmbrellaTask $entity) {
                 return $this->taskHelper->renderRuntime($entity);
             }
-        ));
+        ]);
 
-        $builder->add('progress', PropertyColumnType::class, array(
+        $builder->add('progress', PropertyColumnType::class, [
             'label' => 'task_progress',
             'renderer' => function (UmbrellaTask $entity) {
                 return $this->taskHelper->renderProgress($entity);
             },
-        ));
+        ]);
 
-        $builder->add('actions', ActionColumnType::class, array(
+        $builder->add('actions', ActionColumnType::class, [
             'action_builder' => function (RowActionBuilder $builder, UmbrellaTask $entity) {
                 $builder->createShow('umbrella_admin_task_show', ['id' => $entity->id]);
 
@@ -122,7 +121,7 @@ class TaskTableType extends DataTableType
                         ->setXhr(true);
                 }
             }
-        ));
+        ]);
 
         $builder->addSourceModifier(new EntitySearchModifier());
         $builder->addSourceModifier(new EntityCallbackSourceModifier(function (QueryBuilder $qb, array $queryData) {
@@ -138,10 +137,9 @@ class TaskTableType extends DataTableType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => UmbrellaTask::class,
             'poll_interval' => 10
-        ));
+        ]);
     }
-
 }
