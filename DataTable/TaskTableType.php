@@ -125,7 +125,7 @@ class TaskTableType extends DataTableType
 
         $builder->addSourceModifier(new EntitySearchModifier());
         $builder->addEntityCallbackSourceModifier(function (QueryBuilder $qb, array $formData) {
-            if (isset($formData['states'])) {
+            if ($formData['states']) {
                 $qb->andWhere('e.state IN (:states)');
                 $qb->setParameter('states', $formData['states']);
             }
