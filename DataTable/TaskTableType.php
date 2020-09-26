@@ -124,12 +124,12 @@ class TaskTableType extends DataTableType
         ]);
 
         $builder->addSourceModifier(new EntitySearchModifier());
-        $builder->addSourceModifier(new EntityCallbackSourceModifier(function (QueryBuilder $qb, array $queryData) {
-            if (isset($queryData['form']['states'])) {
+        $builder->addEntityCallbackSourceModifier(function (QueryBuilder $qb, array $formData) {
+            if (isset($formData['states'])) {
                 $qb->andWhere('e.state IN (:states)');
-                $qb->setParameter('states', $queryData['form']['states']);
+                $qb->setParameter('states', $formData['states']);
             }
-        }));
+        });
     }
 
     /**
