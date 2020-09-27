@@ -22,7 +22,6 @@ use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
 use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
 use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
 use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
-use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntityCallbackSourceModifier;
 
 /**
  * Class TaskTableType
