@@ -8,7 +8,6 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
-use Umbrella\CoreBundle\Entity\UmbrellaTask;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,6 +22,20 @@ use Umbrella\CoreBundle\Component\Task\TaskManager;
  */
 class TaskController extends BaseController
 {
+    /**
+     * @var TaskManager
+     */
+    private $manager;
+
+    /**
+     * TaskController constructor.
+     * @param TaskManager $manager
+     */
+    public function __construct(TaskManager $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route(path="")
      *
@@ -51,7 +64,9 @@ class TaskController extends BaseController
      */
     public function showAction(Request $request, $id)
     {
-        $entity = $this->findOrNotFound(UmbrellaTask::class, $id);
+        $entity = $this->manager->getTask($id);
+        $this->throwNotFoundExceptionIfNull($entity);
+
         return $this->jsResponseBuilder()
             ->openModalView('@UmbrellaAdmin/Task/show.html.twig', [
                 'entity' => $entity
@@ -67,9 +82,10 @@ class TaskController extends BaseController
      */
     public function cancelAction(TaskManager  $taskManager, Request $request, $id)
     {
-        $entity = $this->findOrNotFound(UmbrellaTask::class, $id);
-        $taskManager->cancel($entity);
+        $entity = $this->manager->getTask($id);
+        $this->throwNotFoundExceptionIfNull($entity);
 
+        $taskManager->cancel($entity);
         return $this->jsResponseBuilder()
             ->toastSuccess('message.task_canceled')
             ->reloadTable();

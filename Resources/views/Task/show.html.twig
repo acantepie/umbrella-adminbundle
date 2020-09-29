@@ -1,7 +1,7 @@
 {% extends "@UmbrellaCore/Modal/default.html.twig" %}
 
 {% block modal_title %}
-    <h5 class="modal-title">{{ entity }}</h5>
+    <h5 class="modal-title">Tache {{ entity }}</h5>
 {% endblock %}
 
 {% block modal_content %}
@@ -9,7 +9,11 @@
         <tbody>
             <tr>
                 <th>Identifiant</th>
-                <td>{{ entity.taskId }}</td>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Handler alias</th>
+                <td>{{ entity.handlerAlias }}</td>
             </tr>
             <tr>
                 <th>Etat</th>

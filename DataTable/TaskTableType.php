@@ -9,9 +9,9 @@
 namespace Umbrella\AdminBundle\DataTable;
 
 use Doctrine\ORM\QueryBuilder;
+use Umbrella\CoreBundle\Entity\BaseTask;
 use Umbrella\CoreBundle\Form\SearchType;
 use Umbrella\CoreBundle\Form\Choice2Type;
-use Umbrella\CoreBundle\Entity\UmbrellaTask;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
 use Umbrella\CoreBundle\Component\Task\Extension\TaskHelper;
@@ -21,6 +21,7 @@ use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
 use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
 use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
 use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
 
 /**
@@ -34,12 +35,19 @@ class TaskTableType extends DataTableType
     private $taskHelper;
 
     /**
-     * TaskTableType constructor.
-     * @param TaskHelper $taskHelper
+     * @var ParameterBagInterface
      */
-    public function __construct(TaskHelper $taskHelper)
+    private $parameterBag;
+
+    /**
+     * TaskTableType constructor.
+     * @param TaskHelper            $taskHelper
+     * @param ParameterBagInterface $parameterBag
+     */
+    public function __construct(TaskHelper $taskHelper, ParameterBagInterface  $parameterBag)
     {
         $this->taskHelper = $taskHelper;
+        $this->parameterBag = $parameterBag;
     }
 
     /**
@@ -51,11 +59,11 @@ class TaskTableType extends DataTableType
         $builder->addFilter('states', Choice2Type::class, [
             'label' => false,
             'choices' => [
-                UmbrellaTask::STATE_PENDING,
-                UmbrellaTask::STATE_RUNNING,
-                UmbrellaTask::STATE_FINISHED,
-                UmbrellaTask::STATE_TERMINATED,
-                UmbrellaTask::STATE_FAILED
+                BaseTask::STATE_PENDING,
+                BaseTask::STATE_RUNNING,
+                BaseTask::STATE_FINISHED,
+                BaseTask::STATE_TERMINATED,
+                BaseTask::STATE_FAILED
             ],
             'choice_label' => function ($state) {
                 return $state ? $this->taskHelper->getStateLabel($state) : null;
@@ -76,17 +84,16 @@ class TaskTableType extends DataTableType
     {
         $builder->add('state', PropertyColumnType::class, [
             'label' => 'task_state',
-            'renderer' => function (UmbrellaTask $entity) {
+            'renderer' => function (BaseTask $entity) {
                 return $this->taskHelper->renderState($entity->state);
             }
         ]);
 
-        $builder->add('handlerAlias', PropertyColumnType::class, [
-            'label' => 'task_id',
-            'renderer' => function (UmbrellaTask $entity) {
-                return $entity->getTaskId();
-            }
+        $builder->add('id', PropertyColumnType::class, [
+            'label' => 'task_id'
         ]);
+        
+        $builder->add('handlerAlias', PropertyColumnType::class);
 
         $builder->add('createdAt', DateColumnType::class, [
             'default_order' => 'DESC',
@@ -95,20 +102,20 @@ class TaskTableType extends DataTableType
 
         $builder->add('startedAt', PropertyColumnType::class, [
             'label' => 'task_runtime',
-            'renderer' => function (UmbrellaTask $entity) {
+            'renderer' => function (BaseTask $entity) {
                 return $this->taskHelper->renderRuntime($entity);
             }
         ]);
 
         $builder->add('progress', PropertyColumnType::class, [
             'label' => 'task_progress',
-            'renderer' => function (UmbrellaTask $entity) {
+            'renderer' => function (BaseTask $entity) {
                 return $this->taskHelper->renderProgress($entity);
             },
         ]);
 
         $builder->add('actions', ActionColumnType::class, [
-            'action_builder' => function (RowActionBuilder $builder, UmbrellaTask $entity) {
+            'action_builder' => function (RowActionBuilder $builder, BaseTask $entity) {
                 $builder->createShow('umbrella_admin_task_show', ['id' => $entity->id]);
 
                 if ($entity->canCancel()) {
@@ -137,7 +144,7 @@ class TaskTableType extends DataTableType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UmbrellaTask::class,
+            'data_class' => $this->parameterBag->get('umbrella_core.task.class'),
             'poll_interval' => 10
         ]);
     }
