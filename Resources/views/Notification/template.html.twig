@@ -1,0 +1,49 @@
+<template id="notification-fw-pending-tpl">
+    <div class="dropdown-item notify-item">
+        <div class="notify-icon bg-{{ 'pending' | task_state_color }}">
+            <i class="{{ 'pending' | task_state_icon }}"></i>
+        </div>
+        <p class="notify-details">[[label]]
+            <small class="text-muted">{{ 'pending' | task_state_label }} - [[date]]</small>
+        </p>
+    </div>
+</template>
+
+<template id="notification-fw-running-tpl">
+    <div class="dropdown-item notify-item">
+        <div class="notify-icon bg-{{ 'running' | task_state_color }}">
+            <i class="{{ 'running' | task_state_icon }}"></i>
+        </div>
+        <p class="notify-details">[[label]]
+            <small class="text-muted">{{ 'running' | task_state_label }} - [[date]]</small>
+        </p>
+    </div>
+</template>
+
+<template id="notification-fw-failed-tpl">
+    <div class="dropdown-item notify-item">
+        <div class="notify-icon bg-{{ 'failed' | task_state_color }}">
+            <i class="{{ 'failed' | task_state_icon }}"></i>
+        </div>
+        <p class="notify-details">[[label]]
+            <small class="text-muted">{{ 'failed' | task_state_label }} - [[#ended_at]][[ended_at]][[/ended_at]] [[^ended_at]][[started_at]][[/ended_at]]</small>
+        </p>
+    </div>
+</template>
+
+<template id="notification-fw-finished-tpl">
+    <a class="dropdown-item notify-item" href="#">
+        <div class="notify-icon bg-{{ 'finished' | task_state_color }}">
+            <i class="{{ 'finished' | task_state_icon }}"></i>
+        </div>
+        <p class="notify-details">[[label]]
+            <small class="text-muted">{{ 'finished' | task_state_label }} - [[#ended_at]][[ended_at]][[/ended_at]] [[^ended_at]][[started_at]][[/ended_at]] - [[runtime]]s</small>
+        </p>
+    </a>
+</template>
+
+<template id="notification-empty-tpl">
+    <div class="dropdown-item notify-item">
+        <small class="empty">Vous n'avez aucun export</small>
+    </div>
+</template>

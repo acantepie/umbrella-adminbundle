@@ -92,7 +92,8 @@ class TaskTableType extends DataTableType
         $builder->add('id', PropertyColumnType::class, [
             'label' => 'task_id'
         ]);
-        
+
+        $builder->add('type', PropertyColumnType::class);
         $builder->add('handlerAlias', PropertyColumnType::class);
 
         $builder->add('createdAt', DateColumnType::class, [

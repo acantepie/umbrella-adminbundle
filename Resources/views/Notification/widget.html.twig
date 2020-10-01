@@ -1,0 +1,18 @@
+<li class="dropdown notification-list"
+    data-mount="Notification"
+    data-refresh-url="{{ path('umbrella_admin_notification_list') }}"
+
+>
+    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+        <i class="mdi mdi-file-download-outline noti-icon"></i>
+        {#<span class="noti-icon-badge"></span>#}
+    </a>
+    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg">
+        <div class="noti-title">
+            <h5 class="m-0">{{ 'notification.title' | trans }}</h5>
+        </div>
+
+        <div style="max-height: 230px;" data-simplebar class="js-notificarion-list">
+        </div>
+    </div>
+</li>

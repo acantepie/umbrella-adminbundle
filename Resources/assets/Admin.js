@@ -4,6 +4,7 @@ import 'umbrella_core/jquery-plugins/_jquery_plugins';
 // components
 import Sidebar from "umbrella_admin/components/Sidebar";
 import Layout from "umbrella_admin/components/Layout";
+import Notification from "umbrella_admin/components/Notification";
 
 import DataTable from "umbrella_core/components/DataTable";
 import Select2 from "umbrella_core/components/Select2";
@@ -27,8 +28,9 @@ window.app = app;
 
 app.use('[data-mount=Sidebar]', Sidebar);
 app.use('[data-mount=Layout]', Layout);
-
 app.use('[data-mount=DataTable]', DataTable);
+app.use('[data-mount=Notification]', Notification);
+
 app.use('.js-select2', Select2);
 app.use('.js-async-select2', AsyncSelect2);
 app.use('.js-umbrella-tag', TagsInput);
