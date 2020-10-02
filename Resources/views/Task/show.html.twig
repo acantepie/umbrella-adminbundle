@@ -12,23 +12,19 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Handler alias</th>
-                <td>{{ entity.handlerAlias }}</td>
-            </tr>
-            <tr>
                 <th>Etat</th>
                 <td>{{ entity.state | render_task_state }}</td>
             </tr>
-            <tr>
-                <th>Timeout</th>
-                <td>
-                    {% if entity.timeout %}
-                        {{ entity.timeout }}s
-                    {% else %}
-                        &infin;
-                    {% endif %}
-                </td>
-            </tr>
+            {% if entity.config %}
+                <tr>
+                    <th>Coniguration</th>
+                    <td>
+                        <b>Handler alias</b> {{ entity.config.handlerAlias }}<br>
+                        <b>Tag</b> {{ entity.config.tag }}<br>
+                        <b>Timeout</b> {{ entity.config.timeout ? entity.config.timeout : '&infin;' }}
+                    </td>
+                </tr>
+            {% endif %}
             {% if entity.startedAt %}
                 <tr>
                     <th>Exécuté le</th>
@@ -46,12 +42,6 @@
                 <tr>
                     <th>Runtime</th>
                     <td>{{ runtime }}</td>
-                </tr>
-            {% endif %}
-            {% if entity.progress %}
-                <tr>
-                    <th>Progression</th>
-                    <td>{{ entity.progress }}%</td>
                 </tr>
             {% endif %}
         </tbody>

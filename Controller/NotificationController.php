@@ -2,7 +2,7 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
-use Umbrella\CoreBundle\Entity\BaseTask;
+use Umbrella\CoreBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,7 +22,7 @@ class NotificationController extends BaseController
     public function listAction(TaskManager  $taskManager, DateTimeHelper $dateTimeHelper, Request $request)
     {
         $criteria = new SearchTaskCriteria();
-        $criteria->types = [BaseTask::TYPE_FILEWRITER];
+        $criteria->types = [Task::TYPE_FILEWRITER];
         $criteria->maxResults = 10;
         $criteria->onlyNotifiable = true;
         
