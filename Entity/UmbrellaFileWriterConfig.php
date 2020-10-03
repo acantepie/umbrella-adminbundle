@@ -33,6 +33,8 @@ class UmbrellaFileWriterConfig extends BaseTaskConfig
     public $fwAuthor;
 
     /**
+     * Will display task on notification view on ASYNC mode
+     *
      * @var bool
      * @ORM\Column(type="boolean", nullable=false, options={"default"=false})
      */
