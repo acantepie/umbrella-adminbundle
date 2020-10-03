@@ -117,7 +117,7 @@ class TaskTableType extends DataTableType
 
         $builder->add('actions', ActionColumnType::class, [
             'action_builder' => function (RowActionBuilder $builder, Task $entity) {
-                $builder->createShow('umbrella_admin_task_show', ['id' => $entity->id]);
+                $builder->createXhrShow('umbrella_admin_task_show', ['id' => $entity->id]);
 
                 if ($entity->canCancel()) {
                     $builder->create()

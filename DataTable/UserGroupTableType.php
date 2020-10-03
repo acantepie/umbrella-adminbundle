@@ -15,8 +15,8 @@ use Umbrella\CoreBundle\Component\Column\Type\ManyColumnType;
 use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
 use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
 use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
+use Umbrella\CoreBundle\Component\Toolbar\Action\AddActionType;
 use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
-use Umbrella\CoreBundle\Component\Toolbar\Action\AddButtonActionType;
 use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
@@ -46,7 +46,7 @@ class UserGroupTableType extends DataTableType
     public function buildToolbar(ToolbarBuilder $builder, array $options = [])
     {
         $builder->addFilter('search', SearchType::class);
-        $builder->addAction('add', AddButtonActionType::class, [
+        $builder->addAction('add', AddActionType::class, [
             'route' => 'umbrella_admin_usergroup_edit',
             'label' => 'add_group',
             'xhr' => true
@@ -63,8 +63,8 @@ class UserGroupTableType extends DataTableType
 
         $builder->add('actions', ActionColumnType::class, [
             'action_builder' => function (RowActionBuilder $builder, $entity) {
-                $builder->createEdit('umbrella_admin_usergroup_edit', ['id' => $entity->id]);
-                $builder->createDelete('umbrella_admin_usergroup_delete', ['id' => $entity->id]);
+                $builder->createXhrEdit('umbrella_admin_usergroup_edit', ['id' => $entity->id]);
+                $builder->createXhrDelete('umbrella_admin_usergroup_delete', ['id' => $entity->id]);
             }
         ]);
 
