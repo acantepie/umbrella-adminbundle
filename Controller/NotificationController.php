@@ -2,11 +2,11 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
-use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Controller\BaseController;
 use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
 use Umbrella\AdminBundle\FileWriter\FileWriterManager;

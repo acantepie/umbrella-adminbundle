@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Umbrella\AdminBundle\FileWriter;
 
 /**
@@ -19,6 +18,7 @@ class MaxTaskReachedException extends \Exception
     /**
      * FileWriterMaxScheduleReachedException constructor.
      * @param $max
+     * @param mixed $maxTask
      */
     public function __construct($maxTask)
     {
@@ -33,5 +33,4 @@ class MaxTaskReachedException extends \Exception
     {
         return $this->maxTask;
     }
-
 }

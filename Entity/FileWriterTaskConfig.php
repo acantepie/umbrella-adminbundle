@@ -2,7 +2,6 @@
 
 namespace Umbrella\AdminBundle\Entity;
 
-use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
 use Umbrella\CoreBundle\Entity\BaseTaskConfig;
 use Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler;

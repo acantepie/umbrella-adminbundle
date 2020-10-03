@@ -3,19 +3,19 @@
 namespace Umbrella\AdminBundle\FileWriter;
 
 use Doctrine\ORM\Query\Expr\Join;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Security\Core\Security;
-use Umbrella\AdminBundle\Model\AdminUserInterface;
-use Umbrella\CoreBundle\Component\JsResponse\JsResponseBuilder;
 use Umbrella\CoreBundle\Entity\Task;
 use Doctrine\ORM\EntityManagerInterface;
 use Umbrella\CoreBundle\Utils\FileUtils;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\RouterInterface;
+use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Component\Task\TaskManager;
 use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Umbrella\CoreBundle\Component\JsResponse\JsResponseBuilder;
 use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * Class FileWriterManager
@@ -67,13 +67,13 @@ class FileWriterManager
     /**
      * FileWriterManager constructor.
      *
-     * @param ParameterBagInterface $parameterBag
-     * @param TaskManager $taskManager
+     * @param ParameterBagInterface    $parameterBag
+     * @param TaskManager              $taskManager
      * @param FileWriterHandlerFactory $handlerFactory
-     * @param EntityManagerInterface $em
-     * @param RouterInterface $router
-     * @param Security $security
-     * @param JsResponseBuilder $jsResponseBuilder
+     * @param EntityManagerInterface   $em
+     * @param RouterInterface          $router
+     * @param Security                 $security
+     * @param JsResponseBuilder        $jsResponseBuilder
      */
     public function __construct(
         ParameterBagInterface $parameterBag,
@@ -83,8 +83,7 @@ class FileWriterManager
         RouterInterface $router,
         Security $security,
         JsResponseBuilder $jsResponseBuilder
-    )
-    {
+    ) {
         $this->parameterBag = $parameterBag;
         $this->taskManager = $taskManager;
         $this->handlerFactory = $handlerFactory;
@@ -122,7 +121,7 @@ class FileWriterManager
                     'task' => $task,
                     'config' => $config
                 ]);
-        } catch(MaxTaskReachedException $e) {
+        } catch (MaxTaskReachedException $e) {
             return $this->jsResponseBuilder
                 ->openModalView('@UmbrellaAdmin/FileWriter/register_async_error.html.twig', [
                     'max_task' => $e->getMaxTask(),
@@ -132,7 +131,7 @@ class FileWriterManager
     }
 
     /**
-     * @param FileWriterTaskConfig $config
+     * @param  FileWriterTaskConfig $config
      * @return string
      */
     public function getDownloadUrl(FileWriterTaskConfig $config)
@@ -163,7 +162,7 @@ class FileWriterManager
     /**
      * Register an ASYNC config
      *
-     * @param FileWriterTaskConfig $config
+     * @param  FileWriterTaskConfig $config
      * @return Task
      */
     public function registerAsync(FileWriterTaskConfig $config)
@@ -185,7 +184,7 @@ class FileWriterManager
     /**
      * Run a config (don't care if async or sync)
      *
-     * @param FileWriterTaskConfig $config
+     * @param  FileWriterTaskConfig $config
      * @return FileWriterTaskConfig
      */
     public function run(FileWriterTaskConfig $config)
@@ -230,8 +229,8 @@ class FileWriterManager
     }
 
     /**
-     * @param false $onlyNotification
-     * @param int $maxResults
+     * @param  false  $onlyNotification
+     * @param  int    $maxResults
      * @return Task(]
      */
     public function searchTask($onlyNotification = false, $maxResults = 10, AdminUserInterface $author = null)

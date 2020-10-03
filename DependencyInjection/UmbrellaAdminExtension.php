@@ -6,16 +6,18 @@ use Symfony\Component\Config\FileLocator;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 use Umbrella\AdminBundle\Menu\SidebarMenu;
 use Symfony\Component\DependencyInjection\Loader;
+use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Umbrella\AdminBundle\FileWriter\Handler\AbstractFileWriterHandler;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class UmbrellaAdminExtension extends Extension
+class UmbrellaAdminExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -42,5 +44,23 @@ class UmbrellaAdminExtension extends Extension
                 $container->setParameter($pKey, $pValue);
             }
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        // add some config for doctrine bundle
+        // orm:
+        //      resolve_target_entities:
+        //             Umbrella\AdminBundle\Model\AdminUserInterface : <value of umbrella_admin.user.user_crud.class config>
+        //
+        $configs = $container->getExtensionConfig('umbrella_admin');
+        $config = $this->processConfiguration(new Configuration(), $configs);
+
+        $doctrineConfig = [];
+        $doctrineConfig['orm']['resolve_target_entities'][AdminUserInterface::class] = $config['user']['user_crud']['class'];
+        $container->prependExtensionConfig('doctrine', $doctrineConfig);
     }
 }
