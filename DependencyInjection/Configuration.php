@@ -98,6 +98,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('output_path')->defaultValue('%kernel.project_dir%/var/filewriter')->end()
                 ->booleanNode('notification_enable')->defaultValue(false)->end()
-                ->integerNode('notification_max_result')->defaultValue(10)->end();
+                ->integerNode('notification_max_result')->defaultValue(10)->end()
+                ->integerNode('max_task')->defaultValue(10)->end();
     }
 }

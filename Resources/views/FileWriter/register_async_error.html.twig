@@ -1,0 +1,17 @@
+{% extends "@UmbrellaCore/Modal/default.html.twig" %}
+
+{% block modal_header_class %}modal-colored-header bg-danger{% endblock %}
+{% block modal_class %}modal-md{% endblock %}
+
+{% block modal_title %}
+    <h4 class="modal-title">
+        <i class="mdi mdi-alert"></i> {{ 'filewriter.task_register_error.title' | trans }}
+    </h4>
+{% endblock %}
+
+
+{% block modal_content %}
+    <p class="text-center">
+        {{ 'filewriter.task_register_error.message' | trans({'%max_task%' : max_task, '%label%' : config.fwLabel}) | raw }}
+    </p>
+{% endblock %}

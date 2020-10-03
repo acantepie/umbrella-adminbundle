@@ -52,8 +52,6 @@ services:
     Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler:
     Umbrella\AdminBundle\FileWriter\FileWriterManager:
         public: true
-        bind:
-            $outputDirPath: "%umbrella_admin.filewriter.output_path%"
 
     #Twig
     Umbrella\AdminBundle\Extension\AdminTwigExtension:

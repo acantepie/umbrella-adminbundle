@@ -3,6 +3,10 @@
 namespace Umbrella\AdminBundle\FileWriter;
 
 use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Security\Core\Security;
+use Umbrella\AdminBundle\Model\AdminUserInterface;
+use Umbrella\CoreBundle\Component\JsResponse\JsResponseBuilder;
 use Umbrella\CoreBundle\Entity\Task;
 use Doctrine\ORM\EntityManagerInterface;
 use Umbrella\CoreBundle\Utils\FileUtils;
@@ -19,6 +23,11 @@ use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
 class FileWriterManager
 {
     const TAG = 'file_writer';
+
+    /**
+     * @var ParameterBagInterface
+     */
+    private $parameterBag;
 
     /**
      * @var TaskManager
@@ -41,6 +50,16 @@ class FileWriterManager
     private $router;
 
     /**
+     * @var Security
+     */
+    private $security;
+
+    /**
+     * @var JsResponseBuilder
+     */
+    private $jsResponseBuilder;
+
+    /**
      * @var string
      */
     private $outputDirPath;
@@ -48,37 +67,72 @@ class FileWriterManager
     /**
      * FileWriterManager constructor.
      *
-     * @param TaskManager              $taskManager
+     * @param ParameterBagInterface $parameterBag
+     * @param TaskManager $taskManager
      * @param FileWriterHandlerFactory $handlerFactory
-     * @param EntityManagerInterface   $em
-     * @param RouterInterface          $router
-     * @param $outputDirPath
+     * @param EntityManagerInterface $em
+     * @param RouterInterface $router
+     * @param Security $security
+     * @param JsResponseBuilder $jsResponseBuilder
      */
-    public function __construct(TaskManager $taskManager, FileWriterHandlerFactory $handlerFactory, EntityManagerInterface $em, RouterInterface $router, $outputDirPath)
+    public function __construct(
+        ParameterBagInterface $parameterBag,
+        TaskManager $taskManager,
+        FileWriterHandlerFactory $handlerFactory,
+        EntityManagerInterface $em,
+        RouterInterface $router,
+        Security $security,
+        JsResponseBuilder $jsResponseBuilder
+    )
     {
+        $this->parameterBag = $parameterBag;
         $this->taskManager = $taskManager;
         $this->handlerFactory = $handlerFactory;
         $this->em = $em;
         $this->router = $router;
-        $this->outputDirPath = rtrim($outputDirPath, '/') . '/';
+        $this->security = $security;
+        $this->jsResponseBuilder = $jsResponseBuilder;
+        $this->outputDirPath = rtrim($this->parameterBag->get('umbrella_admin.filewriter.output_path'), '/') . '/';
     }
 
     /**
-     * Generate a response for a sync file writer config
+     * Generate a response for a sync file writer config (HttpResponse)
      *
      * @param $config
      * @retrun Response
      */
     public function syncDownloadResponse(FileWriterTaskConfig $config)
     {
-        $config->fwMode = FileWriterTaskConfig::MODE_SYNC;
+        $this->registerSync($config);
         $this->run($config);
-
         return new RedirectResponse($this->getDownloadUrl($config));
     }
 
     /**
-     * @param  FileWriterTaskConfig $config
+     * Generate a response for an async file writer config (JsResponse)
+     *
+     * @param FileWriterTaskConfig $config
+     */
+    public function asyncJsResponse(FileWriterTaskConfig $config)
+    {
+        try {
+            $task = $this->registerASync($config);
+            return $this->jsResponseBuilder
+                ->openModalView('@UmbrellaAdmin/FileWriter/register_async_success.html.twig', [
+                    'task' => $task,
+                    'config' => $config
+                ]);
+        } catch(MaxTaskReachedException $e) {
+            return $this->jsResponseBuilder
+                ->openModalView('@UmbrellaAdmin/FileWriter/register_async_error.html.twig', [
+                    'max_task' => $e->getMaxTask(),
+                    'config' => $config
+                ]);
+        }
+    }
+
+    /**
+     * @param FileWriterTaskConfig $config
      * @return string
      */
     public function getDownloadUrl(FileWriterTaskConfig $config)
@@ -89,21 +143,49 @@ class FileWriterManager
     }
 
     /**
-     * Schedule an ASYNC config
+     * Register a SYNC config
      *
-     * @param  FileWriterTaskConfig $config
+     * @param FileWriterTaskConfig $config
+     */
+    public function registerSync(FileWriterTaskConfig $config)
+    {
+        $config->fwMode = FileWriterTaskConfig::MODE_SYNC;
+
+        $user = $this->security->getUser();
+        if ($user !== null && $user instanceof AdminUserInterface) { // set author
+            $config->fwAuthor = $this->security->getUser();
+        }
+
+        $this->em->persist($config);
+        $this->em->flush();
+    }
+
+    /**
+     * Register an ASYNC config
+     *
+     * @param FileWriterTaskConfig $config
      * @return Task
      */
-    public function schedule(FileWriterTaskConfig $config)
+    public function registerAsync(FileWriterTaskConfig $config)
     {
         $config->fwMode = FileWriterTaskConfig::MODE_ASYNC;
+
+        if (!$this->canRegisterTask()) {
+            throw new MaxTaskReachedException($this->parameterBag->get('umbrella_admin.filewriter.max_task'));
+        }
+
+        $user = $this->security->getUser();
+        if ($user !== null && $user instanceof AdminUserInterface) { // set author
+            $config->fwAuthor = $this->security->getUser();
+        }
+
         return $this->taskManager->register($config);
     }
 
     /**
      * Run a config (don't care if async or sync)
      *
-     * @param  FileWriterTaskConfig $config
+     * @param FileWriterTaskConfig $config
      * @return FileWriterTaskConfig
      */
     public function run(FileWriterTaskConfig $config)
@@ -148,11 +230,11 @@ class FileWriterManager
     }
 
     /**
-     * @param  false  $onlyNotification
-     * @param  int    $maxResults
+     * @param false $onlyNotification
+     * @param int $maxResults
      * @return Task(]
      */
-    public function searchTask($onlyNotification = false, $maxResults = 10)
+    public function searchTask($onlyNotification = false, $maxResults = 10, AdminUserInterface $author = null)
     {
         $qb = $this->em->createQueryBuilder();
         $qb->select('e');
@@ -167,6 +249,39 @@ class FileWriterManager
             $qb->setMaxResults($maxResults);
         }
 
+        if ($author) {
+            $qb->andWhere('c.fwAuthor = :user');
+            $qb->setParameter('user', $author);
+        } else {
+            $qb->andWhere('c.fwAuthor IS NULL');
+        }
+
+        $qb->orderBy('e.createdAt', 'DESC');
+
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Can register filewriter task pending < max_task
+     * @return bool
+     */
+    private function canRegisterTask()
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('COUNT(e)');
+        $qb->from(Task::class, 'e');
+        $qb->innerJoin(FileWriterTaskConfig::class, 'c', Join::WITH, 'c = e.config');
+        $qb->andWhere('e.state IN (:states)');
+        $qb->setParameter('states', [Task::STATE_PENDING, Task::STATE_RUNNING]);
+
+        $user = $this->security->getUser();
+        if ($user !== null && $user instanceof AdminUserInterface) {
+            $qb->andWhere('c.fwAuthor = :user');
+            $qb->setParameter('user', $user);
+        } else {
+            $qb->andWhere('c.fwAuthor IS NULL');
+        }
+
+        return $qb->getQuery()->getSingleScalarResult() < $this->parameterBag->get('umbrella_admin.filewriter.max_task');
     }
 }

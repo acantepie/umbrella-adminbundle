@@ -2,6 +2,7 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
+use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +28,8 @@ class NotificationController extends BaseController
             throw new BadRequestHttpException('Notification are disabled');
         }
 
-        $tasks = $fileWriterManager->searchTask(true, $parameterBag->get('umbrella_admin.filewriter.notification_max_result'));
+        $author = $this->getUser() instanceof AdminUserInterface ? $this->getUser() : null;
+        $tasks = $fileWriterManager->searchTask(true, $parameterBag->get('umbrella_admin.filewriter.notification_max_result'), $author);
 
         $data = [];
         foreach ($tasks as $task) {

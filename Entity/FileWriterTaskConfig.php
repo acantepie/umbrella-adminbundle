@@ -2,6 +2,7 @@
 
 namespace Umbrella\AdminBundle\Entity;
 
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
 use Umbrella\CoreBundle\Entity\BaseTaskConfig;
 use Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler;
@@ -21,6 +22,16 @@ class FileWriterTaskConfig extends BaseTaskConfig
      * @ORM\Column(type="string", nullable=false)
      */
     public $fwMode = self::MODE_SYNC;
+
+    /**
+     * Author
+     *
+     * @var BaseUser
+     *
+     * @ORM\ManyToOne(targetEntity="Umbrella\AdminBundle\Model\AdminUserInterface")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    public $fwAuthor;
 
     /**
      * @var bool

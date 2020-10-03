@@ -1,0 +1,16 @@
+{% extends "@UmbrellaCore/Modal/default.html.twig" %}
+
+{% block modal_class %}modal-md{% endblock %}
+
+{% block modal_title %}
+  <h4 class="modal-title">
+      <i class="mdi mdi-clock"></i> {{ 'filewriter.task_register.title' | trans }}
+  </h4>
+{% endblock %}
+
+
+{% block modal_content %}
+    <p class="text-center">
+        {{ 'filewriter.task_register.message' | trans({'%label%' : config.fwLabel}) | raw }}
+    </p>
+{% endblock %}
