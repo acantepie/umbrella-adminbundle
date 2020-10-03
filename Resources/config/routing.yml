@@ -6,5 +6,9 @@ umbrella_admin_task_:
   resource: "@UmbrellaAdminBundle/Controller/TaskController.php"
   type: annotation
 
+umbrella_admin_filewriter_:
+  resource: "@UmbrellaAdminBundle/Controller/FileWriterController.php"
+  type: annotation
+
 umbrella_user:
   resource: "@UmbrellaAdminBundle/Resources/config/user_routing.yml"

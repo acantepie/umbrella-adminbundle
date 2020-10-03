@@ -28,13 +28,12 @@ class Configuration implements ConfigurationInterface
             ->append($this->menuNode())
             ->append($this->themeNode())
             ->append($this->assetsNode())
+            ->append($this->fileWriterNode())
             ->children()
                 ->arrayNode('user')->addDefaultsIfNotSet()
                 ->append($this->userCrudNode())
                 ->append($this->groupCrudNode())
-                ->append($this->profileCrudNode())
-                ->append($this->mailNode());
-
+                ->append($this->profileCrudNode());
         return $treeBuilder;
     }
 
@@ -81,14 +80,14 @@ class Configuration implements ConfigurationInterface
         $node = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
         $node->children()
             ->scalarNode('class')
-            ->defaultValue('App\\Entity\\User')
-            ->end()
+                ->defaultValue('App\\Entity\\User')
+                ->end()
             ->scalarNode('table')
-            ->defaultValue(UserTableType::class)
-            ->end()
+                ->defaultValue(UserTableType::class)
+                ->end()
             ->scalarNode('form')
-            ->defaultValue(UserType::class)
-            ->end();
+                ->defaultValue(UserType::class)
+                ->end();
         return $node;
     }
 
@@ -98,14 +97,14 @@ class Configuration implements ConfigurationInterface
         $node = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
         $node->children()
             ->scalarNode('class')
-            ->defaultValue('App\\Entity\\UserGroup')
-            ->end()
+                ->defaultValue('App\\Entity\\UserGroup')
+                ->end()
             ->scalarNode('table')
-            ->defaultValue(UserGroupTableType::class)
-            ->end()
+                ->defaultValue(UserGroupTableType::class)
+                ->end()
             ->scalarNode('form')
-            ->defaultValue(UserGroupType::class)
-            ->end();
+                ->defaultValue(UserGroupType::class)
+                ->end();
         return $node;
     }
 
@@ -115,22 +114,25 @@ class Configuration implements ConfigurationInterface
         $node = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
         $node->children()
             ->scalarNode('form')
-            ->defaultValue(ProfileType::class)
-            ->end();
+                ->defaultValue(ProfileType::class)
+                ->end();
         return $node;
     }
 
-    private function mailNode()
+    private function fileWriterNode()
     {
-        $treeBuilder = new TreeBuilder('mail');
+        $treeBuilder = new TreeBuilder('filewriter');
         $node = $treeBuilder->getRootNode()->addDefaultsIfNotSet();
         $node->children()
-            ->scalarNode('from_email')
-            ->defaultValue('no-reply@umbrella.dev')
-            ->end()
-            ->scalarNode('from_name')
-            ->defaultValue(null)
-            ->end();
+            ->scalarNode('output_path')
+                ->defaultValue('%kernel.project_dir%/var/filewriter')
+                ->end()
+            ->booleanNode('notification_enable')
+                ->defaultValue(false)
+                ->end()
+            ->integerNode('notification_max_result')
+                ->defaultValue(10)
+                ->end();
         return $node;
     }
 }

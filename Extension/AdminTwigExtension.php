@@ -44,7 +44,16 @@ class AdminTwigExtension extends AbstractExtension
             new TwigFunction('admin_stylesheet_entry', [$this, 'stylesheetEntry']),
             new TwigFunction('admin_route_profile', [$this, 'routeProfile']),
             new TwigFunction('admin_route_logout', [$this, 'routeLogout']),
+            new TwigFunction('admin_notification_enable', [$this, 'fileWriterNotificationEnable'])
         ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function fileWriterNotificationEnable()
+    {
+        return $this->parameters->get('umbrella_admin.filewriter.notification_enable');
     }
 
     /**

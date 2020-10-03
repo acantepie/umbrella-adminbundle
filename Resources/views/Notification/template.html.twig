@@ -1,5 +1,5 @@
 <template id="notification-fw-pending-tpl">
-    <div class="dropdown-item notify-item">
+    <div class="dropdown-item notify-item disabled">
         <div class="notify-icon bg-{{ 'pending' | task_state_color }}">
             <i class="{{ 'pending' | task_state_icon }}"></i>
         </div>
@@ -10,7 +10,7 @@
 </template>
 
 <template id="notification-fw-running-tpl">
-    <div class="dropdown-item notify-item">
+    <div class="dropdown-item notify-item disabled">
         <div class="notify-icon bg-{{ 'running' | task_state_color }}">
             <i class="{{ 'running' | task_state_icon }}"></i>
         </div>
@@ -21,7 +21,7 @@
 </template>
 
 <template id="notification-fw-failed-tpl">
-    <div class="dropdown-item notify-item">
+    <div class="dropdown-item notify-item disabled">
         <div class="notify-icon bg-{{ 'failed' | task_state_color }}">
             <i class="{{ 'failed' | task_state_icon }}"></i>
         </div>
@@ -32,7 +32,7 @@
 </template>
 
 <template id="notification-fw-finished-tpl">
-    <a class="dropdown-item notify-item" href="#">
+    <a class="dropdown-item notify-item" href="[[url]]">
         <div class="notify-icon bg-{{ 'finished' | task_state_color }}">
             <i class="{{ 'finished' | task_state_icon }}"></i>
         </div>
@@ -43,7 +43,7 @@
 </template>
 
 <template id="notification-empty-tpl">
-    <div class="dropdown-item notify-item">
+    <div class="dropdown-item notify-item disabled">
         <small class="empty">Vous n'avez aucun export</small>
     </div>
 </template>

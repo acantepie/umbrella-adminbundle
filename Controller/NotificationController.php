@@ -2,14 +2,16 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Umbrella\CoreBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Umbrella\CoreBundle\Controller\BaseController;
-use Umbrella\CoreBundle\Component\Task\TaskManager;
+use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
+use Umbrella\AdminBundle\FileWriter\FileWriterManager;
 use Umbrella\CoreBundle\Component\DateTime\DateTimeHelper;
-use Umbrella\CoreBundle\Component\Task\SearchTaskCriteria;
 
 /**
  * @Route("/notification")
@@ -19,27 +21,36 @@ class NotificationController extends BaseController
     /**
      * @Route("/list")
      */
-    public function listAction(TaskManager  $taskManager, DateTimeHelper $dateTimeHelper, Request $request)
+    public function listAction(FileWriterManager $fileWriterManager, DateTimeHelper $dateTimeHelper, ParameterBagInterface  $parameterBag, Request $request)
     {
-        $criteria = new SearchTaskCriteria();
-        $criteria->types = [Task::TYPE_FILEWRITER];
-        $criteria->maxResults = 10;
-        $criteria->onlyNotifiable = true;
-        
-        $tasks = $taskManager->search($criteria);
+        if (!$parameterBag->get('umbrella_admin.filewriter.notification_enable')) {
+            throw new BadRequestHttpException('Notification are disabled');
+        }
+
+        $tasks = $fileWriterManager->searchTask(true, $parameterBag->get('umbrella_admin.filewriter.notification_max_result'));
 
         $data = [];
         foreach ($tasks as $task) {
+
+            /** @var FileWriterTaskConfig $config */
+            $config = $task->config;
+
             $data[] = [
-                'label' => $task->fileWriterConfig->outputPrettyFilename,
+                'label' => empty($config->fwLabel)
+                    ? '-'
+                    : $config->fwLabel,
                 'state' => $task->state,
                 'date' => $dateTimeHelper->diff($task->createdAt),
-                'ended_at' => $task->endedAt ? $dateTimeHelper->diff($task->endedAt) : null,
+                'ended_at' => $task->endedAt
+                    ? $dateTimeHelper->diff($task->endedAt)
+                    : null,
                 'runtime' => $task->runtime(),
-                'url' => '#'
+                'url' => $task->state === Task::STATE_FINISHED
+                    ? $fileWriterManager->getDownloadUrl($config)
+                    : null
             ];
         }
-        
+
         return new JsonResponse($data);
     }
 }

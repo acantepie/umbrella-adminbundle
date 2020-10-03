@@ -2,7 +2,6 @@
 
 namespace Umbrella\AdminBundle\FileWriter\Handler;
 
-use Symfony\Component\Filesystem\Filesystem;
 use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
 
 /**
@@ -16,21 +15,9 @@ abstract class AbstractFileWriterHandler
     protected $outputDirPath;
 
     /**
-     * @var string
+     * @param string $outputDirPath
      */
-    protected $outputFileName;
-
-    /**
-     * @param FileWriterTaskConfig $config
-     */
-    protected $config;
-
-    /**
-     * Call on service build
-     *
-     * @param $outputDirPath
-     */
-    final private function __initializeService($outputDirPath)
+    final public function setOutputDirPath($outputDirPath)
     {
         $this->outputDirPath = $outputDirPath;
     }
@@ -40,12 +27,6 @@ abstract class AbstractFileWriterHandler
      */
     public function initialize(FileWriterTaskConfig $config)
     {
-        $this->outputFileName = md5(uniqid(time(), true));
-
-        $fs = new Filesystem();
-        if (!$fs->exists($this->outpoutDirPath)) {
-            $fs->mkdir($this->outpoutDirPath);
-        }
     }
 
     /**
@@ -55,13 +36,12 @@ abstract class AbstractFileWriterHandler
     {
     }
 
-    // helper
-
     /**
+     * @param  FileWriterTaskConfig $config
      * @return string
      */
-    protected function getOutputFilePath()
+    final protected function getOuputFilePath(FileWriterTaskConfig $config)
     {
-        return sprintf('%s%s', $this->outputDirPath, $this->outputFileName);
+        return sprintf('%s%s', $this->outputDirPath, $config->fwOutputFilename);
     }
 }

@@ -47,5 +47,13 @@ services:
         tags:
           - { name: umbrella.menu_renderer, alias: admin_sidebar }
 
+    # FileWriter
+    Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory:
+    Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler:
+    Umbrella\AdminBundle\FileWriter\FileWriterManager:
+        public: true
+        bind:
+            $outputDirPath: "%umbrella_admin.filewriter.output_path%"
+
     #Twig
     Umbrella\AdminBundle\Extension\AdminTwigExtension:

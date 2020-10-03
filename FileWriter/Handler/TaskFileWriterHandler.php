@@ -2,7 +2,6 @@
 
 namespace Umbrella\AdminBundle\FileWriter\Handler;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Umbrella\CoreBundle\Entity\BaseTaskConfig;
 use Umbrella\AdminBundle\FileWriter\FileWriterManager;
 use Umbrella\CoreBundle\Component\Task\Handler\AbstractTaskHandler;
@@ -18,19 +17,12 @@ class TaskFileWriterHandler extends AbstractTaskHandler
     private $manager;
 
     /**
-     * @var EntityManagerInterface
-     */
-    private $em;
-
-    /**
      * TaskFileWriterHandler constructor.
-     * @param FileWriterManager      $manager
-     * @param EntityManagerInterface $em
+     * @param FileWriterManager $manager
      */
-    public function __construct(FileWriterManager $manager, EntityManagerInterface $em)
+    public function __construct(FileWriterManager $manager)
     {
         $this->manager = $manager;
-        $this->em = $em;
     }
 
     /**
@@ -38,8 +30,6 @@ class TaskFileWriterHandler extends AbstractTaskHandler
      */
     public function execute(BaseTaskConfig $config)
     {
-        $task = $this->taskHelper->getTask();
-        $this->manager->run($task->fileWriterConfig);
-        $this->em->flush();
+        $this->manager->run($config);
     }
 }

@@ -29,8 +29,8 @@ class FileWriterHandlerFactory
      */
     public function create(FileWriterTaskConfig $config)
     {
-        if (isset($this->handlers[$config->handlerAlias])) {
-            $handler = $this->handlers[$config->handlerAlias];
+        if (isset($this->handlers[$config->fwHandlerAlias])) {
+            $handler = $this->handlers[$config->fwHandlerAlias];
             return $handler;
         } else {
             throw new \InvalidArgumentException(sprintf(

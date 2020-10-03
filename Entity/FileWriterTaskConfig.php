@@ -11,26 +11,28 @@ use Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler;
  */
 class FileWriterTaskConfig extends BaseTaskConfig
 {
-    const MODE_DIRECT = 'direct';
-    const MODE_SCHEDULE = 'schedule';
+    const TAG = 'file_writer';
+
+    const MODE_SYNC = 'sync';
+    const MODE_ASYNC = 'async';
 
     /**
-     * Only schedule mode if persisted
      * @var string
+     * @ORM\Column(type="string", nullable=false)
      */
-    public $fwMode;
+    public $fwMode = self::MODE_SYNC;
 
     /**
-     * Stored on task if persisted
-     * @var string
-     */
-    public $fwLabel;
-
-    /**
-     * Only configurable for schedule mode - stored on task
      * @var bool
+     * @ORM\Column(type="boolean", nullable=false, options={"default"=false})
      */
     public $fwDisplayAsNotification = false;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    public $fwLabel;
 
     /**
      * @var string
@@ -42,7 +44,7 @@ class FileWriterTaskConfig extends BaseTaskConfig
      * @var string
      * @ORM\Column(type="string", nullable=true)
      */
-    public $fwOutputFilePath;
+    public $fwOutputFilename;
 
     /**
      * @var string
@@ -59,6 +61,7 @@ class FileWriterTaskConfig extends BaseTaskConfig
     public function __construct($fileWriterHandlerAlias, $taskHandlerAlias = TaskFileWriterHandler::class)
     {
         $this->fwHandlerAlias = $fileWriterHandlerAlias;
+        $this->tag = self::TAG;
         parent::__construct($taskHandlerAlias);
     }
 }

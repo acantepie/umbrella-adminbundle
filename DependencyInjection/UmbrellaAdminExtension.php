@@ -8,6 +8,7 @@ use Umbrella\AdminBundle\Menu\SidebarMenu;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Umbrella\AdminBundle\FileWriter\Handler\AbstractFileWriterHandler;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -29,6 +30,8 @@ class UmbrellaAdminExtension extends Extension
 
         $def = $container->getDefinition(SidebarMenu::class);
         $def->replaceArgument(0, $config['menu']['file']);
+
+        $container->registerForAutoconfiguration(AbstractFileWriterHandler::class)->addTag('umbrella.filewriter.handler');
 
         $parameters = ArrayUtils::remap_nested_array($config, 'umbrella_admin');
         $parameters['umbrella_admin.route.profile'] = 'umbrella_admin_profile_index';
