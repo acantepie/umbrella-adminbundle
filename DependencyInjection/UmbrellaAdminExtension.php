@@ -33,7 +33,7 @@ class UmbrellaAdminExtension extends Extension
 
         $container->registerForAutoconfiguration(AbstractFileWriterHandler::class)->addTag('umbrella.filewriter.handler');
 
-        $parameters = ArrayUtils::remap_nested_array($config, 'umbrella_admin');
+        $parameters = ArrayUtils::remap_nested_array($config, 'umbrella_admin', ['umbrella_admin.user.group_crud.form_roles']);
         $parameters['umbrella_admin.route.profile'] = 'umbrella_admin_profile_index';
         $parameters['umbrella_admin.route.logout'] = 'umbrella_admin_logout';
 

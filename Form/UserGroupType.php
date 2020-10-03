@@ -41,7 +41,7 @@ class UserGroupType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $roles = $this->parameters->get('umbrella_admin.user.roles');
+        $roles = $this->parameters->get('umbrella_admin.user.group_crud.form_roles');
 
         $builder->add('title', TextType::class);
         $builder->add('roles', Choice2Type::class, [

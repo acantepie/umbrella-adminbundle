@@ -2,8 +2,6 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Umbrella\CoreBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +10,8 @@ use Umbrella\CoreBundle\Controller\BaseController;
 use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
 use Umbrella\AdminBundle\FileWriter\FileWriterManager;
 use Umbrella\CoreBundle\Component\DateTime\DateTimeHelper;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * @Route("/notification")

@@ -62,8 +62,8 @@ class UserMailer
     {
         $message = new \Swift_Message();
         $message
-            ->setSubject('TODO - Changement de mot de passe')
-            ->setFrom($this->parameters->get('umbrella_admin.user.mail.from_email'), $this->parameters->get('umbrella_admin.user.mail.from_name'))
+            ->setSubject('Changement de mot de passe')
+            ->setFrom($this->parameters->get('umbrella_admin.user.mailer.from_email'), $this->parameters->get('umbrella_admin.user.mailer.from_name'))
             ->setTo($user->email)
             ->setBody(
                 $this->twig->render('@UmbrellaAdmin/Mail/password_request.html.twig', [

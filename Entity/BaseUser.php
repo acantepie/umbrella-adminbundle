@@ -72,7 +72,7 @@ class BaseUser extends BaseEntity implements UserInterface, EquatableInterface, 
     public $email;
 
     /**
-     * Random string sent to the user email address in order to verify it.
+     * Random string sent to the user email address to verify it.
      *
      * @var string|null
      * @ORM\Column(type="string", length=180, unique=true, nullable=true)
