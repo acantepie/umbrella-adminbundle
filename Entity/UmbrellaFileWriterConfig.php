@@ -9,7 +9,7 @@ use Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler;
 /**
  * @ORM\Entity
  */
-class FileWriterTaskConfig extends BaseTaskConfig
+class UmbrellaFileWriterConfig extends BaseTaskConfig
 {
     const TAG = 'file_writer';
 
@@ -63,7 +63,7 @@ class FileWriterTaskConfig extends BaseTaskConfig
     public $fwOutputPrettyFilename;
 
     /**
-     * FileWriterTaskConfig constructor.
+     * UmbrellaFileWriterConfig constructor.
      *
      * @param $fileWriterHandlerAlias
      * @param string $taskHandlerAlias

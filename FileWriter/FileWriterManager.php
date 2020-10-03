@@ -11,8 +11,8 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\RouterInterface;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Component\Task\TaskManager;
-use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
 use Umbrella\CoreBundle\Component\JsResponse\JsResponseBuilder;
 use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -100,7 +100,7 @@ class FileWriterManager
      * @param $config
      * @retrun Response
      */
-    public function syncDownloadResponse(FileWriterTaskConfig $config)
+    public function syncDownloadResponse(UmbrellaFileWriterConfig $config)
     {
         $this->registerSync($config);
         $this->run($config);
@@ -110,9 +110,9 @@ class FileWriterManager
     /**
      * Generate a response for an async file writer config (JsResponse)
      *
-     * @param FileWriterTaskConfig $config
+     * @param UmbrellaFileWriterConfig $config
      */
-    public function asyncJsResponse(FileWriterTaskConfig $config)
+    public function asyncJsResponse(UmbrellaFileWriterConfig $config)
     {
         try {
             $task = $this->registerASync($config);
@@ -131,10 +131,10 @@ class FileWriterManager
     }
 
     /**
-     * @param  FileWriterTaskConfig $config
+     * @param  UmbrellaFileWriterConfig $config
      * @return string
      */
-    public function getDownloadUrl(FileWriterTaskConfig $config)
+    public function getDownloadUrl(UmbrellaFileWriterConfig $config)
     {
         return $this->router->generate('umbrella_admin_filewriter_download', [
             'id' => $config->id
@@ -144,11 +144,11 @@ class FileWriterManager
     /**
      * Register a SYNC config
      *
-     * @param FileWriterTaskConfig $config
+     * @param UmbrellaFileWriterConfig $config
      */
-    public function registerSync(FileWriterTaskConfig $config)
+    public function registerSync(UmbrellaFileWriterConfig $config)
     {
-        $config->fwMode = FileWriterTaskConfig::MODE_SYNC;
+        $config->fwMode = UmbrellaFileWriterConfig::MODE_SYNC;
 
         $user = $this->security->getUser();
         if ($user !== null && $user instanceof AdminUserInterface) { // set author
@@ -162,12 +162,12 @@ class FileWriterManager
     /**
      * Register an ASYNC config
      *
-     * @param  FileWriterTaskConfig $config
+     * @param  UmbrellaFileWriterConfig $config
      * @return Task
      */
-    public function registerAsync(FileWriterTaskConfig $config)
+    public function registerAsync(UmbrellaFileWriterConfig $config)
     {
-        $config->fwMode = FileWriterTaskConfig::MODE_ASYNC;
+        $config->fwMode = UmbrellaFileWriterConfig::MODE_ASYNC;
 
         if (!$this->canRegisterTask()) {
             throw new MaxTaskReachedException($this->parameterBag->get('umbrella_admin.filewriter.max_task'));
@@ -184,10 +184,10 @@ class FileWriterManager
     /**
      * Run a config (don't care if async or sync)
      *
-     * @param  FileWriterTaskConfig $config
-     * @return FileWriterTaskConfig
+     * @param  UmbrellaFileWriterConfig $config
+     * @return UmbrellaFileWriterConfig
      */
-    public function run(FileWriterTaskConfig $config)
+    public function run(UmbrellaFileWriterConfig $config)
     {
         $this->em->persist($config);
 
@@ -238,7 +238,7 @@ class FileWriterManager
         $qb = $this->em->createQueryBuilder();
         $qb->select('e');
         $qb->from(Task::class, 'e');
-        $qb->innerJoin(FileWriterTaskConfig::class, 'c', Join::WITH, 'c = e.config');
+        $qb->innerJoin(UmbrellaFileWriterConfig::class, 'c', Join::WITH, 'c = e.config');
 
         if ($onlyNotification) {
             $qb->andWhere('c.fwDisplayAsNotification = TRUE');
@@ -269,7 +269,7 @@ class FileWriterManager
         $qb = $this->em->createQueryBuilder();
         $qb->select('COUNT(e)');
         $qb->from(Task::class, 'e');
-        $qb->innerJoin(FileWriterTaskConfig::class, 'c', Join::WITH, 'c = e.config');
+        $qb->innerJoin(UmbrellaFileWriterConfig::class, 'c', Join::WITH, 'c = e.config');
         $qb->andWhere('e.state IN (:states)');
         $qb->setParameter('states', [Task::STATE_PENDING, Task::STATE_RUNNING]);
 

@@ -2,7 +2,7 @@
 
 namespace Umbrella\AdminBundle\FileWriter\Handler;
 
-use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
+use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
 
 /**
  * Class FileWriterProvider
@@ -24,10 +24,10 @@ class FileWriterHandlerFactory
     }
 
     /**
-     * @param  FileWriterTaskConfig      $config
+     * @param  UmbrellaFileWriterConfig  $config
      * @return AbstractFileWriterHandler
      */
-    public function create(FileWriterTaskConfig $config)
+    public function create(UmbrellaFileWriterConfig $config)
     {
         if (isset($this->handlers[$config->fwHandlerAlias])) {
             $handler = $this->handlers[$config->fwHandlerAlias];

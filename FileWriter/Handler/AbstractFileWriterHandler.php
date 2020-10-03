@@ -2,7 +2,7 @@
 
 namespace Umbrella\AdminBundle\FileWriter\Handler;
 
-use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
+use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
 
 /**
  * Class AbstractFileWriterHandler
@@ -23,24 +23,24 @@ abstract class AbstractFileWriterHandler
     }
 
     /**
-     * @param FileWriterTaskConfig $config
+     * @param UmbrellaFileWriterConfig $config
      */
-    public function initialize(FileWriterTaskConfig $config)
+    public function initialize(UmbrellaFileWriterConfig $config)
     {
     }
 
     /**
-     * @param FileWriterTaskConfig $config
+     * @param UmbrellaFileWriterConfig $config
      */
-    public function execute(FileWriterTaskConfig $config)
+    public function execute(UmbrellaFileWriterConfig $config)
     {
     }
 
     /**
-     * @param  FileWriterTaskConfig $config
+     * @param  UmbrellaFileWriterConfig $config
      * @return string
      */
-    final protected function getOuputFilePath(FileWriterTaskConfig $config)
+    final protected function getOuputFilePath(UmbrellaFileWriterConfig $config)
     {
         return sprintf('%s%s', $this->outputDirPath, $config->fwOutputFilename);
     }

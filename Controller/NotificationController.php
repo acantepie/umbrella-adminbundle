@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Controller\BaseController;
-use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
 use Umbrella\AdminBundle\FileWriter\FileWriterManager;
+use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
 use Umbrella\CoreBundle\Component\DateTime\DateTimeHelper;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -34,7 +34,7 @@ class NotificationController extends BaseController
         $data = [];
         foreach ($tasks as $task) {
 
-            /** @var FileWriterTaskConfig $config */
+            /** @var UmbrellaFileWriterConfig $config */
             $config = $task->config;
 
             $data[] = [

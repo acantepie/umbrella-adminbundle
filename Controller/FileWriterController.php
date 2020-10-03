@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Controller\BaseController;
-use Umbrella\AdminBundle\Entity\FileWriterTaskConfig;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
@@ -24,8 +24,8 @@ class FileWriterController extends BaseController
      */
     public function downloadAction(ParameterBagInterface $parameterBag, $id)
     {
-        /** @var FileWriterTaskConfig $config */
-        $config = $this->findOrNotFound(FileWriterTaskConfig::class, $id);
+        /** @var UmbrellaFileWriterConfig $config */
+        $config = $this->findOrNotFound(UmbrellaFileWriterConfig::class, $id);
         $author = $this->getUser() instanceof AdminUserInterface ? $this->getUser() : null;
 
         if ($author !== null && $config->fwAuthor !== $author) {
