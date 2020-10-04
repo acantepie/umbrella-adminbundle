@@ -33,7 +33,7 @@ app.use('[data-mount=Notification]', Notification);
 
 app.use('.js-select2', Select2);
 app.use('.js-async-select2', AsyncSelect2);
-app.use('.js-umbrella-tag', TagsInput);
+app.use('.js-tag', TagsInput);
 app.use('.js-datepicker', DatePicker);
 app.use('.js-datetimepicker', DateTimePicker);
 app.use('.js-umbrella-fileupload', FileUpload);

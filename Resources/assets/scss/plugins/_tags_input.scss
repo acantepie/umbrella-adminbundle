@@ -1,0 +1,14 @@
+.bootstrap-tagsinput {
+  input {
+    margin-top: 6px;
+  }
+}
+
+input.js-tag {
+  display: block !important;
+  position: absolute;
+  top:0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
