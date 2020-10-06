@@ -23,8 +23,6 @@ use Umbrella\CoreBundle\Model\TimestampTrait;
  * @ORM\MappedSuperclass()
  * @ORM\HasLifecycleCallbacks()
  *
- * @Searchable()
- *
  * @CT\UniqueEntity("title")
  */
 class BaseUserGroup

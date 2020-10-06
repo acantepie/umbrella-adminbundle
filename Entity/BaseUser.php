@@ -27,8 +27,6 @@ use Umbrella\CoreBundle\Model\TimestampTrait;
  *
  * @ORM\MappedSuperclass()
  * @ORM\HasLifecycleCallbacks
- *
- * @Searchable()
  */
 class BaseUser implements UserInterface, EquatableInterface, \Serializable, AdminUserInterface
 {
