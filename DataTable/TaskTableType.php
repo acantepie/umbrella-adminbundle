@@ -130,8 +130,14 @@ class TaskTableType extends DataTableType
             }
         ]);
 
-        $builder->addSourceModifier(new EntitySearchModifier());
         $builder->addEntityCallbackSourceModifier(function (QueryBuilder $qb, array $formData) {
+            $qb->innerJoin('e.config', 'c');
+
+            if ($formData['search']) {
+                $qb->andWhere('LOWER(c.handlerAlias) LIKE :search OR LOWER(c.tag) LIKE :search');
+                $qb->setParameter('search', '%' . $formData['search'] . '%');
+            }
+
             if ($formData['states']) {
                 $qb->andWhere('e.state IN (:states)');
                 $qb->setParameter('states', $formData['states']);
