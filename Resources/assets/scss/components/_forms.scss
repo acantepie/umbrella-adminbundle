@@ -52,3 +52,19 @@ label.required:after, legend.required:after {
 .js-select2 {
   display: none;
 }
+
+.custom-control-lg {
+  min-height: 1.70rem;
+
+  .checkbox-custom {
+    &::after {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &::before {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+}

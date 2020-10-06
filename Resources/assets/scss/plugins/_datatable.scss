@@ -40,10 +40,10 @@ table.dataTable {
         // Multi select table
 
         > tr.selected, >tr>.selected {
-            background-color: rgba($primary, 0.1);
+            background-color: rgba($primary, 0.125);
             
             td {
-                border-color: rgba($primary, 0.1);
+                border-color: rgba($primary, 0.125);
             }
         }
         td {
