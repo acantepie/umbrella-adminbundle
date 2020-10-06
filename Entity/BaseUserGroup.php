@@ -9,10 +9,13 @@
 namespace Umbrella\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Umbrella\CoreBundle\Entity\BaseEntity;
 use Doctrine\Common\Collections\ArrayCollection;
+use Umbrella\CoreBundle\Annotation\Searchable;
 use Umbrella\CoreBundle\Annotation\SearchableField;
 use Symfony\Bridge\Doctrine\Validator\Constraints as CT;
+use Umbrella\CoreBundle\Model\IdTrait;
+use Umbrella\CoreBundle\Model\SearchTrait;
+use Umbrella\CoreBundle\Model\TimestampTrait;
 
 /**
  * Class UserGroup.
@@ -20,10 +23,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as CT;
  * @ORM\MappedSuperclass()
  * @ORM\HasLifecycleCallbacks()
  *
+ * @Searchable()
+ *
  * @CT\UniqueEntity("title")
  */
-class BaseUserGroup extends BaseEntity
+class BaseUserGroup
 {
+    use IdTrait;
+    use TimestampTrait;
+    use SearchTrait;
+
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)

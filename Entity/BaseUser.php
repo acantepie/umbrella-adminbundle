@@ -10,24 +10,32 @@
 namespace Umbrella\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Umbrella\CoreBundle\Entity\BaseEntity;
+use Umbrella\CoreBundle\Annotation\Searchable;
 use Umbrella\CoreBundle\Entity\UmbrellaFile;
-use Umbrella\CoreBundle\Model\ActivableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Annotation\SearchableField;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
+use Umbrella\CoreBundle\Model\ActiveTrait;
+use Umbrella\CoreBundle\Model\IdTrait;
+use Umbrella\CoreBundle\Model\SearchTrait;
+use Umbrella\CoreBundle\Model\TimestampTrait;
 
 /**
  * Class User.
  *
  * @ORM\MappedSuperclass()
  * @ORM\HasLifecycleCallbacks
+ *
+ * @Searchable()
  */
-class BaseUser extends BaseEntity implements UserInterface, EquatableInterface, \Serializable, AdminUserInterface
+class BaseUser implements UserInterface, EquatableInterface, \Serializable, AdminUserInterface
 {
-    use ActivableTrait;
+    use IdTrait;
+    use TimestampTrait;
+    use SearchTrait;
+    use ActiveTrait;
 
     /**
      * @var string|null

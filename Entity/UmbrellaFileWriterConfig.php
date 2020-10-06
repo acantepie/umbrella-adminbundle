@@ -8,6 +8,7 @@ use Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class UmbrellaFileWriterConfig extends BaseTaskConfig
 {
