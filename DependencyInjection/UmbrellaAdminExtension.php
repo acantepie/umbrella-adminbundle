@@ -30,9 +30,6 @@ class UmbrellaAdminExtension extends Extension implements PrependExtensionInterf
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $def = $container->getDefinition(SidebarMenu::class);
-        $def->replaceArgument(0, $config['menu']['file']);
-
         $container->registerForAutoconfiguration(AbstractFileWriterHandler::class)->addTag('umbrella.filewriter.handler');
 
         $parameters = ArrayUtils::remap_nested_array($config, 'umbrella_admin', ['umbrella_admin.user.group_crud.form_roles']);

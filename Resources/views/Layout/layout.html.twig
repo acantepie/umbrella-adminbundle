@@ -21,7 +21,7 @@
         <body data-mount="Layout" data-leftbar-theme="dark">
             <div class="wrapper">
                 {% block sidebar %}
-                    {{ menu_render(sidebar_alias | default('admin_sidebar')) }}
+                    {{ menu_render() }}
                 {% endblock %}
 
                 <div class="content-page">

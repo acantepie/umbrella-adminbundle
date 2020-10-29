@@ -11,10 +11,7 @@
     </button>
 
     <div class="app-breadcrumb">
-        {% if breadcrumb is not defined %}
-            {% set breadcrumb = menu_get_breadcrumb(sidebar_alias | default('admin_sidebar')) %}
-        {% endif %}
-        {{ breadcrumb_render(breadcrumb) }}
+        {{ breadcrumb_render() }}
     </div>
 
 </div>

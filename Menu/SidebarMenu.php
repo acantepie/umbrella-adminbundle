@@ -10,44 +10,76 @@
 namespace Umbrella\AdminBundle\Menu;
 
 use Symfony\Component\Yaml\Yaml;
+use Twig\Environment;
+use Umbrella\CoreBundle\Component\Menu\MenuFactory;
+use Umbrella\CoreBundle\Component\Menu\Model\Breadcrumb;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
-use Umbrella\CoreBundle\Component\Menu\MenuBuilder;
+use Umbrella\CoreBundle\Component\Menu\Model\MenuItem;
 
 /**
  * Class SidebarMenu.
  */
 class SidebarMenu
 {
+    /**
+     * @var Environment
+     */
+    protected $twig;
 
     /**
      * @var string
      */
-    private $yml_path;
+    private $ymlPath;
 
     /**
      * SidebarMenu constructor.
-     * @param $yml_path
+     *
+     * @param Environment $twig
+     * @param null $ymlPath
      */
-    public function __construct($yml_path = null)
+    public function __construct(Environment $twig, $ymlPath = null)
     {
-        $this->yml_path = $yml_path;
+        $this->twig = $twig;
+        $this->ymlPath = $ymlPath;
     }
 
     /**
-     * @param  MenuBuilder $builder
+     * @param MenuFactory $factory
      * @return Menu
      */
-    public function createMenu(MenuBuilder $builder)
+    public function createMenu(MenuFactory $factory)
     {
-        if (!file_exists($this->yml_path)) {
-            throw new \RuntimeException(sprintf("Can't load menu, resource %s doesn't exist", $this->yml_path));
+        if (!file_exists($this->ymlPath)) {
+            throw new \RuntimeException(sprintf("Can't load menu, resource %s doesn't exist", $this->ymlPath));
         }
+        $data = (array) Yaml::parse(file_get_contents($this->ymlPath));
 
-        $data = (array) Yaml::parse(file_get_contents($this->yml_path));
-        foreach ($data as $id => $options) {
-            $builder->addNode($id, $options);
+        $menu = $factory->createMenu();
+        foreach ($data as $id => $childOptions) {
+            $menu->getRoot()->addChild($id, $childOptions);
         }
+        return $menu;
+    }
 
-        return $builder->getMenu();
+    /**
+     * @param Menu $menu
+     * @return string
+     */
+    public function renderMenu(Menu $menu)
+    {
+        return $this->twig->render('@UmbrellaAdmin/Menu/sidebar.html.twig', [
+            'menu' => $menu
+        ]);
+    }
+
+    /**
+     * @param Breadcrumb $breadcrumb
+     * @return string
+     */
+    public function renderBreadcrumb(Breadcrumb $breadcrumb)
+    {
+        return $this->twig->render('@UmbrellaAdmin/Menu/breadcrumb.html.twig', [
+            'breadcrumb' => $breadcrumb
+        ]);
     }
 }

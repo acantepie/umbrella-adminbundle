@@ -37,15 +37,13 @@ services:
 
     # Sidebar
     Umbrella\AdminBundle\Menu\SidebarMenu:
-        arguments: [null]
         public: true
+        bind:
+            $ymlPath: "%umbrella_admin.menu.file%"
         tags:
           - { name: umbrella.menu.factory, method: createMenu, alias: admin_sidebar }
-
-    Umbrella\AdminBundle\Menu\SideBarMenuRenderer:
-        public: true
-        tags:
-          - { name: umbrella.menu_renderer, alias: admin_sidebar }
+          - { name: umbrella.menu.renderer, method: renderMenu, alias: admin_sidebar }
+          - { name: umbrella.breadcrumb.renderer, method: renderBreadcrumb, alias: admin_sidebar }
 
     # FileWriter
     Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory:
