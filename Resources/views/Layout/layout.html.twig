@@ -27,7 +27,24 @@
                 <div class="content-page">
                     <div class="content mt-3">
                         {% block topbar %}
-                            {% include '@UmbrellaAdmin/Include/topbar.html.twig' %}
+                            <div class="navbar-custom">
+                                <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                                    {% if admin_notification_enable() %}
+                                        {% include "@UmbrellaAdmin/Notification/widget.html.twig" %}
+                                    {% endif %}
+                                    {% include "@UmbrellaAdmin/Include/userinfo.html.twig" %}
+                                </ul>
+
+                                <button class="button-menu-mobile open-left disable-btn">
+                                    <i class="uil-list-ul"></i>
+                                </button>
+
+                                <div class="app-breadcrumb">
+                                    {% block breadcrumb %}
+                                        {{ breadcrumb_render() }}
+                                    {% endblock %}
+                                </div>
+                            </div>
                         {% endblock %}
 
                         <div class="container-fluid">
