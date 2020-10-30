@@ -71,7 +71,7 @@ class UserTableType extends DataTableType
     public function buildTable(DataTableBuilder $builder, array $options = [])
     {
         $builder->add('name', PropertyColumnType::class, [
-            'default_order' => 'ASC',
+            'order' => 'ASC',
             'order_by' => ['firstname', 'lastname'],
             'renderer' => function (BaseUser $user) {
                 $html = '<div class="d-flex">';

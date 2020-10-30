@@ -104,7 +104,7 @@ class TaskTableType extends DataTableType
         ]);
 
         $builder->add('createdAt', DateColumnType::class, [
-            'default_order' => 'DESC',
+            'order' => 'DESC',
             'format' => 'd/m/Y H:i'
         ]);
 
