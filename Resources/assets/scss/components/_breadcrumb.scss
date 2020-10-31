@@ -8,6 +8,7 @@
     +.breadcrumb-item {
         &::before {
             font-family: "Material Design Icons";
+            content: "\F0142";
         }
     }
 }
