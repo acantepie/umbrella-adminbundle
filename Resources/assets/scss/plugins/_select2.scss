@@ -2,6 +2,8 @@
 // Select 2
 //
 
+$icon-select2-width: 26px;
+
 .select2-container {
     width: 100%!important;
     
@@ -13,11 +15,12 @@
         .select2-selection__rendered {
             line-height: 36px;
             padding-left: 12px;
+            padding-right: $icon-select2-width;
             color: $input-color;
         }
         .select2-selection__arrow {
             height: 34px;
-            width: 34px;
+            width: $icon-select2-width;
             right: 3px;
             b {
                 border-color: $gray-600 transparent transparent transparent;
@@ -27,7 +30,7 @@
 
         .select2-selection__clear {
             height: 34px;
-            width: 34px;
+            width: $icon-select2-width;
             text-align: center;
         }
     }
