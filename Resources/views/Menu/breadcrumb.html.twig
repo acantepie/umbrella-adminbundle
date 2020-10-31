@@ -1,21 +1,23 @@
-<div class="breadcrumb">
-    {{ breadcrumb.icon | icon }}
-    <ol data-count="{{ breadcrumb | length }}">
+<div class="app-breadcrumb">
+    <div class="breadcrumb">
+        {{ breadcrumb.icon | icon }}
+        <ol data-count="{{ breadcrumb | length }}">
 
-        {% for item in breadcrumb %}
-            {% set label = item.translationDomain ? (item.label | trans([], item.translationDomain)) : item.label %}
+            {% for item in breadcrumb %}
+                {% set label = item.translationDomain ? (item.label | trans([], item.translationDomain)) : item.label %}
 
-            {% if loop.last %}
-                <li class="active">{{ label }}</li>
-            {% elseif item.route %}
-                <li>
-                    <a href="{{ path(item.route, item.routeParams) }}">{{ label }}</a>
-                </li>
-            {% else %}
-                <li>{{ label }}</li>
-            {% endif %}
+                {% if loop.last %}
+                    <li class="active">{{ label }}</li>
+                {% elseif item.route %}
+                    <li>
+                        <a href="{{ path(item.route, item.routeParams) }}">{{ label }}</a>
+                    </li>
+                {% else %}
+                    <li>{{ label }}</li>
+                {% endif %}
 
-        {% endfor %}
-    </ol>
+            {% endfor %}
+        </ol>
 
+    </div>
 </div>

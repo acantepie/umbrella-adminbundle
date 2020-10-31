@@ -39,10 +39,9 @@
                                     <i class="uil-list-ul"></i>
                                 </button>
 
-                                <div class="app-breadcrumb">
-                                    {% block breadcrumb %}
-                                        {{ breadcrumb_render() }}
-                                    {% endblock %}
+                                {% block breadcrumb %}
+                                    {{ breadcrumb_render() }}
+                                {% endblock %}
                                 </div>
                             </div>
                         {% endblock %}
