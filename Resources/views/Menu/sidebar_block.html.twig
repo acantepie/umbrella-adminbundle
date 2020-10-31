@@ -1,22 +1,22 @@
 {% block menu_widget %}
     {% for item in menu.root %}
-        {% if item.type == 'title' %}
-            {{ block('menu_title') }}
-        {% else %}
-            {{ block('menu_item') }}
-        {% endif %}
+        {{ block('menu_title') }}
     {% endfor %}
 {% endblock %}
 
 {% block menu_title %}
     {% if menu_is_granted_item(item) %}
         <li class="side-nav-title side-nav-item">{{ block('menu_item_label') }}</li>
+
+        {% for item in item %}
+            {{ block('menu_item') }}
+        {% endfor %}
     {% endif %}
 {% endblock %}
 
 {% block menu_item %}
     {% set level = item.level %}
-    {% set isTopLevel = level == 1 %}
+    {% set isTopLevel = level == 2 %}
 
     {% if menu_is_granted_item(item) %}
         <li class="side-nav-item {{ menu_is_current_item(item) ? 'mm-active' }}" data-lvl="{{ level }}">
@@ -33,9 +33,9 @@
             </a>
 
             {% if item.hasChildren() %}
-                {% if level == 1 %}
+                {% if level == 2 %}
                     {% set item_level_class = 'side-nav-second-level' %}
-                {% elseif level == 2 %}
+                {% elseif level == 3 %}
                     {% set item_level_class = 'side-nav-third-level' %}
                 {% else %}
                     {% set item_level_class = 'side-nav-forth-level' %}
