@@ -8,16 +8,17 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Umbrella\AdminBundle\DataTable\TaskTableType;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Umbrella\CoreBundle\Controller\BaseController;
 use Umbrella\CoreBundle\Component\Task\TaskManager;
+use Umbrella\CoreBundle\Controller\BaseController;
 
 /**
  * Class TaskController
+ *
  * @Route("/task")
  */
 class TaskController extends BaseController
@@ -29,6 +30,7 @@ class TaskController extends BaseController
 
     /**
      * TaskController constructor.
+     *
      * @param TaskManager $manager
      */
     public function __construct(TaskManager $manager)
@@ -51,7 +53,7 @@ class TaskController extends BaseController
         }
 
         return $this->render('@UmbrellaAdmin/DataTable/index.html.twig', [
-            'table' => $table
+            'table' => $table,
         ]);
     }
 
@@ -60,6 +62,7 @@ class TaskController extends BaseController
      *
      * @param Request $request
      * @param $id
+     *
      * @return AppMessageBuilder
      */
     public function showAction(Request $request, $id)
@@ -69,7 +72,7 @@ class TaskController extends BaseController
 
         return $this->jsResponseBuilder()
             ->openModalView('@UmbrellaAdmin/Task/show.html.twig', [
-                'entity' => $entity
+                'entity' => $entity,
             ]);
     }
 
@@ -78,14 +81,16 @@ class TaskController extends BaseController
      *
      * @param Request $request
      * @param $id
+     *
      * @return AppMessageBuilder
      */
-    public function cancelAction(TaskManager  $taskManager, Request $request, $id)
+    public function cancelAction(TaskManager $taskManager, Request $request, $id)
     {
         $entity = $this->manager->getTask($id);
         $this->throwNotFoundExceptionIfNull($entity);
 
         $taskManager->cancel($entity);
+
         return $this->jsResponseBuilder()
             ->toastSuccess('message.task_canceled')
             ->reloadTable();

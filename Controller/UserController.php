@@ -9,19 +9,19 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Umbrella\AdminBundle\Services\UserManager;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Umbrella\AdminBundle\Services\UserManager;
 use Umbrella\CoreBundle\Controller\BaseController;
 
 /**
  * Class UserController.
+ *
  * @Route("/user")
  */
 class UserController extends BaseController
 {
-
     /**
      * @var UserManager
      */
@@ -29,6 +29,7 @@ class UserController extends BaseController
 
     /**
      * UserController constructor.
+     *
      * @param UserManager $userManager
      */
     public function __construct(UserManager $userManager)
@@ -49,17 +50,18 @@ class UserController extends BaseController
         }
 
         return $this->render('@UmbrellaAdmin/DataTable/index.html.twig', [
-            'table' => $table
+            'table' => $table,
         ]);
     }
 
     /**
-     * @Route("/edit/{id}", requirements={"id"="\d+"})
-     * @param null|mixed $id
+     * @Route("/edit/{id}", requirements={"id": "\d+"})
+     *
+     * @param mixed|null $id
      */
     public function editAction(Request $request, $id = null)
     {
-        if ($id === null) {
+        if (null === $id) {
             $entity = $this->userManager->createUser();
         } else {
             $entity = $this->userManager->find($id);
@@ -69,7 +71,7 @@ class UserController extends BaseController
         $form = $this->createForm($this->getParameter('umbrella_admin.user.user_crud.form'), $entity, [
             'password_required' => !$entity->id,
         ]);
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -90,7 +92,8 @@ class UserController extends BaseController
     }
 
     /**
-     * @Route("/toggle-active/{id}/{value}", requirements={"id"="\d+"})
+     * @Route("/toggle-active/{id}/{value}", requirements={"id": "\d+"})
+     *
      * @param mixed $id
      * @param mixed $value
      */
@@ -99,14 +102,15 @@ class UserController extends BaseController
         $entity = $this->userManager->find($id);
         $this->throwNotFoundExceptionIfNull($entity);
 
-        $entity->active = $value == 1;
+        $entity->active = 1 == $value;
         $this->userManager->update($entity);
 
         return $this->jsResponseBuilder();
     }
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id": "\d+"})
+     *
      * @param mixed $id
      */
     public function deleteAction(Request $request, $id)

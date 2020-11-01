@@ -8,12 +8,12 @@
 
 namespace Umbrella\AdminBundle\Security;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * Class UserProvider
@@ -37,6 +37,7 @@ class UserProvider implements UserProviderInterface
 
     /**
      * UserProvider constructor.
+     *
      * @param EntityManagerInterface $em
      * @param ParameterBagInterface  $parameters
      */
@@ -48,7 +49,7 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function loadUserByUsername($username)
     {
@@ -60,7 +61,7 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function refreshUser(UserInterface $user)
     {
@@ -76,7 +77,7 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function supportsClass($class)
     {

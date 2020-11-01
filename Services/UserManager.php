@@ -8,11 +8,11 @@
 
 namespace Umbrella\AdminBundle\Services;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Umbrella\AdminBundle\Entity\BaseUser;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Umbrella\AdminBundle\Entity\BaseUser;
 
 /**
  * Class UserManager
@@ -46,6 +46,7 @@ class UserManager
 
     /**
      * UserManager constructor.
+     *
      * @param EntityManagerInterface       $em
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param ParameterBagInterface        $parameters
@@ -66,11 +67,13 @@ class UserManager
     public function createUser()
     {
         $user = new $this->class();
+
         return $user;
     }
 
     /**
      * @param $id
+     *
      * @return BaseUser
      */
     public function find($id)
@@ -80,23 +83,25 @@ class UserManager
 
     /**
      * @param $email
+     *
      * @return BaseUser
      */
     public function findUserByEmail($email)
     {
         return $this->repo->findOneBy([
-            'email' => $email
+            'email' => $email,
         ]);
     }
 
     /**
      * @param $confirmationToken
+     *
      * @return BaseUser
      */
     public function findUserByConfirmationToken($confirmationToken)
     {
         return $this->repo->findOneBy([
-            'confirmationToken' => $confirmationToken
+            'confirmationToken' => $confirmationToken,
         ]);
     }
 

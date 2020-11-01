@@ -8,20 +8,19 @@
 
 namespace Umbrella\AdminBundle\Form;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\AbstractType;
-use Umbrella\CoreBundle\Form\Choice2Type;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Umbrella\CoreBundle\Form\Choice2Type;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class UserGroupType.
  */
 class UserGroupType extends AbstractType
 {
-
     /**
      * @var ParameterBagInterface
      */
@@ -29,6 +28,7 @@ class UserGroupType extends AbstractType
 
     /**
      * UserGroupType constructor.
+     *
      * @param ParameterBagInterface $parameters
      */
     public function __construct(ParameterBagInterface $parameters)
@@ -47,7 +47,7 @@ class UserGroupType extends AbstractType
         $builder->add('roles', Choice2Type::class, [
             'choices' => ArrayUtils::values_as_keys($roles),
             'multiple' => true,
-            'choice_prefix' => null
+            'choice_prefix' => null,
         ]);
     }
 
@@ -57,7 +57,7 @@ class UserGroupType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->parameters->get('umbrella_admin.user.group_crud.class')
+            'data_class' => $this->parameters->get('umbrella_admin.user.group_crud.class'),
         ]);
     }
 }

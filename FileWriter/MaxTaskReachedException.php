@@ -9,7 +9,6 @@ namespace Umbrella\AdminBundle\FileWriter;
  */
 class MaxTaskReachedException extends \Exception
 {
-
     /**
      * @var int
      */
@@ -17,6 +16,7 @@ class MaxTaskReachedException extends \Exception
 
     /**
      * FileWriterMaxScheduleReachedException constructor.
+     *
      * @param $max
      * @param mixed $maxTask
      */

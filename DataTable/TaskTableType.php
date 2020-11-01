@@ -9,20 +9,19 @@
 namespace Umbrella\AdminBundle\DataTable;
 
 use Doctrine\ORM\QueryBuilder;
-use Umbrella\CoreBundle\Entity\Task;
-use Umbrella\CoreBundle\Form\SearchType;
-use Umbrella\CoreBundle\Form\Choice2Type;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Column\Type\ColumnType;
-use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
-use Umbrella\CoreBundle\Component\Task\Extension\TaskHelper;
-use Umbrella\CoreBundle\Component\Column\Type\DateColumnType;
-use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
 use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
-use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
+use Umbrella\CoreBundle\Component\Column\Type\ColumnType;
+use Umbrella\CoreBundle\Component\Column\Type\DateColumnType;
 use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
+use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
 use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
-use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
+use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
+use Umbrella\CoreBundle\Component\Task\Extension\TaskHelper;
+use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
+use Umbrella\CoreBundle\Entity\Task;
+use Umbrella\CoreBundle\Form\Choice2Type;
+use Umbrella\CoreBundle\Form\SearchType;
 
 /**
  * Class TaskTableType
@@ -36,6 +35,7 @@ class TaskTableType extends DataTableType
 
     /**
      * TaskTableType constructor.
+     *
      * @param TaskHelper $taskHelper
      */
     public function __construct(TaskHelper $taskHelper)
@@ -44,7 +44,7 @@ class TaskTableType extends DataTableType
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function buildToolbar(ToolbarBuilder $builder, array $options = [])
     {
@@ -56,7 +56,7 @@ class TaskTableType extends DataTableType
                 Task::STATE_RUNNING,
                 Task::STATE_FINISHED,
                 Task::STATE_TERMINATED,
-                Task::STATE_FAILED
+                Task::STATE_FAILED,
             ],
             'choice_label' => function ($state) {
                 return $state ? $this->taskHelper->getStateLabel($state) : null;
@@ -64,14 +64,14 @@ class TaskTableType extends DataTableType
             'multiple' => true,
             'translation_domain' => false,
             'attr' => [
-                'class' => 'form-check-horizontal'
+                'class' => 'form-check-horizontal',
             ],
-            'placeholder' => 'form.placeholder.states'
+            'placeholder' => 'form.placeholder.states',
         ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildTable(DataTableBuilder $builder, array $options = [])
     {
@@ -79,11 +79,11 @@ class TaskTableType extends DataTableType
             'label' => 'task_state',
             'renderer' => function (Task $entity) {
                 return $this->taskHelper->renderState($entity->state);
-            }
+            },
         ]);
 
         $builder->add('id', PropertyColumnType::class, [
-            'label' => 'task_id'
+            'label' => 'task_id',
         ]);
 
         $builder->add('config', ColumnType::class, [
@@ -100,19 +100,19 @@ class TaskTableType extends DataTableType
                 }
 
                 return $html;
-            }
+            },
         ]);
 
         $builder->add('createdAt', DateColumnType::class, [
             'order' => 'DESC',
-            'format' => 'd/m/Y H:i'
+            'format' => 'd/m/Y H:i',
         ]);
 
         $builder->add('startedAt', PropertyColumnType::class, [
             'label' => 'task_runtime',
             'renderer' => function (Task $entity) {
                 return $this->taskHelper->renderRuntime($entity);
-            }
+            },
         ]);
 
         $builder->add('actions', ActionColumnType::class, [
@@ -127,7 +127,7 @@ class TaskTableType extends DataTableType
                         ->setConfirm('message.task_cancel_confirm')
                         ->setXhr(true);
                 }
-            }
+            },
         ]);
 
         $builder->addEntityCallbackSourceModifier(function (QueryBuilder $qb, array $formData) {
@@ -146,13 +146,13 @@ class TaskTableType extends DataTableType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Task::class,
-            'poll_interval' => 10
+            'poll_interval' => 10,
         ]);
     }
 }

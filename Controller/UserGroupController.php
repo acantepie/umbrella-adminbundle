@@ -8,11 +8,11 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Umbrella\CoreBundle\Controller\BaseController;
 use Umbrella\AdminBundle\Services\UserGroupManager;
+use Umbrella\CoreBundle\Controller\BaseController;
 
 /**
  * Class UserGroupController.
@@ -21,7 +21,6 @@ use Umbrella\AdminBundle\Services\UserGroupManager;
  */
 class UserGroupController extends BaseController
 {
-
     /**
      * @var UserGroupManager
      */
@@ -29,6 +28,7 @@ class UserGroupController extends BaseController
 
     /**
      * UserGroupController constructor.
+     *
      * @param UserGroupManager $groupManager
      */
     public function __construct(UserGroupManager $groupManager)
@@ -49,17 +49,18 @@ class UserGroupController extends BaseController
         }
 
         return $this->render('@UmbrellaAdmin/DataTable/index.html.twig', [
-            'table' => $table
+            'table' => $table,
         ]);
     }
 
     /**
-     * @Route("/edit/{id}", requirements={"id"="\d+"})
-     * @param null|mixed $id
+     * @Route("/edit/{id}", requirements={"id": "\d+"})
+     *
+     * @param mixed|null $id
      */
     public function editAction(Request $request, $id = null)
     {
-        if ($id === null) {
+        if (null === $id) {
             $entity = $this->groupManager->createGroup();
         } else {
             $entity = $this->groupManager->find($id);
@@ -87,7 +88,8 @@ class UserGroupController extends BaseController
     }
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id": "\d+"})
+     *
      * @param mixed $id
      */
     public function deleteAction(Request $request, $id)

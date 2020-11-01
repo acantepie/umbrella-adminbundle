@@ -2,14 +2,14 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Controller\BaseController;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * Class FileWriterController
@@ -19,7 +19,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class FileWriterController extends BaseController
 {
     /**
-     * @Route("/download/{id}", requirements={"id"="\d+"})
+     * @Route("/download/{id}", requirements={"id": "\d+"})
+     *
      * @param mixed $id
      */
     public function downloadAction(ParameterBagInterface $parameterBag, $id)
@@ -28,7 +29,7 @@ class FileWriterController extends BaseController
         $config = $this->findOrNotFound(UmbrellaFileWriterConfig::class, $id);
         $author = $this->getUser() instanceof AdminUserInterface ? $this->getUser() : null;
 
-        if ($author !== null && $config->fwAuthor !== $author) {
+        if (null !== $author && $config->fwAuthor !== $author) {
             return new Response('', 404);
         }
 
@@ -40,6 +41,7 @@ class FileWriterController extends BaseController
 
         $response = new BinaryFileResponse($outputFilePath);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $config->fwOutputPrettyFilename);
+
         return $response;
     }
 }

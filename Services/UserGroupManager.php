@@ -8,10 +8,10 @@
 
 namespace Umbrella\AdminBundle\Services;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Umbrella\AdminBundle\Entity\BaseUserGroup;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Umbrella\AdminBundle\Entity\BaseUserGroup;
 
 /**
  * Class UserGroupManager
@@ -40,6 +40,7 @@ class UserGroupManager
 
     /**
      * UserGroupManager constructor.
+     *
      * @param EntityManagerInterface $em
      * @param ParameterBagInterface  $parameters
      */
@@ -58,11 +59,13 @@ class UserGroupManager
     public function createGroup()
     {
         $user = new $this->class();
+
         return $user;
     }
 
     /**
      * @param $id
+     *
      * @return BaseUserGroup
      */
     public function find($id)

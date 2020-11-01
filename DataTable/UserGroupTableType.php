@@ -8,18 +8,18 @@
 
 namespace Umbrella\AdminBundle\DataTable;
 
-use Umbrella\CoreBundle\Form\SearchType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
-use Umbrella\CoreBundle\Component\Action\Type\AddActionType;
-use Umbrella\CoreBundle\Component\Column\Type\ManyColumnType;
-use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
-use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
-use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
-use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
-use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Umbrella\CoreBundle\Component\Action\Type\AddActionType;
+use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
+use Umbrella\CoreBundle\Component\Column\Type\ManyColumnType;
+use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
+use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
+use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
 use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
+use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
+use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
+use Umbrella\CoreBundle\Form\SearchType;
 
 /**
  * Class UserGroupTableType.
@@ -33,6 +33,7 @@ class UserGroupTableType extends DataTableType
 
     /**
      * UserGroupTableType constructor.
+     *
      * @param ParameterBagInterface $parameters
      */
     public function __construct(ParameterBagInterface $parameters)
@@ -41,7 +42,7 @@ class UserGroupTableType extends DataTableType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildToolbar(ToolbarBuilder $builder, array $options = [])
     {
@@ -49,7 +50,7 @@ class UserGroupTableType extends DataTableType
         $builder->addAction('add', AddActionType::class, [
             'route' => 'umbrella_admin_usergroup_edit',
             'label' => 'add_group',
-            'xhr' => true
+            'xhr' => true,
         ]);
     }
 
@@ -65,7 +66,7 @@ class UserGroupTableType extends DataTableType
             'action_builder' => function (RowActionBuilder $builder, $entity) {
                 $builder->createXhrEdit('umbrella_admin_usergroup_edit', ['id' => $entity->id]);
                 $builder->createXhrDelete('umbrella_admin_usergroup_delete', ['id' => $entity->id]);
-            }
+            },
         ]);
 
         $builder->addSourceModifier(new EntitySearchModifier());
@@ -77,7 +78,7 @@ class UserGroupTableType extends DataTableType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->parameters->get('umbrella_admin.user.group_crud.class')
+            'data_class' => $this->parameters->get('umbrella_admin.user.group_crud.class'),
         ]);
     }
 }

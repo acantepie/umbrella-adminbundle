@@ -24,20 +24,18 @@ class FileWriterHandlerFactory
     }
 
     /**
-     * @param  UmbrellaFileWriterConfig  $config
+     * @param UmbrellaFileWriterConfig $config
+     *
      * @return AbstractFileWriterHandler
      */
     public function create(UmbrellaFileWriterConfig $config)
     {
         if (isset($this->handlers[$config->fwHandlerAlias])) {
             $handler = $this->handlers[$config->fwHandlerAlias];
+
             return $handler;
         } else {
-            throw new \InvalidArgumentException(sprintf(
-                "No filewriter handler found with alias '%s', alias registered are %s.",
-                $config->handlerAlias,
-                implode(', ', array_keys($this->handlers))
-            ));
+            throw new \InvalidArgumentException(sprintf("No filewriter handler found with alias '%s', alias registered are %s.", $config->handlerAlias, implode(', ', array_keys($this->handlers))));
         }
     }
 }

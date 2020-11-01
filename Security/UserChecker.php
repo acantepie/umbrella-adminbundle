@@ -8,10 +8,10 @@
 
 namespace Umbrella\AdminBundle\Security;
 
-use Umbrella\AdminBundle\Entity\BaseUser;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
+use Symfony\Component\Security\Core\User\UserCheckerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Umbrella\AdminBundle\Entity\BaseUser;
 
 /**
  * Class UserChecker

@@ -8,11 +8,10 @@
 
 namespace Umbrella\AdminBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Umbrella\CoreBundle\Annotation\Searchable;
-use Umbrella\CoreBundle\Annotation\SearchableField;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints as CT;
+use Umbrella\CoreBundle\Annotation\SearchableField;
 use Umbrella\CoreBundle\Model\IdTrait;
 use Umbrella\CoreBundle\Model\SearchTrait;
 use Umbrella\CoreBundle\Model\TimestampTrait;
@@ -20,8 +19,8 @@ use Umbrella\CoreBundle\Model\TimestampTrait;
 /**
  * Class UserGroup.
  *
- * @ORM\MappedSuperclass()
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\MappedSuperclass
+ * @ORM\HasLifecycleCallbacks
  *
  * @CT\UniqueEntity("title")
  */
@@ -35,7 +34,7 @@ class BaseUserGroup
      * @var string
      * @ORM\Column(type="string", length=255, nullable=false, unique=true)
      *
-     * @SearchableField()
+     * @SearchableField
      */
     public $title;
 
@@ -68,6 +67,7 @@ class BaseUserGroup
 
     /**
      * @param $role
+     *
      * @return bool
      */
     public function hasRole($role)

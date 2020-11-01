@@ -8,10 +8,10 @@
 
 namespace Umbrella\AdminBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
+use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
 
 /**
  * Class UmbrellaAdminComponentPass

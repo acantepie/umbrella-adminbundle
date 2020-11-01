@@ -2,20 +2,20 @@
 
 namespace Umbrella\AdminBundle\FileWriter;
 
-use Doctrine\ORM\Query\Expr\Join;
-use Umbrella\CoreBundle\Entity\Task;
 use Doctrine\ORM\EntityManagerInterface;
-use Umbrella\CoreBundle\Utils\FileUtils;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Routing\RouterInterface;
-use Umbrella\AdminBundle\Model\AdminUserInterface;
-use Umbrella\CoreBundle\Component\Task\TaskManager;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
-use Umbrella\CoreBundle\Component\JsResponse\JsResponseBuilder;
-use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Security;
+use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
+use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
+use Umbrella\AdminBundle\Model\AdminUserInterface;
+use Umbrella\CoreBundle\Component\JsResponse\JsResponseBuilder;
+use Umbrella\CoreBundle\Component\Task\TaskManager;
+use Umbrella\CoreBundle\Entity\Task;
+use Umbrella\CoreBundle\Utils\FileUtils;
 
 /**
  * Class FileWriterManager
@@ -104,6 +104,7 @@ class FileWriterManager
     {
         $this->registerSync($config);
         $this->run($config);
+
         return new RedirectResponse($this->getDownloadUrl($config));
     }
 
@@ -116,28 +117,30 @@ class FileWriterManager
     {
         try {
             $task = $this->registerASync($config);
+
             return $this->jsResponseBuilder
                 ->openModalView('@UmbrellaAdmin/FileWriter/register_async_success.html.twig', [
                     'task' => $task,
-                    'config' => $config
+                    'config' => $config,
                 ]);
         } catch (MaxTaskReachedException $e) {
             return $this->jsResponseBuilder
                 ->openModalView('@UmbrellaAdmin/FileWriter/register_async_error.html.twig', [
                     'max_task' => $e->getMaxTask(),
-                    'config' => $config
+                    'config' => $config,
                 ]);
         }
     }
 
     /**
-     * @param  UmbrellaFileWriterConfig $config
+     * @param UmbrellaFileWriterConfig $config
+     *
      * @return string
      */
     public function getDownloadUrl(UmbrellaFileWriterConfig $config)
     {
         return $this->router->generate('umbrella_admin_filewriter_download', [
-            'id' => $config->id
+            'id' => $config->id,
         ]);
     }
 
@@ -151,7 +154,7 @@ class FileWriterManager
         $config->fwMode = UmbrellaFileWriterConfig::MODE_SYNC;
 
         $user = $this->security->getUser();
-        if ($user !== null && $user instanceof AdminUserInterface) { // set author
+        if (null !== $user && $user instanceof AdminUserInterface) { // set author
             $config->fwAuthor = $this->security->getUser();
         }
 
@@ -162,7 +165,8 @@ class FileWriterManager
     /**
      * Register an ASYNC config
      *
-     * @param  UmbrellaFileWriterConfig $config
+     * @param UmbrellaFileWriterConfig $config
+     *
      * @return Task
      */
     public function registerAsync(UmbrellaFileWriterConfig $config)
@@ -174,7 +178,7 @@ class FileWriterManager
         }
 
         $user = $this->security->getUser();
-        if ($user !== null && $user instanceof AdminUserInterface) { // set author
+        if (null !== $user && $user instanceof AdminUserInterface) { // set author
             $config->fwAuthor = $this->security->getUser();
         }
 
@@ -184,7 +188,8 @@ class FileWriterManager
     /**
      * Run a config (don't care if async or sync)
      *
-     * @param  UmbrellaFileWriterConfig $config
+     * @param UmbrellaFileWriterConfig $config
+     *
      * @return UmbrellaFileWriterConfig
      */
     public function run(UmbrellaFileWriterConfig $config)
@@ -229,8 +234,9 @@ class FileWriterManager
     }
 
     /**
-     * @param  false  $onlyNotification
-     * @param  int    $maxResults
+     * @param false $onlyNotification
+     * @param int   $maxResults
+     *
      * @return Task(]
      */
     public function searchTask($onlyNotification = false, $maxResults = 10, AdminUserInterface $author = null)
@@ -262,6 +268,7 @@ class FileWriterManager
 
     /**
      * Can register filewriter task pending < max_task
+     *
      * @return bool
      */
     private function canRegisterTask()
@@ -274,7 +281,7 @@ class FileWriterManager
         $qb->setParameter('states', [Task::STATE_PENDING, Task::STATE_RUNNING]);
 
         $user = $this->security->getUser();
-        if ($user !== null && $user instanceof AdminUserInterface) {
+        if (null !== $user && $user instanceof AdminUserInterface) {
             $qb->andWhere('c.fwAuthor = :user');
             $qb->setParameter('user', $user);
         } else {

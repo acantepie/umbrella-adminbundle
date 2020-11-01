@@ -6,13 +6,14 @@
  * Date: 30/05/17
  * Time: 22:01
  */
+
 namespace Umbrella\AdminBundle\Security;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
@@ -21,7 +22,6 @@ use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
  */
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
-
     /**
      * @var RouterInterface
      */
@@ -29,6 +29,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 
     /**
      * AuthenticationEntryPoint constructor.
+     *
      * @param RouterInterface $router
      */
     public function __construct(RouterInterface $router)
@@ -59,6 +60,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse('', 401);
         }
+
         return new RedirectResponse($this->router->generate('umbrella_admin_login'));
     }
 }

@@ -8,22 +8,21 @@
 
 namespace Umbrella\AdminBundle\Form;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\AbstractType;
-use Umbrella\CoreBundle\Form\UmbrellaFileType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Image;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
+use Umbrella\CoreBundle\Form\UmbrellaFileType;
 
 /**
  * Class AccountType
  */
 class ProfileType extends AbstractType
 {
-
     /**
      * @var ParameterBagInterface
      */
@@ -31,6 +30,7 @@ class ProfileType extends AbstractType
 
     /**
      * UserGroupTableType constructor.
+     *
      * @param ParameterBagInterface $parameters
      */
     public function __construct(ParameterBagInterface $parameters)
@@ -48,12 +48,12 @@ class ProfileType extends AbstractType
         $builder->add('lastname', TextType::class);
         $builder->add('avatar', UmbrellaFileType::class, [
             'file_attr' => [
-                'accept' => 'image/*'
+                'accept' => 'image/*',
             ],
             'file_constraints' => [
-                new Image()
+                new Image(),
             ],
-            'required' => false
+            'required' => false,
         ]);
         $builder->add('email', EmailType::class);
 
@@ -61,8 +61,8 @@ class ProfileType extends AbstractType
             'label' => 'password',
             'required' => false,
             'attr' => [
-                'placeholder' => 'form.placeholder.password_not_set_if_empty'
-            ]
+                'placeholder' => 'form.placeholder.password_not_set_if_empty',
+            ],
         ]);
     }
 
@@ -72,7 +72,7 @@ class ProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->parameters->get('umbrella_admin.user.user_crud.class')
+            'data_class' => $this->parameters->get('umbrella_admin.user.user_crud.class'),
         ]);
     }
 }

@@ -9,14 +9,13 @@
 
 namespace Umbrella\AdminBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Umbrella\CoreBundle\Annotation\Searchable;
-use Umbrella\CoreBundle\Entity\UmbrellaFile;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Annotation\SearchableField;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\EquatableInterface;
+use Umbrella\CoreBundle\Entity\UmbrellaFile;
 use Umbrella\CoreBundle\Model\ActiveTrait;
 use Umbrella\CoreBundle\Model\IdTrait;
 use Umbrella\CoreBundle\Model\SearchTrait;
@@ -25,7 +24,7 @@ use Umbrella\CoreBundle\Model\TimestampTrait;
 /**
  * Class User.
  *
- * @ORM\MappedSuperclass()
+ * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks
  */
 class BaseUser implements UserInterface, EquatableInterface, \Serializable, AdminUserInterface
@@ -39,7 +38,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
      * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @SearchableField()
+     * @SearchableField
      */
     public $firstname;
 
@@ -47,7 +46,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
      * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @SearchableField()
+     * @SearchableField
      */
     public $lastname;
 
@@ -73,7 +72,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
      * @var string
      * @ORM\Column(type="string", length=60, unique=true)
      *
-     * @SearchableField()
+     * @SearchableField
      */
     public $email;
 
@@ -134,6 +133,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
 
     /**
      * @param $ttl
+     *
      * @return bool
      */
     public function isPasswordRequestNonExpired($ttl)
@@ -153,7 +153,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     // UserInterface implementation
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRoles()
     {
@@ -166,7 +166,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPassword()
     {
@@ -174,7 +174,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSalt()
     {
@@ -182,7 +182,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getUsername()
     {
@@ -190,7 +190,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function eraseCredentials()
     {
@@ -200,7 +200,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     // Equatable implementation
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isEqualTo(UserInterface $user)
     {
@@ -226,7 +226,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     // Serializable implementation
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function serialize()
     {
@@ -234,16 +234,16 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
             $this->id,
             $this->password,
             $this->salt,
-            $this->email
+            $this->email,
         ]);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             $this->password,
             $this->salt,
@@ -254,7 +254,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     // AdminUserInterface implementation
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFullName()
     {
@@ -262,7 +262,7 @@ class BaseUser implements UserInterface, EquatableInterface, \Serializable, Admi
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAvatar()
     {

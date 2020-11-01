@@ -8,12 +8,12 @@
 
 namespace Umbrella\AdminBundle\Controller;
 
-use Umbrella\AdminBundle\Entity\BaseUser;
 use Symfony\Component\HttpFoundation\Request;
-use Umbrella\AdminBundle\Services\UserManager;
 use Symfony\Component\Routing\Annotation\Route;
-use Umbrella\CoreBundle\Controller\BaseController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Umbrella\AdminBundle\Entity\BaseUser;
+use Umbrella\AdminBundle\Services\UserManager;
+use Umbrella\CoreBundle\Controller\BaseController;
 
 /**
  * Class AccountController
@@ -29,6 +29,7 @@ class ProfileController extends BaseController
 
     /**
      * ProfileController constructor.
+     *
      * @param UserManager $userManager
      */
     public function __construct(UserManager $userManager)
@@ -54,12 +55,13 @@ class ProfileController extends BaseController
             $this->userManager->update($user);
 
             $this->toastSuccess('message.account_updated');
+
             return $this->redirectToRoute('umbrella_admin_profile_index');
         }
 
         return $this->render('@UmbrellaAdmin/Profile/index.html.twig', [
             'user' => $user,
-            'settings_form' => $settingsForm->createView()
+            'settings_form' => $settingsForm->createView(),
         ]);
     }
 }

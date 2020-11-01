@@ -37,7 +37,8 @@ abstract class AbstractFileWriterHandler
     }
 
     /**
-     * @param  UmbrellaFileWriterConfig $config
+     * @param UmbrellaFileWriterConfig $config
+     *
      * @return string
      */
     final protected function getOuputFilePath(UmbrellaFileWriterConfig $config)

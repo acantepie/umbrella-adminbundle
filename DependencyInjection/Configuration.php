@@ -2,14 +2,14 @@
 
 namespace Umbrella\AdminBundle\DependencyInjection;
 
-use Umbrella\AdminBundle\Form\UserType;
-use Umbrella\AdminBundle\Form\ProfileType;
-use Umbrella\AdminBundle\Form\UserGroupType;
-use Umbrella\AdminBundle\DataTable\UserTableType;
-use Umbrella\AdminBundle\DataTable\UserGroupTableType;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Umbrella\AdminBundle\DataTable\UserGroupTableType;
+use Umbrella\AdminBundle\DataTable\UserTableType;
+use Umbrella\AdminBundle\Form\ProfileType;
+use Umbrella\AdminBundle\Form\UserGroupType;
+use Umbrella\AdminBundle\Form\UserType;
 
 /**
  * This is the class that validates and merges configuration from your app/config files.
@@ -59,7 +59,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('stylesheet_entry')->defaultValue('/build/umbrella_admin.css')->end()
                 ->scalarNode('script_entry')->defaultValue('/build/umbrella_admin.js')->end();
     }
-    
+
     private function addUserSection(ArrayNodeDefinition $rootNode)
     {
         $rootNode->children()

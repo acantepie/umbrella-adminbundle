@@ -8,19 +8,18 @@
 
 namespace Umbrella\AdminBundle\Form;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UserPasswordConfirmType
  */
 class UserPasswordConfirmType extends AbstractType
 {
-
     /**
      * @var ParameterBagInterface
      */
@@ -28,6 +27,7 @@ class UserPasswordConfirmType extends AbstractType
 
     /**
      * UserGroupTableType constructor.
+     *
      * @param ParameterBagInterface $parameters
      */
     public function __construct(ParameterBagInterface $parameters)
@@ -46,13 +46,13 @@ class UserPasswordConfirmType extends AbstractType
             'required' => true,
             'first_options' => [
                 'attr' => [
-                    'class' => 'md-input'
-                ]
+                    'class' => 'md-input',
+                ],
             ],
             'second_options' => [
                 'attr' => [
-                    'class' => 'md-input'
-                ]
+                    'class' => 'md-input',
+                ],
             ],
             'invalid_message' => 'error.password.mismatch',
         ]);

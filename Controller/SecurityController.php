@@ -9,17 +9,18 @@
 namespace Umbrella\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Umbrella\AdminBundle\Services\UserMailer;
-use Umbrella\AdminBundle\Services\UserManager;
 use Symfony\Component\Routing\Annotation\Route;
-use Umbrella\CoreBundle\Controller\BaseController;
-use Umbrella\AdminBundle\Form\UserPasswordConfirmType;
+use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
+use Umbrella\AdminBundle\Form\UserPasswordConfirmType;
+use Umbrella\AdminBundle\Services\UserMailer;
+use Umbrella\AdminBundle\Services\UserManager;
+use Umbrella\CoreBundle\Controller\BaseController;
 
 /**
  * Class SecurityController.
+ *
  * @Route("/")
  */
 class SecurityController extends BaseController
@@ -31,6 +32,7 @@ class SecurityController extends BaseController
 
     /**
      * SecurityController constructor.
+     *
      * @param UserManager $userManager
      */
     public function __construct(UserManager $userManager)
@@ -77,7 +79,7 @@ class SecurityController extends BaseController
             }
 
             return $this->redirectToRoute('umbrella_admin_security_passwordrequestsuccess', [
-                'email' => $email
+                'email' => $email,
             ]);
         }
 
@@ -90,12 +92,13 @@ class SecurityController extends BaseController
     public function passwordRequestSuccessAction(Request $request)
     {
         return $this->render('@UmbrellaAdmin/Security/password_request_success.html.twig', [
-            'email' => $request->query->get('email')
+            'email' => $request->query->get('email'),
         ]);
     }
 
     /**
      * @Route("/password_reset/{token}")
+     *
      * @param mixed $token
      */
     public function passwordResetAction(Request $request, $token)
@@ -110,11 +113,12 @@ class SecurityController extends BaseController
             $this->userManager->update($user);
 
             $this->toastSuccess('message.password_resetted');
+
             return $this->redirectToRoute('umbrella_admin_login');
         }
 
         return $this->render('@UmbrellaAdmin/Security/password_reset.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }

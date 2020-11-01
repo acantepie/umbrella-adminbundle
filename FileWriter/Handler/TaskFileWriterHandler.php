@@ -2,9 +2,9 @@
 
 namespace Umbrella\AdminBundle\FileWriter\Handler;
 
-use Umbrella\CoreBundle\Entity\BaseTaskConfig;
 use Umbrella\AdminBundle\FileWriter\FileWriterManager;
 use Umbrella\CoreBundle\Component\Task\Handler\AbstractTaskHandler;
+use Umbrella\CoreBundle\Entity\BaseTaskConfig;
 
 /**
  * Class TaskFileWriterHandler
@@ -18,6 +18,7 @@ class TaskFileWriterHandler extends AbstractTaskHandler
 
     /**
      * TaskFileWriterHandler constructor.
+     *
      * @param FileWriterManager $manager
      */
     public function __construct(FileWriterManager $manager)
@@ -26,7 +27,7 @@ class TaskFileWriterHandler extends AbstractTaskHandler
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function execute(BaseTaskConfig $config)
     {

@@ -9,16 +9,15 @@
 
 namespace Umbrella\AdminBundle\Extension;
 
-use Twig\TwigFunction;
-use Twig\Extension\AbstractExtension;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Class AdminTwigExtension.
  */
 class AdminTwigExtension extends AbstractExtension
 {
-
     /**
      * @var ParameterBagInterface
      */
@@ -26,6 +25,7 @@ class AdminTwigExtension extends AbstractExtension
 
     /**
      * AdminTwigExtension constructor.
+     *
      * @param ParameterBagInterface $parameters
      */
     public function __construct(ParameterBagInterface $parameters)
@@ -44,7 +44,7 @@ class AdminTwigExtension extends AbstractExtension
             new TwigFunction('admin_stylesheet_entry', [$this, 'stylesheetEntry']),
             new TwigFunction('admin_route_profile', [$this, 'routeProfile']),
             new TwigFunction('admin_route_logout', [$this, 'routeLogout']),
-            new TwigFunction('admin_notification_enable', [$this, 'fileWriterNotificationEnable'])
+            new TwigFunction('admin_notification_enable', [$this, 'fileWriterNotificationEnable']),
         ];
     }
 

@@ -14,7 +14,6 @@ use Twig\Environment;
 use Umbrella\CoreBundle\Component\Menu\MenuFactory;
 use Umbrella\CoreBundle\Component\Menu\Model\Breadcrumb;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
-use Umbrella\CoreBundle\Component\Menu\Model\MenuItem;
 
 /**
  * Class SidebarMenu.
@@ -35,7 +34,7 @@ class SidebarMenu
      * SidebarMenu constructor.
      *
      * @param Environment $twig
-     * @param null $ymlPath
+     * @param null        $ymlPath
      */
     public function __construct(Environment $twig, $ymlPath = null)
     {
@@ -45,6 +44,7 @@ class SidebarMenu
 
     /**
      * @param MenuFactory $factory
+     *
      * @return Menu
      */
     public function createMenu(MenuFactory $factory)
@@ -58,28 +58,31 @@ class SidebarMenu
         foreach ($data as $id => $childOptions) {
             $menu->getRoot()->addChild($id, $childOptions);
         }
+
         return $menu;
     }
 
     /**
      * @param Menu $menu
+     *
      * @return string
      */
     public function renderMenu(Menu $menu)
     {
         return $this->twig->render('@UmbrellaAdmin/Menu/sidebar.html.twig', [
-            'menu' => $menu
+            'menu' => $menu,
         ]);
     }
 
     /**
      * @param Breadcrumb $breadcrumb
+     *
      * @return string
      */
     public function renderBreadcrumb(Breadcrumb $breadcrumb)
     {
         return $this->twig->render('@UmbrellaAdmin/Menu/breadcrumb.html.twig', [
-            'breadcrumb' => $breadcrumb
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 }

@@ -12,7 +12,6 @@ use Umbrella\CoreBundle\Entity\UmbrellaFile;
 
 /**
  * Interface AdminUserInterface
- * @package Umbrella\AdminBundle\Model
  */
 interface AdminUserInterface
 {

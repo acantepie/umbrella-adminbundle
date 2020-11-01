@@ -9,22 +9,22 @@
 
 namespace Umbrella\AdminBundle\DataTable;
 
-use Umbrella\CoreBundle\Form\SearchType;
-use Umbrella\AdminBundle\Entity\BaseUser;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
+use Umbrella\AdminBundle\Entity\BaseUser;
 use Umbrella\CoreBundle\Component\Action\Type\AddActionType;
+use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
 use Umbrella\CoreBundle\Component\Column\Type\DateColumnType;
 use Umbrella\CoreBundle\Component\Column\Type\ManyColumnType;
-use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
-use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
-use Umbrella\CoreBundle\Component\Column\Type\ToggleColumnType;
-use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
 use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
+use Umbrella\CoreBundle\Component\Column\Type\ToggleColumnType;
+use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
 use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
+use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
+use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
+use Umbrella\CoreBundle\Form\SearchType;
 
 /**
  * Class UserTableType.
@@ -43,6 +43,7 @@ class UserTableType extends DataTableType
 
     /**
      * UserTableType constructor.
+     *
      * @param CacheManager          $cacheManager
      * @param ParameterBagInterface $parameters
      */
@@ -53,7 +54,7 @@ class UserTableType extends DataTableType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildToolbar(ToolbarBuilder $builder, array $options = [])
     {
@@ -61,7 +62,7 @@ class UserTableType extends DataTableType
         $builder->addAction('add', AddActionType::class, [
             'route' => 'umbrella_admin_user_edit',
             'label' => 'add_user',
-            'xhr' => true
+            'xhr' => true,
         ]);
     }
 
@@ -86,8 +87,9 @@ class UserTableType extends DataTableType
                 $html .= sprintf('<div class="text-muted">%s</div>', $user->email);
                 $html .= '</div>';
                 $html .= '</div>';
+
                 return $html;
-            }
+            },
         ]);
 
         $builder->add('createdAt', DateColumnType::class);
@@ -100,14 +102,14 @@ class UserTableType extends DataTableType
             'route' => 'umbrella_admin_user_toggleactive',
             'route_params' => function ($entity) {
                 return ['id' => $entity->id];
-            }
+            },
         ]);
 
         $builder->add('actions', ActionColumnType::class, [
             'action_builder' => function (RowActionBuilder $builder, $entity) {
                 $builder->createXhrEdit('umbrella_admin_user_edit', ['id' => $entity->id]);
                 $builder->createXhrDelete('umbrella_admin_user_delete', ['id' => $entity->id]);
-            }
+            },
         ]);
 
         $builder->addSourceModifier(new EntitySearchModifier());
@@ -119,7 +121,7 @@ class UserTableType extends DataTableType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => $this->parameters->get('umbrella_admin.user.user_crud.class')
+            'data_class' => $this->parameters->get('umbrella_admin.user.user_crud.class'),
         ]);
     }
 }
