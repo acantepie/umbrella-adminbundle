@@ -13,7 +13,6 @@ use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
 use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Component\JsResponse\JsResponseBuilder;
-use Umbrella\CoreBundle\Component\Task\TaskManager;
 use Umbrella\CoreBundle\Entity\Task;
 use Umbrella\CoreBundle\Utils\FileUtils;
 

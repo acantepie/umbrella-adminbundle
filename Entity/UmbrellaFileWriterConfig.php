@@ -7,10 +7,8 @@ use Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler;
 use Umbrella\CoreBundle\Entity\BaseTaskConfig;
 
 /**
- * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
  */
-class UmbrellaFileWriterConfig extends BaseTaskConfig
+class UmbrellaFileWriterConfig
 {
     const TAG = 'file_writer';
 

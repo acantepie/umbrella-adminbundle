@@ -3,7 +3,6 @@
 namespace Umbrella\AdminBundle\FileWriter\Handler;
 
 use Umbrella\AdminBundle\FileWriter\FileWriterManager;
-use Umbrella\CoreBundle\Component\Task\Handler\AbstractTaskHandler;
 use Umbrella\CoreBundle\Entity\BaseTaskConfig;
 
 /**

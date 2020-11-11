@@ -2,8 +2,8 @@ umbrella_admin_notification_:
   resource: "@UmbrellaAdminBundle/Controller/NotificationController.php"
   type: annotation
 
-umbrella_admin_task_:
-  resource: "@UmbrellaAdminBundle/Controller/TaskController.php"
+umbrella_admin_job_:
+  resource: "@UmbrellaAdminBundle/Controller/JobController.php"
   type: annotation
 
 umbrella_admin_filewriter_:

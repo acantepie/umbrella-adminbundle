@@ -13,7 +13,7 @@ services:
     # Table
     Umbrella\AdminBundle\DataTable\UserGroupTableType:
     Umbrella\AdminBundle\DataTable\UserTableType:
-    Umbrella\AdminBundle\DataTable\TaskTableType:
+    Umbrella\AdminBundle\DataTable\JobTableType:
 
     # Form
     Umbrella\AdminBundle\Form\ProfileType:
@@ -46,10 +46,10 @@ services:
           - { name: umbrella.breadcrumb.renderer, method: renderBreadcrumb, alias: admin_sidebar }
 
     # FileWriter
-    Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory:
-    Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler:
-    Umbrella\AdminBundle\FileWriter\FileWriterManager:
-        public: true
+    #Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory:
+    #Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler:
+    #Umbrella\AdminBundle\FileWriter\FileWriterManager:
+    #    public: true
 
     #Twig
     Umbrella\AdminBundle\Extension\AdminTwigExtension:

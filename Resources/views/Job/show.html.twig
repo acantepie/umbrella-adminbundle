@@ -1,0 +1,71 @@
+{% extends "@UmbrellaCore/Modal/default.html.twig" %}
+
+{% block modal_title %}
+    <h5 class="modal-title">Job {{ entity }}</h5>
+{% endblock %}
+
+{% block modal_content %}
+
+    <h4 class="mb-2 pb-1 border-bottom">Job</h4>
+    <dl class="row">
+        <dt class="col-sm-3">Identifiant</dt>
+        <dd class="col-sm-9">{{ entity.id }}</dd>
+
+        {% if entity.description %}
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">{{ entity.description }}</dd>
+        {% endif %}
+
+        <dt class="col-sm-3">Programmé le</dt>
+        <dd class="col-sm-9">{{ entity.createdAt |date('d/m/Y H:i:s') }}</dd>
+
+        <dt class="col-sm-3">Commande</dt>
+        <dd class="col-sm-9"><pre>{{ entity.processArgs | join(' ') }}</pre></dd>
+    </dl>
+
+    <h4 class="mb-2 pb-1 border-bottom">Execution</h4>
+    <dl class="row">
+        <dt class="col-sm-3">Etat</dt>
+        <dd class="col-sm-9">{{ entity.state | render_job_state }}</dd>
+
+        {% if entity.pid %}
+            <dt class="col-sm-3">pid</dt>
+            <dd class="col-sm-9">{{ entity.pid }}</dd>
+        {% endif %}
+
+        {% if entity.startedAt %}
+            <dt class="col-sm-3">Exécuté le</dt>
+            <dd class="col-sm-9">{{ entity.startedAt | date('d/m/Y H:i:s') }}</dd>
+        {% endif %}
+
+        {% set runtime = entity.runtime %}
+        {% if runtime %}
+            <dt class="col-sm-3">Temps d'execution</dt>
+            <dd class="col-sm-9">{{ runtime }}</dd>
+        {% endif %}
+
+        {% if entity.endedAt %}
+            <dt class="col-sm-3">Terminé le</dt>
+            <dd class="col-sm-9">{{ entity.endedAt | date('d/m/Y H:i:s') }}</dd>
+        {% endif %}
+    </dl>
+
+    {% if entity.stdOutput is not empty or entity.errorOutput is not empty %}
+        {{ nav_config({}, 'bordered') }}
+        {{ nav_start() }}
+            {{ nav_item({'label' : 'STD', 'url' : '#output-std'}) }}
+            {{ nav_item({'label' : 'ERR', 'url' : '#output-err'}) }}
+        {{ nav_end() }}
+        <div class="tab-content">
+
+            <div class="tab-pane active" id="output-std">
+                <pre class="pre-scrollable">{{ entity.stdOutput }}</pre>
+            </div>
+
+            <div class="tab-pane" id="output-err">
+                <pre class="pre-scrollable">{{ entity.errorOutput }}</pre>
+            </div>
+
+        </div>
+    {% endif %}
+{% endblock %}
