@@ -34,7 +34,6 @@ services:
     Umbrella\AdminBundle\Services\UserMailer:
         public: true
 
-
     # Sidebar
     Umbrella\AdminBundle\Menu\SidebarMenu:
         public: true
@@ -46,10 +45,10 @@ services:
           - { name: umbrella.breadcrumb.renderer, method: renderBreadcrumb, alias: admin_sidebar }
 
     # FileWriter
-    #Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory:
-    #Umbrella\AdminBundle\FileWriter\Handler\TaskFileWriterHandler:
-    #Umbrella\AdminBundle\FileWriter\FileWriterManager:
-    #    public: true
-
+    Umbrella\AdminBundle\FileWriter\FileWriter:
+        public: true
+        bind:
+            $outputDirPath: "%umbrella_admin.filewriter.output_path%"
+            $maxFileWrite: "%umbrella_admin.filewriter.max_task%"
     #Twig
     Umbrella\AdminBundle\Extension\AdminTwigExtension:

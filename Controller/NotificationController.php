@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
+use Umbrella\AdminBundle\FileWriter\FileWriter;
 use Umbrella\AdminBundle\FileWriter\FileWriterManager;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Component\DateTime\DateTimeHelper;
@@ -22,7 +23,7 @@ class NotificationController extends BaseController
     /**
      * @Route("/list")
      */
-    public function listAction(FileWriterManager $fileWriterManager, DateTimeHelper $dateTimeHelper, ParameterBagInterface $parameterBag, Request $request)
+    public function listAction(FileWriter $fileWriterManager, DateTimeHelper $dateTimeHelper, ParameterBagInterface $parameterBag, Request $request)
     {
         if (!$parameterBag->get('umbrella_admin.filewriter.notification_enable')) {
             throw new BadRequestHttpException('Notification are disabled');
