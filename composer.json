@@ -3,8 +3,7 @@
     "type": "symfony-bundle",
     "description": "Umbrella admin ",
     "keywords": [],
-    "version": "1.0.0",
-    "license": "GPL-3.0+",
+    "license": "MIT",
     "authors": [
         {
             "name": "Adrien Cantepie",
@@ -15,7 +14,7 @@
         "psr-4": {"Umbrella\\AdminBundle\\": ""}
     },
     "require": {
-        "umbrella/corebundle": "dev-master"
+        "umbrella/corebundle": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [],
