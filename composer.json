@@ -1,7 +1,7 @@
 {
     "name": "umbrella2/adminbundle",
     "type": "symfony-bundle",
-    "description": "Umbrella admin ",
+    "description": "Umbrella framework - adminbundle ",
     "keywords": [],
     "license": "MIT",
     "authors": [
