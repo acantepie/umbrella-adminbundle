@@ -1,2 +1,1 @@
-# Umbrella AdminBundle
-vendor Umbrella/AdminBundle
+Framework Umbrella - vendor adminbundle
