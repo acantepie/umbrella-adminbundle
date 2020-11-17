@@ -14,7 +14,7 @@
         "psr-4": {"Umbrella\\AdminBundle\\": ""}
     },
     "require": {
-        "umbrella/corebundle": "^1.0"
+        "umbrella2/corebundle": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [],
