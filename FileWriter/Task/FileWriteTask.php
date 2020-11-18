@@ -3,6 +3,7 @@
 namespace Umbrella\AdminBundle\FileWriter\Task;
 
 use Umbrella\AdminBundle\Entity\FileWrite;
+use Umbrella\CoreBundle\Component\Schedule\Context\AbstractTaskContext;
 use Umbrella\CoreBundle\Component\Schedule\Task\AbstractTask;
 
 /**
@@ -11,9 +12,9 @@ use Umbrella\CoreBundle\Component\Schedule\Task\AbstractTask;
 class FileWriteTask extends AbstractTask
 {
     /**
-     * @param FileWrite $env
+     * @param FileWrite $context
      */
-    public function execute($env)
+    public function execute(AbstractTaskContext $context)
     {
 
     }

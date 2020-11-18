@@ -3,12 +3,13 @@
 namespace Umbrella\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Umbrella\CoreBundle\Component\Schedule\Context\AbstractTaskContext;
 use Umbrella\CoreBundle\Component\Schedule\RuntimeEnv\AbstractEnvironment;
 
 /**
  * @ORM\Entity()
  */
-class FileWrite extends AbstractEnvironment
+class FileWrite extends AbstractTaskContext
 {
     /**
      * Author
