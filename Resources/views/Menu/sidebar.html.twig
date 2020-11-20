@@ -2,12 +2,16 @@
 
 <div class="left-side-menu">
 
-    {% include "@UmbrellaAdmin/_logo.html.twig" %}
+    {% block logo %}
+        {% include "@UmbrellaAdmin/Menu/logo.twig" %}
+    {% endblock %}
 
-    <div class="h-100" id="left-side-menu-container" data-simplebar>
-        <ul class="metismenu side-nav" data-mount="Sidebar">
-            {{ block('menu_widget') }}
-        </ul>
-        <div class="clearfix"></div>
-    </div>
+    {% block sidemenu %}
+        <div class="h-100" id="left-side-menu-container" data-simplebar>
+            <ul class="metismenu side-nav" data-mount="Sidebar">
+                {{ block('menu_widget') }}
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    {% endblock %}
 </div>

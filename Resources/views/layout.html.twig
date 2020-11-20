@@ -18,7 +18,8 @@
     {% include "@UmbrellaCore/_toastr.html.twig" %}
 
     {% block body %}
-        <body data-mount="Layout" data-leftbar-theme="dark">
+        <body data-mount="Layout" data-leftbar-theme="dark" class="env-{{ app.environment }}">
+
             <div class="wrapper">
                 {% block sidebar %}
                     {{ menu_render() }}
@@ -26,24 +27,9 @@
 
                 <div class="content-page">
                     <div class="content mt-3">
+
                         {% block topbar %}
-                            <div class="navbar-custom">
-                                <ul class="list-unstyled topbar-right-menu float-right mb-0">
-                                    {% if admin_notification_enable() %}
-                                        {% include "@UmbrellaAdmin/Notification/widget.html.twig" %}
-                                    {% endif %}
-                                    {% include "@UmbrellaAdmin/_userinfo.html.twig" %}
-                                </ul>
-
-                                <button class="button-menu-mobile open-left disable-btn">
-                                    <i class="uil-list-ul"></i>
-                                </button>
-
-                                {% block breadcrumb %}
-                                    {{ breadcrumb_render() }}
-                                {% endblock %}
-                                </div>
-                            </div>
+                            {% include "@UmbrellaAdmin/_topbar.html.twig" %}
                         {% endblock %}
 
                         <div class="container-fluid">
@@ -54,7 +40,6 @@
                 </div>
 
             </div>
-
         </body>
     {% endblock %}
 

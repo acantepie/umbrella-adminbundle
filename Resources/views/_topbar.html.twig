@@ -1,0 +1,21 @@
+<div class="navbar-custom">
+    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+        {% block notification %}
+            {% if admin_notification_enable() %}
+                {% include "@UmbrellaAdmin/Notification/widget.html.twig" %}
+            {% endif %}
+        {% endblock %}
+
+        {% block userinfo %}
+            {% include "@UmbrellaAdmin/_userinfo.html.twig" %}
+        {% endblock %}
+    </ul>
+
+    <button class="button-menu-mobile open-left disable-btn">
+        <i class="uil-list-ul"></i>
+    </button>
+
+    {% block breadcrumb %}
+        {{ breadcrumb_render() }}
+    {% endblock %}
+</div>
