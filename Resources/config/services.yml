@@ -10,6 +10,10 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    Umbrella\AdminBundle\Controller\SecurityController:
+        bind:
+            $retryTtl: "%umbrella_admin.user.security.password_request_ttl%"
+
     # Table
     Umbrella\AdminBundle\DataTable\UserGroupTableType:
     Umbrella\AdminBundle\DataTable\UserTableType:

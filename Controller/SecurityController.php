@@ -31,13 +31,19 @@ class SecurityController extends BaseController
     protected $userManager;
 
     /**
-     * SecurityController constructor.
-     *
-     * @param UserManager $userManager
+     * @var int
      */
-    public function __construct(UserManager $userManager)
+    protected $retryTtl;
+
+    /**
+     * SecurityController constructor.
+     * @param UserManager $userManager
+     * @param $retryTtl
+     */
+    public function __construct(UserManager $userManager, $retryTtl)
     {
         $this->userManager = $userManager;
+        $this->retryTtl = $retryTtl;
     }
 
     /**
@@ -104,7 +110,10 @@ class SecurityController extends BaseController
     public function passwordResetAction(Request $request, $token)
     {
         $user = $this->userManager->findUserByConfirmationToken($token);
-        $this->throwNotFoundExceptionIfNull($user);
+
+        if (null === $user || !$user->isPasswordRequestNonExpired($this->retryTtl)) {
+            return $this->render('@UmbrellaAdmin/Security/password_reset_error.html.twig');
+        }
 
         $form = $this->createForm(UserPasswordConfirmType::class, $user);
         $form->handleRequest($request);
