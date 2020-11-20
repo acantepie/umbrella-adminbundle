@@ -4,10 +4,9 @@ namespace Umbrella\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Umbrella\CoreBundle\Component\Schedule\Context\AbstractTaskContext;
-use Umbrella\CoreBundle\Component\Schedule\RuntimeEnv\AbstractEnvironment;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity
  */
 class FileWrite extends AbstractTaskContext
 {

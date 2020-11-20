@@ -16,7 +16,5 @@ class FileWriteTask extends AbstractTask
      */
     public function execute(AbstractTaskContext $context)
     {
-
     }
-
 }

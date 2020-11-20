@@ -7,7 +7,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Umbrella\AdminBundle\FileWriter\Handler\AbstractFileWriterHandler;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 

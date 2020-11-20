@@ -12,7 +12,6 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\Action\Type\ActionType;
 use Umbrella\CoreBundle\Component\Column\Type\ActionColumnType;
-use Umbrella\CoreBundle\Component\Column\Type\ColumnType;
 use Umbrella\CoreBundle\Component\Column\Type\DateColumnType;
 use Umbrella\CoreBundle\Component\Column\Type\PropertyColumnType;
 use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
@@ -75,7 +74,7 @@ class JobTableType extends DataTableType
             'xhr' => true,
             'confirm' => 'message.delete_all_job',
             'class' => 'btn btn-secondary',
-            'icon' => 'mdi mdi-delete'
+            'icon' => 'mdi mdi-delete',
         ]);
     }
 
@@ -99,7 +98,7 @@ class JobTableType extends DataTableType
 
         $builder->add('runtime', PropertyColumnType::class, [
             'label' => 'job_runtime',
-            'order' => false
+            'order' => false,
         ]);
 
         $builder->add('actions', ActionColumnType::class, [
@@ -113,7 +112,6 @@ class JobTableType extends DataTableType
         ]);
 
         $builder->addEntityCallbackSourceModifier(function (QueryBuilder $qb, array $formData) {
-
             if ($formData['search']) {
                 $qb->andWhere('LOWER(e.description) LIKE :search');
                 $qb->setParameter('search', '%' . $formData['search'] . '%');

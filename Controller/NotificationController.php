@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Umbrella\AdminBundle\Entity\UmbrellaFileWriterConfig;
 use Umbrella\AdminBundle\FileWriter\FileWriter;
-use Umbrella\AdminBundle\FileWriter\FileWriterManager;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Component\DateTime\DateTimeHelper;
 use Umbrella\CoreBundle\Controller\BaseController;

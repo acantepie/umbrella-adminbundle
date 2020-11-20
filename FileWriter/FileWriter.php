@@ -4,19 +4,15 @@ namespace Umbrella\AdminBundle\FileWriter;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Security;
 use Umbrella\AdminBundle\Entity\FileWrite;
-use Umbrella\AdminBundle\FileWriter\Handler\FileWriterHandlerFactory;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
 use Umbrella\CoreBundle\Component\JsResponse\JsResponseBuilder;
 use Umbrella\CoreBundle\Component\Schedule\Runner\Runner;
 use Umbrella\CoreBundle\Component\Schedule\Scheduler;
 use Umbrella\CoreBundle\Entity\Task;
-use Umbrella\CoreBundle\Utils\FileUtils;
 
 /**
  * Class FileWriterManager
@@ -65,12 +61,13 @@ class FileWriter
 
     /**
      * FileWriter constructor.
-     * @param Scheduler $scheduler
-     * @param RouterInterface $router
-     * @param Security $security
+     *
+     * @param Scheduler         $scheduler
+     * @param RouterInterface   $router
+     * @param Security          $security
      * @param JsResponseBuilder $jsResponseBuilder
-     * @param string $outputDirPath
-     * @param int $maxFileWrite
+     * @param string            $outputDirPath
+     * @param int               $maxFileWrite
      */
     public function __construct(
         Scheduler $scheduler,
@@ -79,8 +76,7 @@ class FileWriter
         JsResponseBuilder $jsResponseBuilder,
         string $outputDirPath,
         int $maxFileWrite
-    )
-    {
+    ) {
         $this->scheduler = $scheduler;
         $this->router = $router;
         $this->security = $security;
@@ -89,24 +85,27 @@ class FileWriter
         $this->maxFileWrite = $maxFileWrite;
     }
 
-
     /**
      * @param FileWrite $fileWrite
+     *
      * @return RedirectResponse
      */
     public function syncDownloadResponse(FileWrite $fileWrite)
     {
         $fileWrite = $this->scheduleAndRun($fileWrite);
+
         return new RedirectResponse($this->getDownloadUrl($fileWrite));
     }
 
     /**
      * @param FileWrite $fileWrite
+     *
      * @return JsResponseBuilder
      */
     public function asyncJsResponse(FileWrite $fileWrite)
     {
         $jobId = $this->schedule($fileWrite);
+
         return $this->jsResponseBuilder
             ->openModalView('@UmbrellaAdmin/FileWriter/register_async_success.html.twig', [
                 'file_write' => $fileWrite,
@@ -115,6 +114,7 @@ class FileWriter
 
     /**
      * @param FileWrite $fileWrite
+     *
      * @return string
      */
     public function getDownloadUrl(FileWrite $fileWrite)
@@ -127,7 +127,8 @@ class FileWriter
     /**
      * @param $taskId
      * @param FileWrite $fileWrite
-     * @param int $timeout
+     * @param int       $timeout
+     *
      * @return int
      */
     public function schedule($taskId, FileWrite $fileWrite, $timeout = 0)
@@ -147,7 +148,8 @@ class FileWriter
     /**
      * @param $taskId
      * @param FileWrite $fileWrite
-     * @param int $timeout
+     * @param int       $timeout
+     *
      * @return FileWrite
      */
     public function scheduleAndRun($taskId, FileWrite $fileWrite, $timeout = 0)
@@ -160,7 +162,7 @@ class FileWriter
 
     /**
      * @param false $onlyNotification
-     * @param int $maxResults
+     * @param int   $maxResults
      *
      * @return Task(]
      */

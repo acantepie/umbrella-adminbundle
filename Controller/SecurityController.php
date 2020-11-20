@@ -37,6 +37,7 @@ class SecurityController extends BaseController
 
     /**
      * SecurityController constructor.
+     *
      * @param UserManager $userManager
      * @param $retryTtl
      */
