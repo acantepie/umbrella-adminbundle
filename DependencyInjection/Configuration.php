@@ -56,8 +56,8 @@ class Configuration implements ConfigurationInterface
         $rootNode->children()
             ->arrayNode('assets')->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('stylesheet_entry')->defaultValue('/build/umbrella_admin.css')->end()
-                ->scalarNode('script_entry')->defaultValue('/build/umbrella_admin.js')->end();
+                ->scalarNode('stylesheet_entry')->defaultValue('umbrella_admin')->end()
+                ->scalarNode('script_entry')->defaultValue('umbrella_admin')->end();
     }
 
     private function addUserSection(ArrayNodeDefinition $rootNode)
