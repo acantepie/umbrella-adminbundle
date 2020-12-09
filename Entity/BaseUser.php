@@ -29,10 +29,10 @@ use Umbrella\CoreBundle\Model\TimestampTrait;
  */
 class BaseUser implements UserInterface, EquatableInterface, \Serializable, AdminUserInterface
 {
-    use IdTrait;
-    use TimestampTrait;
-    use SearchTrait;
     use ActiveTrait;
+    use IdTrait;
+    use SearchTrait;
+    use TimestampTrait;
 
     /**
      * @var string|null

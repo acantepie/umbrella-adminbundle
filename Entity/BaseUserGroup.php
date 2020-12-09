@@ -27,8 +27,8 @@ use Umbrella\CoreBundle\Model\TimestampTrait;
 class BaseUserGroup
 {
     use IdTrait;
-    use TimestampTrait;
     use SearchTrait;
+    use TimestampTrait;
 
     /**
      * @var string
