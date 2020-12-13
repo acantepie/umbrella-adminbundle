@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 use Umbrella\AdminBundle\Entity\BaseUser;
-use Umbrella\CoreBundle\Services\Mailer;
 
 /**
  * Class UserMailer
@@ -31,7 +30,7 @@ class UserMailer
     private $router;
 
     /**
-     * @var Mailer
+     * @var \Swift_Mailer
      */
     private $mailer;
 
@@ -43,12 +42,12 @@ class UserMailer
     /**
      * UserMailer constructor.
      *
-     * @param Environment           $twig
-     * @param RouterInterface       $router
-     * @param Mailer                $mailer
+     * @param Environment $twig
+     * @param RouterInterface $router
+     * @param \Swift_Mailer $mailer
      * @param ParameterBagInterface $parameters
      */
-    public function __construct(Environment $twig, RouterInterface $router, Mailer $mailer, ParameterBagInterface $parameters)
+    public function __construct(Environment $twig, RouterInterface $router, \Swift_Mailer $mailer, ParameterBagInterface $parameters)
     {
         $this->twig = $twig;
         $this->router = $router;
@@ -56,7 +55,7 @@ class UserMailer
         $this->parameters = $parameters;
     }
 
-    public function sendPasswordRequestEmail(BaseUser $user)
+    public function sendPasswordRequestEmail(BaseUser $user) : void
     {
         $message = new \Swift_Message();
         $message
