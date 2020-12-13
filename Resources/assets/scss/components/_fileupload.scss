@@ -5,6 +5,19 @@
     position: relative;
   }
 
+  .input-hidden {
+    .custom-file {
+      opacity: 0;
+      float: left;
+      position: absolute;
+      width: calc(100% - 80px);
+    }
+
+    .form-check {
+      display: none;
+    }
+  }
+
   .action-container {
     position: absolute;
     right: 0;
@@ -23,6 +36,8 @@
 
   input[type="text"] {
     border-right: 0;
+    text-overflow: ellipsis;
+    padding-right: 60px;
   }
 
   input[readonly] {

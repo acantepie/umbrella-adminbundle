@@ -9,7 +9,6 @@
 
 namespace Umbrella\AdminBundle\DataTable;
 
-use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\AdminBundle\Entity\BaseUser;
@@ -24,6 +23,7 @@ use Umbrella\CoreBundle\Component\DataTable\RowAction\RowActionBuilder;
 use Umbrella\CoreBundle\Component\DataTable\Source\Modifier\EntitySearchModifier;
 use Umbrella\CoreBundle\Component\DataTable\Type\DataTableType;
 use Umbrella\CoreBundle\Component\Toolbar\ToolbarBuilder;
+use Umbrella\CoreBundle\Component\UmbrellaFile\UmbrellaFileHelper;
 use Umbrella\CoreBundle\Form\SearchType;
 
 /**
@@ -32,9 +32,9 @@ use Umbrella\CoreBundle\Form\SearchType;
 class UserTableType extends DataTableType
 {
     /**
-     * @var CacheManager
+     * @var UmbrellaFileHelper
      */
-    private $cacheManager;
+    private $fileHelper;
 
     /**
      * @var ParameterBagInterface
@@ -43,13 +43,12 @@ class UserTableType extends DataTableType
 
     /**
      * UserTableType constructor.
-     *
-     * @param CacheManager          $cacheManager
+     * @param UmbrellaFileHelper $fileHelper
      * @param ParameterBagInterface $parameters
      */
-    public function __construct(CacheManager $cacheManager, ParameterBagInterface $parameters)
+    public function __construct(UmbrellaFileHelper $fileHelper, ParameterBagInterface $parameters)
     {
-        $this->cacheManager = $cacheManager;
+        $this->fileHelper = $fileHelper;
         $this->parameters = $parameters;
     }
 
@@ -77,8 +76,7 @@ class UserTableType extends DataTableType
             'renderer' => function (BaseUser $user) {
                 $html = '<div class="d-flex">';
                 if ($user->avatar) {
-                    $url = $this->cacheManager->getBrowserPath($user->avatar->getWebPath(), 'ub_avatar_sm');
-                    $html .= sprintf('<img src="%s" class="avatar-sm rounded-circle mr-2">', $url);
+                    $html .= sprintf('<img src="%s" class="avatar-sm rounded-circle mr-2">', $this->fileHelper->getImageUrl($user->avatar, 'ub_avatar_sm'));
                 } else {
                     $html .= '<div class="avatar-sm avatar-icon rounded-circle mr-2"><i class="uil-user font-20"></i></div>';
                 }
