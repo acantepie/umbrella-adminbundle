@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Umbrella\AdminBundle\Model\AdminUserInterface;
-use Umbrella\CoreBundle\Annotation\SearchableField;
+use Umbrella\CoreBundle\Component\Search\Annotation\SearchableField;
 use Umbrella\CoreBundle\Entity\UmbrellaFile;
 use Umbrella\CoreBundle\Model\ActiveTrait;
 use Umbrella\CoreBundle\Model\IdTrait;

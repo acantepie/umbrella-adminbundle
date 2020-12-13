@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
+use Umbrella\CoreBundle\Component\UmbrellaFile\Validator\Constraints\UmbrellaImageConstraint;
 use Umbrella\CoreBundle\Form\CustomCheckboxType;
 use Umbrella\CoreBundle\Form\Entity2Type;
 use Umbrella\CoreBundle\Form\UmbrellaFileType;
@@ -55,8 +56,8 @@ class UserType extends AbstractType
             'file_attr' => [
                 'accept' => 'image/*',
             ],
-            'file_constraints' => [
-                new Image(),
+            'constraints' => [
+                new UmbrellaImageConstraint(),
             ],
             'required' => false,
         ]);
