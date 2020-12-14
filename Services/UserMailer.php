@@ -42,9 +42,9 @@ class UserMailer
     /**
      * UserMailer constructor.
      *
-     * @param Environment $twig
-     * @param RouterInterface $router
-     * @param \Swift_Mailer $mailer
+     * @param Environment           $twig
+     * @param RouterInterface       $router
+     * @param \Swift_Mailer         $mailer
      * @param ParameterBagInterface $parameters
      */
     public function __construct(Environment $twig, RouterInterface $router, \Swift_Mailer $mailer, ParameterBagInterface $parameters)
@@ -55,7 +55,7 @@ class UserMailer
         $this->parameters = $parameters;
     }
 
-    public function sendPasswordRequestEmail(BaseUser $user) : void
+    public function sendPasswordRequestEmail(BaseUser $user): void
     {
         $message = new \Swift_Message();
         $message

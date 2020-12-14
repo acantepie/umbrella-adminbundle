@@ -43,7 +43,8 @@ class UserTableType extends DataTableType
 
     /**
      * UserTableType constructor.
-     * @param UmbrellaFileHelper $fileHelper
+     *
+     * @param UmbrellaFileHelper    $fileHelper
      * @param ParameterBagInterface $parameters
      */
     public function __construct(UmbrellaFileHelper $fileHelper, ParameterBagInterface $parameters)
