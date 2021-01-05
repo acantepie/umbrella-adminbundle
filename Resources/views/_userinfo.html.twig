@@ -4,7 +4,7 @@
     <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#">
         <span class="account-user-avatar">
             {% if isAdminUser and app.user.getAvatar() %}
-                <img src="{{ app.user.getAvatar().webPath | imagine_filter('ub_avatar_md') }}" alt="user-image" class="rounded-circle">
+                <img src="{{ app.user.getAvatar() | get_thumb('ub_avatar_md') }}" alt="user-image" class="rounded-circle">
             {% else %}
                 <div class="avatar-default bg-secondary-lighten"><i class="uil-user"></i></div>
             {% endif %}

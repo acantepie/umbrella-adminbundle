@@ -50,9 +50,9 @@ class ProfileType extends AbstractType
             'file_attr' => [
                 'accept' => 'image/*',
             ],
-            'file_constraints' => [
-                new Image(),
-            ],
+//            'constraints' => [
+//                new Image(),
+//            ],
             'required' => false,
         ]);
         $builder->add('email', EmailType::class);

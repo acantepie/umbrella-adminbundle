@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <div class="card-body">
                             {% if user.avatar %}
-                                <img src="{{ user.avatar.webPath }}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+                                <img src="{{ user.avatar|get_thumb }}" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
                             {% else %}
                                 <div class="avatar-icon avatar-lg rounded-circle"><i class="uil-user font-24"></i></div>
                             {% endif %}
