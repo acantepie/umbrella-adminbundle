@@ -48,7 +48,8 @@ class Configuration implements ConfigurationInterface
         $rootNode->children()
             ->arrayNode('theme')->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('name')->defaultValue('umbrella')->end();
+                ->scalarNode('name')->defaultValue('umbrella')->end()
+                ->scalarNode('logo')->defaultNull()->end();
     }
 
     private function addAssetsSection(ArrayNodeDefinition $rootNode)

@@ -1,5 +1,13 @@
 .logo {
-  display: block;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  .logo-img {
+    width: 3rem;
+    margin-right: 0.5rem;
+  }
 
   .logo-title {
     color: $white;

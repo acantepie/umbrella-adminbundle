@@ -1,5 +1,10 @@
 <div class="logo text-center">
     <span class="logo-lg logo-title">
-        <i class="mdi mdi-umbrella mr-1"></i> {{ admin_theme_name() }}
+        {% if null == admin_theme_logo() %}
+            <i class="mdi mdi-umbrella mr-1"></i>
+        {% else %}
+            <img class="logo-img" src="{{ admin_theme_logo() }}">
+        {% endif %}
+        {{ admin_theme_name() }}
     </span>
 </div>

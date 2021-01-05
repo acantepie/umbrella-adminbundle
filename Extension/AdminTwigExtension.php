@@ -40,6 +40,7 @@ class AdminTwigExtension extends AbstractExtension
     {
         return [
             new TwigFunction('admin_theme_name', [$this, 'themeName']),
+            new TwigFunction('admin_theme_logo', [$this, 'themeLogo']),
             new TwigFunction('admin_script_entry', [$this, 'scriptEntry']),
             new TwigFunction('admin_stylesheet_entry', [$this, 'stylesheetEntry']),
             new TwigFunction('admin_route_profile', [$this, 'routeProfile']),
@@ -62,6 +63,14 @@ class AdminTwigExtension extends AbstractExtension
     public function themeName()
     {
         return $this->parameters->get('umbrella_admin.theme.name');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function themeLogo()
+    {
+        return $this->parameters->get('umbrella_admin.theme.logo');
     }
 
     /**
