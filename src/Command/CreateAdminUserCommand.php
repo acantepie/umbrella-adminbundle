@@ -40,7 +40,9 @@ class CreateAdminUserCommand extends Command
         $u->lastname = $this->io->askQuestion(new Question('Lastname'));
         $u->email = $this->io->askQuestion(new Question('Email (must be unique)'));
         $u->plainPassword = $this->io->askQuestion(new Question('Password'));
-
+        $u->createdAt = new \DateTime();
+        $u->updatedAt = new \DateTime();
+        
         $this->userManager->update($u);
 
         $this->io->success('User created');
